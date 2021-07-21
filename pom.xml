@@ -41,7 +41,7 @@
         <version.jakarta.enterprise>2.0.2</version.jakarta.enterprise>
         <version.jakarta.ws.rs>2.1.6</version.jakarta.ws.rs>
         <version.javax.ws.rs-api>2.0.1.Final</version.javax.ws.rs-api>
-
+        <version.log4j>2.13.3</version.log4j>
         <version.io.smallrye.context-propagation>1.2.0</version.io.smallrye.context-propagation>
         <version.io.smallrye.smallrye-config>2.3.0</version.io.smallrye.smallrye-config>
 
@@ -65,7 +65,10 @@
         <version.junit>4.13.2</version.junit>
 
         <!-- Test only dependencies -->
-
+        <version.org.aspectj>1.7.3</version.org.aspectj>
+        <version.aopalliance>1.0</version.aopalliance>
+        <version.org.jboss.arquillian>1.6.0.Final</version.org.jboss.arquillian>
+        <version.org.jboss.arquillian.container.arquillian-weld-embedded>2.0.0.Final</version.org.jboss.arquillian.container.arquillian-weld-embedded>
         <version.com.github.tomakehurst.wiremock>2.26.3</version.com.github.tomakehurst.wiremock>
         <version.org.apache.httpcomponents.httpclient>4.5.13</version.org.apache.httpcomponents.httpclient>
         <version.org.eclipse.jetty>9.4.39.v20210325</version.org.eclipse.jetty>
@@ -105,6 +108,8 @@
         <module>resteasy-spring</module>
         <module>resteasy-spring-web</module>
         <module>resteasy-spring-bom</module>
+        <module>resteasy-spring-test-bom</module>
+        <module>testsuite</module>
     </modules>
 
     <build>

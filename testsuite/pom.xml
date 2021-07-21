@@ -16,6 +16,7 @@
 
     <modules>
         <module>integration-tests-spring</module>
+        <module>integration-tests-spring-web</module>
     </modules>
 
     <dependencyManagement>
@@ -28,22 +29,11 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>${version.org.jboss.arquillian}</version>
-                <scope>import</scope>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>resteasy-spring-test-bom</artifactId>
+                <version>${project.version}</version>
                 <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${version.junit}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-jaxb-provider</artifactId>
-                <scope>${version.org.jboss.resteasy}</scope>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
