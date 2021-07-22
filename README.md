@@ -1,1 +1,1 @@
-# RESTeasy Spring Modules
+# RESTEasy Spring Modules
