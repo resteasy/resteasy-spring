@@ -2,18 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.jboss.resteasy</groupId>
         <artifactId>resteasy-spring-parent</artifactId>
         <version>5.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>resteasy-spring-web</artifactId>
-    <packaging>jar</packaging>
-    <name>RESTEasy Spring SPI</name>
-    <description/>
+    <artifactId>resteasy-spring-testsuite</artifactId>
+    <packaging>pom</packaging>
+    <name>RESTEasy Spring Modules: Test Suite</name>
+
+    <modules>
+        <module>integration-tests-spring</module>
+        <module>integration-tests-spring-web</module>
+    </modules>
 
     <dependencyManagement>
         <dependencies>
@@ -24,19 +28,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>resteasy-spring-test-bom</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-    
 </project>
