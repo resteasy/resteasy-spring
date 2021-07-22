@@ -109,6 +109,7 @@
         <module>resteasy-spring-web</module>
         <module>resteasy-spring-bom</module>
         <module>resteasy-spring-test-bom</module>
+        <module>resteasy-undertow-spring</module>
         <module>testsuite</module>
     </modules>
 
