@@ -44,9 +44,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
+            <groupId>org.jboss.resteasy.spring</groupId>
             <artifactId>resteasy-spring-web</artifactId>
-            <version>${version.resteasy.testsuite}</version>
+            <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
 
