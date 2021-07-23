@@ -69,7 +69,7 @@
         <!--        </dependency>-->
 
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
+            <groupId>org.jboss.resteasy.spring</groupId>
             <artifactId>resteasy-spring</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
