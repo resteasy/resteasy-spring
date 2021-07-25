@@ -44,7 +44,7 @@ public class JavaConfigTest {
    }
 
    @Deployment
-   private static Archive<?> deploy() {
+   public static Archive<?> deploy() {
       WebArchive archive = ShrinkWrap.create(WebArchive.class, JavaConfigTest.class.getSimpleName() + ".war")
             .addClass(JavaConfigResource.class)
             .addClass(JavaConfigService.class)
