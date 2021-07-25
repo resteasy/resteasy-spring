@@ -17,7 +17,7 @@
 
     <modules>
         <!--        <module>deployment</module>-->
-        <!--        <module>inmodule</module>-->
+        <module>inmodule</module>
         <module>unit</module>
     </modules>
 
