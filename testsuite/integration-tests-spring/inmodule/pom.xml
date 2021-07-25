@@ -149,7 +149,6 @@
                         </goals>
                         <configuration>
                             <artifactItems>
-
                                 <artifactItem>
                                     <groupId>org.springframework</groupId>
                                     <artifactId>spring-aop</artifactId>
@@ -190,7 +189,6 @@
                                     <artifactId>spring-webmvc</artifactId>
                                     <version>${version.org.springframework}</version>
                                 </artifactItem>
-
                                 <artifactItem>
                                     <groupId>aopalliance</groupId>
                                     <artifactId>aopalliance</artifactId>
@@ -206,9 +204,7 @@
                                     <artifactId>aspectjweaver</artifactId>
                                     <version>${version.org.aspectj}</version>
                                 </artifactItem>
-
                             </artifactItems>
-
                             <outputDirectory>${module.spring.path}</outputDirectory>
                             <overWriteSnapshots>true</overWriteSnapshots>
                             <stripVersion>true</stripVersion>
