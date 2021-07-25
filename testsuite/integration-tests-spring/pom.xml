@@ -109,5 +109,9 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jboss-</artifactId>
+        </dependency>
     </dependencies>
 </project>
