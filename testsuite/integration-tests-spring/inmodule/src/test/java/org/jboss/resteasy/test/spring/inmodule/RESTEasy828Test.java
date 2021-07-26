@@ -15,6 +15,7 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -27,6 +28,7 @@ import java.lang.reflect.ReflectPermission;
 import java.util.PropertyPermission;
 import java.util.logging.LoggingPermission;
 
+@Ignore
 @RunWith(Arquillian.class)
 @RunAsClient
 public class RESTEasy828Test {
@@ -48,7 +50,7 @@ public class RESTEasy828Test {
    }
 
    @Deployment
-   private static Archive<?> deploy() {
+   public static Archive<?> deploy() {
       WebArchive archive = ShrinkWrap.create(WebArchive.class, RESTEasy828Test.class.getSimpleName() + ".war")
               .addAsWebInfResource(RESTEasy828Test.class.getPackage(), "resteasy828/web.xml", "web.xml");
       archive.addAsWebInfResource(RESTEasy828Test.class.getPackage(),
