@@ -17,10 +17,17 @@
 
     <properties>
         <jboss.server.config.file.name>standalone-full.xml</jboss.server.config.file.name>
+        <debug.port>8787</debug.port>
+        <!--        <debugJvmArgs>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=${debug.port}</debugJvmArgs>-->
+        <debugJvmArgs></debugJvmArgs>
+        <additionalJvmArgs></additionalJvmArgs>
+        <ipv6ArquillianSettings></ipv6ArquillianSettings>
+        <jacoco.agent></jacoco.agent>
+        <securityManagerArg></securityManagerArg>
     </properties>
 
     <modules>
-        <!--        <module>deployment</module>-->
+<!--        <module>deployment</module>-->
         <module>inmodule</module>
         <module>unit</module>
     </modules>
@@ -78,7 +85,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
 
 
         <dependency>

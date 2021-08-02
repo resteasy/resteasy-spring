@@ -21,13 +21,6 @@
         <module.spring.path>
             ${jboss.home}/modules/system/add-ons/spring/org/springframework/spring/${module.spring.slot}
         </module.spring.path>
-        <debug.port>8787</debug.port>
-<!--        <debugJvmArgs>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=${debug.port}</debugJvmArgs>-->
-        <debugJvmArgs></debugJvmArgs>
-        <additionalJvmArgs></additionalJvmArgs>
-        <ipv6ArquillianSettings></ipv6ArquillianSettings>
-        <jacoco.agent></jacoco.agent>
-        <securityManagerArg></securityManagerArg>
     </properties>
 
     <profiles>
@@ -282,32 +275,6 @@
                                     <followSymlinks>false</followSymlinks>
                                 </fileset>
                             </filesets>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enable-elytron-full-cli</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>execute-commands</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipTests}</skip>
-                            <jboss-home>${jboss.home}</jboss-home>
-                            <offline>true</offline>
-                            <scripts>
-                                <script>${basedir}/../../config/enable-elytron-full.cli</script>
-                            </scripts>
-                            <stdout>${project.build.directory}/elytron-config.out</stdout>
-                            <system-properties>
-                                <jboss.server.config.file.name>${jboss.server.config.file.name}
-                                </jboss.server.config.file.name>
-                            </system-properties>
                         </configuration>
                     </execution>
                 </executions>
