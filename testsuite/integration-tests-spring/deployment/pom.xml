@@ -53,57 +53,57 @@
                     </execution>
                 </executions>
               </plugin>
-<!--                <plugin>-->
-<!--                    <groupId>com.googlecode.maven-download-plugin</groupId>-->
-<!--                    <artifactId>download-maven-plugin</artifactId>-->
-<!--                    <version>1.6.6</version>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>download-jboss-modules</id>-->
-<!--                            <phase>generate-test-resources</phase>-->
-<!--                            <goals>-->
-<!--                                <goal>wget</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                    <configuration>-->
-<!--                        <url>-->
-<!--                            https://repo1.maven.org/maven2/org/jboss/resteasy/resteasy-jboss-modules/${version.org.jboss.resteasy}/resteasy-jboss-modules-${version.org.jboss.resteasy}.zip-->
-<!--                        </url>-->
-<!--                        <unpack>false</unpack>-->
-<!--                        <outputDirectory>${project.build.directory}/-->
-<!--                        </outputDirectory>-->
-<!--                        <skipCache>true</skipCache>-->
-<!--                        <overwrite>true</overwrite>-->
-<!--                    </configuration>-->
-<!--                </plugin>-->
-<!--              <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-antrun-plugin</artifactId>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>unpack-resteasy</id>-->
-<!--                        <phase>generate-test-resources</phase>-->
-<!--                        <configuration>-->
-<!--                            <skip>${skipTests}</skip>-->
-<!--                            <target>-->
-<!--                                &lt;!&ndash; Explicitly remove resteasy-spring contents as the module.xml does not reference resource jars in this case-->
-<!--                                     so adding jars without removing old ones basically messes up the classloader &ndash;&gt;-->
-<!--                                <delete>-->
-<!--                                    <fileset dir="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base/org/jboss/resteasy/resteasy-spring/main" includes="**/*.jar"/>-->
-<!--                                </delete>-->
-<!--                                <unzip src="${project.build.directory}/resteasy-jboss-modules-${version.org.jboss.resteasy}.zip"-->
-<!--                                       dest="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base"-->
-<!--                                       overwrite="true"/>-->
-<!--                                <delete dir="target/dependency-maven-plugin-markers"/>-->
-<!--                            </target>-->
-<!--                        </configuration>-->
-<!--                        <goals>-->
-<!--                            <goal>run</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--              </plugin>-->
+                <plugin>
+                    <groupId>com.googlecode.maven-download-plugin</groupId>
+                    <artifactId>download-maven-plugin</artifactId>
+                    <version>1.6.6</version>
+                    <executions>
+                        <execution>
+                            <id>download-jboss-modules</id>
+                            <phase>generate-test-resources</phase>
+                            <goals>
+                                <goal>wget</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <url>
+                            https://repo1.maven.org/maven2/org/jboss/resteasy/resteasy-jboss-modules/${version.org.jboss.resteasy}/resteasy-jboss-modules-${version.org.jboss.resteasy}.zip
+                        </url>
+                        <unpack>false</unpack>
+                        <outputDirectory>${project.build.directory}/
+                        </outputDirectory>
+                        <skipCache>true</skipCache>
+                        <overwrite>true</overwrite>
+                    </configuration>
+                </plugin>
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-resteasy</id>
+                        <phase>generate-test-resources</phase>
+                        <configuration>
+                            <skip>${skipTests}</skip>
+                            <target>
+                                <!-- Explicitly remove resteasy-spring contents as the module.xml does not reference resource jars in this case
+                                     so adding jars without removing old ones basically messes up the classloader -->
+                                <delete>
+                                    <fileset dir="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base/org/jboss/resteasy/resteasy-spring/main" includes="**/*.jar"/>
+                                </delete>
+                                <unzip src="${project.build.directory}/resteasy-jboss-modules-${version.org.jboss.resteasy}.zip"
+                                       dest="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base"
+                                       overwrite="true"/>
+                                <delete dir="target/dependency-maven-plugin-markers"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+              </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <configuration>
