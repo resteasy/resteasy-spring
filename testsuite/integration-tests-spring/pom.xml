@@ -102,14 +102,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
@@ -125,10 +123,5 @@
             <artifactId>resteasy-json-binding-provider</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.jboss.resteasy</groupId>-->
-        <!--            <artifactId>resteasy-jboss-modules</artifactId>-->
-        <!--            <version>${version.org.jboss.resteasy}</version>-->
-        <!--        </dependency>-->
     </dependencies>
 </project>

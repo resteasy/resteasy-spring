@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.jboss.resteasy</groupId>
+        <groupId>org.jboss.resteasy.spring</groupId>
         <artifactId>resteasy-integration-tests-spring-web</artifactId>
         <version>1.0.0.Final</version>
         <relativePath>../pom.xml</relativePath>
@@ -59,6 +59,30 @@
                         </executions>
                     </plugin>
                     <plugin>
+                        <groupId>com.googlecode.maven-download-plugin</groupId>
+                        <artifactId>download-maven-plugin</artifactId>
+                        <version>${version.download-plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>download-jboss-modules</id>
+                                <phase>generate-test-resources</phase>
+                                <goals>
+                                    <goal>wget</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <url>
+                                https://repo1.maven.org/maven2/org/jboss/resteasy/resteasy-jboss-modules/${version.org.jboss.resteasy}/resteasy-jboss-modules-${version.org.jboss.resteasy}.zip
+                            </url>
+                            <unpack>false</unpack>
+                            <outputDirectory>${project.build.directory}/
+                            </outputDirectory>
+                            <skipCache>true</skipCache>
+                            <overwrite>true</overwrite>
+                        </configuration>
+                    </plugin>
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
                         <configuration>
@@ -75,7 +99,7 @@
                                         <delete failonerror="false">
                                             <fileset dir="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base/org/jboss/resteasy/resteasy-spring-web/main" includes="**/*.jar"/>
                                         </delete>
-                                        <unzip src="../../../jboss-modules/target/resteasy-jboss-modules-${project.version}.zip"
+                                        <unzip src="${project.build.directory}/resteasy-jboss-modules-${version.org.jboss.resteasy}.zip"
                                                dest="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base"
                                                overwrite="true"/>
                                         <delete dir="target/dependency-maven-plugin-markers"/>
@@ -108,7 +132,6 @@
             </properties>
         </profile>
     </profiles>
-
     <build>
         <testResources>
             <testResource>
@@ -164,7 +187,6 @@
                         </goals>
                         <configuration>
                             <artifactItems>
-
                                 <artifactItem>
                                     <groupId>org.springframework</groupId>
                                     <artifactId>spring-aop</artifactId>
@@ -221,9 +243,7 @@
                                     <artifactId>aspectjweaver</artifactId>
                                     <version>${version.org.aspectj}</version>
                                 </artifactItem>
-
                             </artifactItems>
-
                             <outputDirectory>${module.spring.path}</outputDirectory>
                             <overWriteSnapshots>true</overWriteSnapshots>
                             <stripVersion>true</stripVersion>
@@ -265,5 +285,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
