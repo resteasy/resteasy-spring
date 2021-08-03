@@ -16,11 +16,10 @@
     <name>RESTEasy Main testsuite: Spring Web integration tests</name>
 
     <modules>
-<!--        <module>deployment</module>-->
+        <module>deployment</module>
     </modules>
 
     <dependencies>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -64,11 +63,18 @@
             <scope>provided</scope>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.jboss.resteasy</groupId>-->
-<!--            <artifactId>arquillian-utils</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>arquillian-utils</artifactId>
+            <scope>test</scope>
+            <version>${version.org.jboss.resteasy}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.inject</groupId>
+                    <artifactId>javax.inject</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -101,7 +107,6 @@
             <version>${version.resteasy.testsuite}</version>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 
     <build>

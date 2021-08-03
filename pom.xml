@@ -54,7 +54,7 @@
         </version.org.jboss.logging.jboss-logging-annotations>
         <version.org.jboss.logging.jboss-logging-tools>2.2.1.Final</version.org.jboss.logging.jboss-logging-tools>
 
-        <version.org.jboss.resteasy>4.7.0.Final</version.org.jboss.resteasy>
+        <version.org.jboss.resteasy>4.7.1.Final</version.org.jboss.resteasy>
         <version.org.jboss.spec.javax.servlet.jboss-servlet-api_4.0_spec>2.0.0.Final
         </version.org.jboss.spec.javax.servlet.jboss-servlet-api_4.0_spec>
         <version.org.springframework>5.3.7</version.org.springframework>
@@ -85,6 +85,7 @@
         <version.org.testng>6.14.2</version.org.testng>
         <version.resteasy.testsuite>${version.org.jboss.resteasy}</version.resteasy.testsuite>
         <version.junit>4.13.2</version.junit>
+        <server.version>24.0.0.Final</server.version>
 
         <!-- Plugin Versions, please keep in alphabetical order -->
         <version.org.jboss.resteasy.checkstyle>1.0.0.Final</version.org.jboss.resteasy.checkstyle>

@@ -15,9 +15,13 @@
     <packaging>pom</packaging>
     <name>RESTEasy Main testsuite: Spring integration tests</name>
 
+    <properties>
+        <jboss.server.config.file.name>standalone-full.xml</jboss.server.config.file.name>
+    </properties>
+
     <modules>
-        <!--        <module>deployment</module>-->
-        <!--        <module>inmodule</module>-->
+        <module>deployment</module>
+        <module>inmodule</module>
         <module>unit</module>
     </modules>
 
@@ -62,11 +66,19 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--        <dependency>-->
-        <!--            <groupId>org.jboss.resteasy</groupId>-->
-        <!--            <artifactId>arquillian-utils</artifactId>-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>arquillian-utils</artifactId>
+            <scope>test</scope>
+            <version>${version.org.jboss.resteasy}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.inject</groupId>
+                    <artifactId>javax.inject</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
 
         <dependency>
             <groupId>org.jboss.resteasy.spring</groupId>
@@ -83,31 +95,26 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-json-p-provider</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-json-binding-provider</artifactId>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 </project>

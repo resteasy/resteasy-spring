@@ -16,8 +16,11 @@
 
     <properties>
         <module.spring.version>3.2.x</module.spring.version>
-        <module.spring.slot>main</module.spring.slot><!-- beware jbossws spring integration preinstalled in default distribution expects main slot -->
-        <module.spring.path>${jboss.home}/modules/system/add-ons/spring/org/springframework/spring/${module.spring.slot}</module.spring.path>
+        <module.spring.slot>main
+        </module.spring.slot><!-- beware jbossws spring integration preinstalled in default distribution expects main slot -->
+        <module.spring.path>
+            ${jboss.home}/modules/system/add-ons/spring/org/springframework/spring/${module.spring.slot}
+        </module.spring.path>
     </properties>
 
     <profiles>
@@ -26,71 +29,105 @@
         Descr: Download WildFly
         -->
         <profile>
-          <id>download</id>
-          <activation>
-            <property>
-              <name>!server.home</name>
-            </property>
-          </activation>
-          <build>
-            <plugins>
-              <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>unpack</id>
-                        <phase>generate-test-resources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
+            <id>download</id>
+            <activation>
+                <property>
+                    <name>!server.home</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <phase>generate-test-resources</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>${skipTests}</skip>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.wildfly</groupId>
+                                            <artifactId>wildfly-dist</artifactId>
+                                            <version>${server.version}</version>
+                                            <type>zip</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}/test-server</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.googlecode.maven-download-plugin</groupId>
+                        <artifactId>download-maven-plugin</artifactId>
+                        <version>${version.download-plugin}</version>
+                        <executions>
+                            <execution>
+                                <id>download-jboss-modules</id>
+                                <phase>generate-test-resources</phase>
+                                <goals>
+                                    <goal>wget</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                         <configuration>
-                            <skip>${skipTests}</skip>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.wildfly</groupId>
-                                    <artifactId>wildfly-dist</artifactId>
-                                    <version>${server.version}</version>
-                                    <type>zip</type>
-                                    <overWrite>false</overWrite>
-                                    <outputDirectory>${project.build.directory}/test-server</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
+                            <url>
+                                https://repo1.maven.org/maven2/org/jboss/resteasy/resteasy-jboss-modules/${version.org.jboss.resteasy}/resteasy-jboss-modules-${version.org.jboss.resteasy}.zip
+                            </url>
+                            <unpack>false</unpack>
+                            <outputDirectory>${project.build.directory}/
+                            </outputDirectory>
+                            <skipCache>true</skipCache>
+                            <overwrite>true</overwrite>
                         </configuration>
-                    </execution>
-                </executions>
-              </plugin>
-              <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>unpack-resteasy</id>
-                        <phase>generate-test-resources</phase>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unpack-resteasy</id>
+                                <phase>generate-test-resources</phase>
+                                <configuration>
+                                    <skip>${skipTests}</skip>
+                                    <target>
+                                        <!-- Explicitly remove resteasy-spring contents as the module.xml does not reference resource jars in this case
+                                             so adding jars without removing old ones basically messes up the classloader -->
+                                        <delete>
+                                            <fileset
+                                                    dir="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base/org/jboss/resteasy/resteasy-spring/main"
+                                                    includes="**/*.jar"/>
+                                        </delete>
+                                        <unzip src="${project.build.directory}/resteasy-jboss-modules-${version.org.jboss.resteasy}.zip"
+                                               dest="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base"
+                                               overwrite="true"/>
+                                        <delete dir="target/dependency-maven-plugin-markers"/>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
-                            <skip>${skipTests}</skip>
-                            <target>
-                                <!-- Explicitly remove resteasy-spring contents as the module.xml does not reference resource jars in this case
-                                     so adding jars without removing old ones basically messes up the classloader -->
-                                <delete>
-                                    <fileset dir="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base/org/jboss/resteasy/resteasy-spring/main" includes="**/*.jar"/>
-                                </delete>
-                                <unzip src="../../../jboss-modules/target/resteasy-jboss-modules-${project.version}.zip"
-                                       dest="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base"
-                                       overwrite="true"/>
-                                <delete dir="target/dependency-maven-plugin-markers"/>
-                            </target>
+                            <systemProperties>
+                                <property>
+                                    <name>java.util.logging.config.file</name>
+                                    <value>src/test/resources/logging.properties</value>
+                                </property>
+                            </systemProperties>
                         </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-              </plugin>
-            </plugins>
-          </build>
-          <properties>
-            <jboss.home>${project.build.directory}/test-server/wildfly-${server.version}</jboss.home>
-          </properties>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 
@@ -127,7 +164,8 @@
                             <outputDirectory>${module.spring.path}</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>src/test/resources/org/jboss/resteasy/test/spring/inmodule/module</directory>
+                                    <directory>src/test/resources/org/jboss/resteasy/test/spring/inmodule/module
+                                    </directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
@@ -149,7 +187,6 @@
                         </goals>
                         <configuration>
                             <artifactItems>
-
                                 <artifactItem>
                                     <groupId>org.springframework</groupId>
                                     <artifactId>spring-aop</artifactId>
@@ -190,7 +227,6 @@
                                     <artifactId>spring-webmvc</artifactId>
                                     <version>${version.org.springframework}</version>
                                 </artifactItem>
-
                                 <artifactItem>
                                     <groupId>aopalliance</groupId>
                                     <artifactId>aopalliance</artifactId>
@@ -206,9 +242,7 @@
                                     <artifactId>aspectjweaver</artifactId>
                                     <version>${version.org.aspectj}</version>
                                 </artifactItem>
-
                             </artifactItems>
-
                             <outputDirectory>${module.spring.path}</outputDirectory>
                             <overWriteSnapshots>true</overWriteSnapshots>
                             <stripVersion>true</stripVersion>
@@ -238,31 +272,6 @@
                                     <followSymlinks>false</followSymlinks>
                                 </fileset>
                             </filesets>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enable-elytron-full-cli</id>
-                        <phase>process-test-resources</phase>
-                        <goals>
-                            <goal>execute-commands</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${skipTests}</skip>
-                            <jboss-home>${jboss.home}</jboss-home>
-                            <offline>true</offline>
-                            <scripts>
-                                <script>${basedir}/../../config/enable-elytron-full.cli</script>
-                            </scripts>
-                            <stdout>${project.build.directory}/elytron-config.out</stdout>
-                            <system-properties>
-                                <jboss.server.config.file.name>${jboss.server.config.file.name}</jboss.server.config.file.name>
-                            </system-properties>
                         </configuration>
                     </execution>
                 </executions>
@@ -299,5 +308,4 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 </project>
