@@ -127,9 +127,6 @@
                     </plugin>
                 </plugins>
             </build>
-            <properties>
-                <jboss.home>${project.build.directory}/test-server/wildfly-${server.version}</jboss.home>
-            </properties>
         </profile>
     </profiles>
     <build>

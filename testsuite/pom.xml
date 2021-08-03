@@ -14,13 +14,18 @@
     <packaging>pom</packaging>
     <name>RESTEasy Spring Modules: Test Suite</name>
 
-    <properties>
-        <version.download-plugin>1.6.6</version.download-plugin>
-    </properties>
     <modules>
         <module>integration-tests-spring</module>
         <module>integration-tests-spring-web</module>
     </modules>
+
+    <properties>
+        <version.download-plugin>1.6.6</version.download-plugin>
+        <debug.port>8787</debug.port>
+<!--        <debugJvmArgs>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=${debug.port}</debugJvmArgs>-->
+        <debugJvmArgs></debugJvmArgs>
+        <jboss.home>${project.build.directory}/test-server/wildfly-${server.version}</jboss.home>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
