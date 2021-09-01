@@ -68,7 +68,7 @@
                     </executions>
                     <configuration>
                         <url>
-                            https://repo1.maven.org/maven2/org/jboss/resteasy/resteasy-jboss-modules/${version.org.jboss.resteasy}/resteasy-jboss-modules-${version.org.jboss.resteasy}.zip
+                            https://repo1.maven.org/maven2/org/jboss/resteasy/resteasy-jboss-modules/${version.org.jboss.resteasy.modules}/resteasy-jboss-modules-${version.org.jboss.resteasy.modules}.zip
                         </url>
                         <unpack>false</unpack>
                         <outputDirectory>${project.build.directory}/
@@ -92,7 +92,7 @@
                                 <delete>
                                     <fileset dir="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base/org/jboss/resteasy/resteasy-spring/main" includes="**/*.jar"/>
                                 </delete>
-                                <unzip src="${project.build.directory}/resteasy-jboss-modules-${version.org.jboss.resteasy}.zip"
+                                <unzip src="${project.build.directory}/resteasy-jboss-modules-${version.org.jboss.resteasy.modules}.zip"
                                        dest="${project.build.directory}/test-server/wildfly-${server.version}/modules/system/layers/base"
                                        overwrite="true"/>
                                 <delete dir="target/dependency-maven-plugin-markers"/>
