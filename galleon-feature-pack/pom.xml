@@ -42,10 +42,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <dependencies>
-       
-
         <!-- Other feature pack dependencies -->
         <dependency>
             <groupId>org.wildfly</groupId>
@@ -93,26 +90,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--<plugin>
-                <groupId>org.wildfly.maven.plugins</groupId>
-                <artifactId>licenses-plugin</artifactId>
-                <inherited>false</inherited>
-                <executions>
-                    <execution>
-                        <id>update-licenses-xml</id>
-                        <goals>
-                            <goal>insert-versions</goal>
-                        </goals>
-                        <phase>process-resources</phase>
-                        <configuration>
-                            <sortByGroupIdAndArtifactId>true</sortByGroupIdAndArtifactId>
-                            <licensesConfigFile>src/license/template-feature-pack-licenses.xml</licensesConfigFile>
-                            <licensesOutputFile>${license.output.directory}/template-feature-pack-licenses.xml</licensesOutputFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
     </build>
-
 </project>
