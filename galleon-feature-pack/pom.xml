@@ -43,6 +43,11 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <dependency>
+            <groupId>org.jboss.resteasy.spring</groupId>
+            <artifactId>resteasy-spring</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- Other feature pack dependencies -->
         <dependency>
             <groupId>org.wildfly</groupId>
