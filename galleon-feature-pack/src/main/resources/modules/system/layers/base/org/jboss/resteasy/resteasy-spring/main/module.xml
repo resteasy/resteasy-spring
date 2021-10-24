@@ -31,8 +31,8 @@
         <module name="javax.ws.rs.api"/>
         <module name="org.jboss.resteasy.resteasy-client-api"/>
         <module name="org.jboss.resteasy.resteasy-client" services="import"/>
-        <module name="org.springframework.spring-core"/>
-        <module name="org.springframework.spring-webmvc"/>
+<!--        <module name="org.springframework.spring-core"/>-->
+<!--        <module name="org.springframework.spring-webmvc"/>-->
         <module name="javax.servlet.api"/>
         <module name="org.jboss.logging"/>
     </dependencies>
