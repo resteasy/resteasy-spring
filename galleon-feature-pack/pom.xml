@@ -46,12 +46,10 @@
         <dependency>
             <groupId>org.jboss.resteasy.spring</groupId>
             <artifactId>resteasy-spring</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy.spring</groupId>
             <artifactId>resteasy-spring-web</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
 
