@@ -20,20 +20,13 @@
   -->
 <module xmlns="urn:jboss:module:1.9" name="org.jboss.resteasy.resteasy-spring">
 
-    <properties>
-        <property name="jboss.api" value="private"/>
-    </properties>
     <resources>
-        <artifact name="${org.jboss.resteasy.spring:resteasy-spring}"/>
+        <!-- This module just contains the jar as a resource root. It cannot be depended on to get
+         access to the jar classes-->
+        <resource-root path="overridden"/>
     </resources>
 
     <dependencies>
-        <module name="javax.ws.rs.api"/>
-        <module name="org.jboss.resteasy.resteasy-client-api"/>
-        <module name="org.jboss.resteasy.resteasy-client" services="import"/>
-<!--        <module name="org.springframework.spring-core"/>-->
-<!--        <module name="org.springframework.spring-webmvc"/>-->
-        <module name="javax.servlet.api"/>
-        <module name="org.jboss.logging"/>
+        <module name="java.desktop"/>
     </dependencies>
 </module>
