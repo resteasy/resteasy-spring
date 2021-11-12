@@ -8,7 +8,7 @@
         <configuration>
             <property name="jbossHome">${jboss.home}</property>
             <property name="serverConfig">${jboss.server.config.file.name:standalone.xml}</property>
-            <property name="javaVmArguments">${debugJvmArgs}</property>
+            <property name="javaVmArguments">${debugJvmArgs} -Dmaven.repo.local=${settings.localRepository}</property>
         </configuration>
     </container>
 </arquillian>
