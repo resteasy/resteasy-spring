@@ -21,5 +21,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: Run Maven Install
+      run: mvn install
     - name: Build with Maven
       run: mvn -B package --file pom.xml
