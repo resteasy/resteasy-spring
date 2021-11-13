@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.jboss.resteasy.spring</groupId>
         <artifactId>resteasy-spring-parent</artifactId>
-        <version>2.0.0.Beta1</version>
+        <version>2.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -15,8 +15,9 @@
     <name>RESTEasy Spring Modules: Test Suite</name>
 
     <modules>
+        <module>shared</module>
         <module>integration-tests-spring</module>
-<!--        <module>integration-tests-spring-web</module>-->
+        <module>integration-tests-spring-web</module>
     </modules>
 
     <properties>
@@ -45,4 +46,84 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <!-- Required for provisioning WildFly. Not all dependencies currently exist on Maven Central. This is also
+             useful for when we want to test with versions releases that have not yet been synchronized to Maven Central
+             from JBoss Nexus.
+         -->
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+            <layout>default</layout>
+        </repository>
+        <!-- Required for PicketBox, once this is removed from WildFly this can be removed -->
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+            <id>jboss-enterprise-maven-repository</id>
+            <name>JBoss Enterprise Maven Repository</name>
+            <url>https://maven.repository.redhat.com/ga/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jboss.galleon</groupId>
+                    <artifactId>galleon-maven-plugin</artifactId>
+                    <configuration>
+                        <install-dir>${jboss.home}</install-dir>
+                        <skip>${skipTests}</skip>
+                        <record-state>false</record-state>
+                        <log-time>${galleon.log.time}</log-time>
+                        <offline>${galleon.offline}</offline>
+                        <plugin-options>
+                            <jboss-maven-dist/>
+                            <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
+                            <optional-packages>passive+</optional-packages>`
+                        </plugin-options>
+                        <feature-packs>
+                            <feature-pack>
+                                <groupId>org.jboss.resteasy.spring</groupId>
+                                <artifactId>galleon-feature-pack</artifactId>
+                                <version>${project.version}</version>
+                                <excluded-packages>
+                                    <name>product.conf</name>
+                                    <name>docs.schema</name>
+                                </excluded-packages>
+                            </feature-pack>
+                        </feature-packs>
+                        <configurations>
+                            <config>
+                                <model>standalone</model>
+                                <name>standalone.xml</name>
+                                <layers>
+                                    <layer>cdi</layer>
+                                    <layer>jaxrs-server</layer>
+                                </layers>
+                            </config>
+                        </configurations>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

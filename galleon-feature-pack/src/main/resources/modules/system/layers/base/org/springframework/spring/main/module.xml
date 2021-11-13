@@ -20,19 +20,19 @@
 ~ 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<module xmlns="urn:jboss:module:1.0" name="org.springframework.spring" slot="${module.spring.slot}">
+<module xmlns="urn:jboss:module:1.9" name="org.springframework.spring">
     <resources>
-        <resource-root path="aopalliance.jar"/>
-        <resource-root path="aspectjrt.jar"/>
-        <resource-root path="aspectjweaver.jar"/>
-        <resource-root path="spring-aop.jar"/>
-        <resource-root path="spring-beans.jar"/>
-        <resource-root path="spring-context.jar"/>
-        <resource-root path="spring-context-support.jar"/>
-        <resource-root path="spring-core.jar"/>
-        <resource-root path="spring-expression.jar"/>
-        <resource-root path="spring-web.jar"/>
-        <resource-root path="spring-webmvc.jar"/>
+        <artifact name="${org.springframework:spring-aop}"/>
+        <artifact name="${org.springframework:spring-beans}"/>
+        <artifact name="${org.springframework:spring-context}"/>
+        <artifact name="${org.springframework:spring-context-support}"/>
+        <artifact name="${org.springframework:spring-core}"/>
+        <artifact name="${org.springframework:spring-expression}"/>
+        <artifact name="${org.springframework:spring-web}"/>
+        <artifact name="${org.springframework:spring-webmvc}"/>
+        <artifact name="${aopalliance:aopalliance}"/>
+        <artifact name="${org.aspectj:aspectjrt}"/>
+        <artifact name="${org.aspectj:aspectjweaver}"/>
     </resources>
     <dependencies>
         <module name="ch.qos.cal10n" optional="true"/>
