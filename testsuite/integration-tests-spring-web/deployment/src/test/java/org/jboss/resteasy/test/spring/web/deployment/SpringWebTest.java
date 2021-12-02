@@ -266,10 +266,9 @@ public class SpringWebTest {
     public static Archive<?> createDeployment() {
         WebArchive archive = ShrinkWrap.create(WebArchive.class, DEPLOYMENT_NAME + ".war");
         archive.addAsWebInfResource(SpringWebTest.class.getPackage(), "web.xml", "web.xml");
-        archive.addAsManifestResource("jboss-deployment-structure.xml", "jboss-deployment-structure.xml");
 
 
-        TestUtilSpring.addSpringLibraries(archive);
+        TestUtilSpring.addSpringLibraries(archive, "org.jboss.resteasy.spring:resteasy-spring-web:" + TestUtilSpring.getResteasySpringVersion());
         archive.as(ZipExporter.class).exportTo(new File("target", DEPLOYMENT_NAME + ".war"), true);
         return TestUtil.finishContainerPrepare(archive, null,
                 SomeClass.class, Greeting.class, TestController.class, ResponseEntityController.class, ResponseStatusController.class, GreetingControllerWithNoRequestMapping.class);

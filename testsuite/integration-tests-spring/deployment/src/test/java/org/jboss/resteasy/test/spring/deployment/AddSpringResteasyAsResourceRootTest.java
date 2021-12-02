@@ -154,8 +154,9 @@ public class AddSpringResteasyAsResourceRootTest {
 
       assertResponse(deploymentName);
       Assert.assertTrue("Spring classes are not available in deployment", springClassesAreAvailableToDeployment(deploymentName));
+      // Do not execute this test if the dependencies were explicitly added to the deployment
       Assert.assertFalse("Resteasy Spring classes are available in deployment, which is not expected",
-            resteasySpringClassesAreAvailableToDeployment(deploymentName));
+              !TestUtilSpring.includeResteasySpring() && resteasySpringClassesAreAvailableToDeployment(deploymentName));
    }
 
    @Deployment(name = "dep1")

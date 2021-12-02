@@ -26,6 +26,7 @@
 <!--        <debugJvmArgs>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=${debug.port}</debugJvmArgs>-->
         <debugJvmArgs></debugJvmArgs>
         <jboss.home>${project.build.directory}/test-server/wildfly-${server.version}</jboss.home>
+        <version.test.org.jboss.resteasy.spring>${project.version}</version.test.org.jboss.resteasy.spring>
 
         <!-- Galleon properties -->
         <feature.pack.groupId>org.jboss.resteasy.spring</feature.pack.groupId>
@@ -91,6 +92,14 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <version.test.org.jboss.resteasy.spring>${version.test.org.jboss.resteasy.spring}</version.test.org.jboss.resteasy.spring>
+                        </systemPropertyVariables>
+                    </configuration>
+                </plugin>
                 <plugin>
                     <groupId>org.jboss.galleon</groupId>
                     <artifactId>galleon-maven-plugin</artifactId>
