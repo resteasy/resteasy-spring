@@ -35,7 +35,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Dependency versions, please keep in alphabetical order -->
-        <version.javax.ws.rs-api>2.0.1.Final</version.javax.ws.rs-api>
+<!--        <version.javax.ws.rs-api>2.0.1.Final</version.javax.ws.rs-api>-->
         <version.log4j>2.13.3</version.log4j>
         <version.org.eclipse.jetty>9.4.39.v20210325</version.org.eclipse.jetty>
 
@@ -45,8 +45,10 @@
         <version.org.jboss.logging.jboss-logging-tools>2.2.1.Final</version.org.jboss.logging.jboss-logging-tools>
 
         <version.org.jboss.resteasy>6.0.0.Final</version.org.jboss.resteasy>
-        <version.org.jboss.spec.javax.servlet.jboss-servlet-api_4.0_spec>2.0.0.Final
-        </version.org.jboss.spec.javax.servlet.jboss-servlet-api_4.0_spec>
+<!--        <version.org.jboss.spec.javax.servlet.jboss-servlet-api_4.0_spec>2.0.0.Final-->
+<!--        </version.org.jboss.spec.javax.servlet.jboss-servlet-api_4.0_spec>-->
+        <version.jakarta.ws.rs>3.0.0</version.jakarta.ws.rs>
+        <version.jakarta.servlet.servlet-api>5.0.0</version.jakarta.servlet.servlet-api>
         <version.org.springframework>5.3.13</version.org.springframework>
         <version.org.wildfly>24.0.1.Final</version.org.wildfly>
 
