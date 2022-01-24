@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ValueConstants;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.container.Suspended;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.FormParam;
+import jakarta.ws.rs.container.Suspended;
+import jakarta.ws.rs.core.MediaType;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -494,7 +494,7 @@ public class SpringResourceBuilder extends ResourceBuilder {
             else if (findAnnotation(annotations, RequestBody.class) != null)
             {
                 parameter.setParamType(Parameter.ParamType.MESSAGE_BODY);
-            } else if (parameter.getType().getName().startsWith("javax.servlet.http")) {  // is this perhaps too aggressive?
+            } else if (parameter.getType().getName().startsWith("jakarta.servlet.http")) {  // is this perhaps too aggressive?
                 parameter.setParamType(Parameter.ParamType.CONTEXT);
             } else {
                 parameter.setParamType(Parameter.ParamType.UNKNOWN);

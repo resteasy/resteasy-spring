@@ -1,8 +1,8 @@
 package org.jboss.resteasy.test.spring.inmodule.resource;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @Path("/test")
 public class TypeMappingResource {
