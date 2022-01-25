@@ -107,6 +107,12 @@
             <name>JBoss Releases Repository</name>
             <url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</url>
         </repository>
+        <!-- Temporary repository until Spring 6 is final and synchronized to Maven central -->
+        <repository>
+            <id>spring-repo</id>
+            <name>Spring Repository</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
     </distributionManagement>
 
 
