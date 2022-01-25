@@ -103,7 +103,7 @@
         <module>resteasy-spring-bom</module>
         <module>resteasy-spring-test-bom</module>
         <module>resteasy-spring</module>
-<!--        <module>resteasy-spring-web</module>-->
+        <module>resteasy-spring-web</module>
 <!--        <module>resteasy-undertow-spring</module>-->
 <!--        <module>galleon-feature-pack</module>-->
 <!--        <module>testsuite</module>-->
