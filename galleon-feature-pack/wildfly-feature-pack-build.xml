@@ -18,7 +18,7 @@
   -->
 <build xmlns="urn:wildfly:feature-pack-build:3.1" producer="org.jboss.resteasy.spring:galleon-feature-pack">
     <transitive>
-        <dependency group-id="org.wildfly" artifact-id="wildfly-ee-galleon-pack" translate-to-fpl="true">
+        <dependency group-id="org.wildfly" artifact-id="wildfly-preview-feature-pack" translate-to-fpl="true">
             <name>org.wildfly:wildfly-ee-galleon-pack</name>
             <packages inherit="true">
                 <!-- Exclude modules no longer provided by RESTEasy -->
