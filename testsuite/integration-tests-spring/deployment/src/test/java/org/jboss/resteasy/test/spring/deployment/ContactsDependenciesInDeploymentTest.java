@@ -5,9 +5,9 @@ import java.lang.reflect.ReflectPermission;
 import java.util.PropertyPermission;
 import java.util.logging.LoggingPermission;
 
-import jakarta.management.MBeanPermission;
-import jakarta.management.MBeanServerPermission;
-import jakarta.management.MBeanTrustPermission;
+import javax.management.MBeanPermission;
+import javax.management.MBeanServerPermission;
+import javax.management.MBeanTrustPermission;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
