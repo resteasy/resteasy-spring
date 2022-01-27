@@ -17,7 +17,7 @@
     <modules>
         <module>shared</module>
         <module>integration-tests-spring</module>
-<!--        <module>integration-tests-spring-web</module>-->
+        <module>integration-tests-spring-web</module>
     </modules>
 
     <properties>
