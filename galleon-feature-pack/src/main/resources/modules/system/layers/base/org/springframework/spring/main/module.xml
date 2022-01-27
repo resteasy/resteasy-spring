@@ -35,6 +35,9 @@
         <artifact name="${org.aspectj:aspectjweaver}"/>
     </resources>
     <dependencies>
+        <!-- for java.beans -->
+        <module name="java.desktop"/>
+        <module name="java.logging"/>
         <module name="ch.qos.cal10n" optional="true"/>
         <module name="com.google.guava"/>
 <!--        <module name="jakarta.api"/>-->
