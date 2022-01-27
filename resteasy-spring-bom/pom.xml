@@ -41,22 +41,11 @@
                 <artifactId>resteasy-core-spi</artifactId>
                 <version>${version.org.jboss.resteasy}</version>
             </dependency>
-            <!--            <dependency>-->
-            <!--                <groupId>org.jboss.spec.javax.ws.rs</groupId>-->
-            <!--                <artifactId>jboss-jaxrs-api_2.1_spec</artifactId>-->
-            <!--                <version>${version.javax.ws.rs-api}</version>-->
-            <!--            </dependency>-->
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-server</artifactId>
                 <version>${version.org.eclipse.jetty}</version>
             </dependency>
-            <!--            <dependency>-->
-            <!--                <groupId>org.jboss.spec.javax.servlet</groupId>-->
-            <!--                <artifactId>jboss-servlet-api_4.0_spec</artifactId>-->
-            <!--                <version>${version.org.jboss.spec.javax.servlet.jboss-servlet-api_4.0_spec}</version>-->
-            <!--                <scope>provided</scope>-->
-            <!--            </dependency>-->
             <dependency>
                 <groupId>jakarta.ws.rs</groupId>
                 <artifactId>jakarta.ws.rs-api</artifactId>
