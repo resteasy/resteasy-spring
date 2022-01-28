@@ -20,7 +20,7 @@
     </properties>
 
     <modules>
-<!--        <module>deployment</module>-->
+        <module>deployment</module>
         <module>inmodule</module>
         <module>unit</module>
     </modules>
