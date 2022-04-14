@@ -55,7 +55,7 @@
         <version.jakarta.ws.rs>3.0.0</version.jakarta.ws.rs>
         <version.jakarta.servlet.servlet-api>5.0.0</version.jakarta.servlet.servlet-api>
         <version.org.springframework>6.0.0-M3</version.org.springframework>
-        <version.org.wildfly>26.0.0.Final</version.org.wildfly>
+        <version.org.wildfly>26.1.0.Final</version.org.wildfly>
 
         <version.junit>4.13.2</version.junit>
 
