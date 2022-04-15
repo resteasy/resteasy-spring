@@ -31,6 +31,24 @@
     </scm>
 
     <repositories>
+        <!-- Required for provisioning WildFly. Not all dependencies currently exist on Maven Central. This is also
+           useful for when we want to test with versions releases that have not yet been synchronized to Maven Central
+           from JBoss Nexus.
+       -->
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+            <layout>default</layout>
+        </repository>
         <repository>
             <id>spring-repo</id>
             <name>Spring Repository</name>
@@ -52,7 +70,7 @@
         <version.org.jboss.logging.jboss-logging-tools>2.2.1.Final</version.org.jboss.logging.jboss-logging-tools>
 
         <version.org.jboss.resteasy>6.1.0.Alpha1</version.org.jboss.resteasy>
-        <version.jakarta.ws.rs>3.1.0</version.jakarta.ws.rs>
+        <version.jakarta.ws.rs>3.1.0.RC1-jbossorg-1</version.jakarta.ws.rs>
         <version.jakarta.servlet.servlet-api>5.0.0</version.jakarta.servlet.servlet-api>
         <version.org.springframework>6.0.0-M3</version.org.springframework>
         <version.org.wildfly>26.1.0.Final</version.org.wildfly>
