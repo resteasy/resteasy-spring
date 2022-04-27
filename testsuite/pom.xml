@@ -142,4 +142,18 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>override-jboss-home</id>
+            <activation>
+                <property>
+                    <name>server.home</name>
+                </property>
+            </activation>
+            <properties>
+                <jboss.home>${server.home}</jboss.home>
+            </properties>
+        </profile>
+    </profiles>
 </project>
