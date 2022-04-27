@@ -19,12 +19,6 @@
         <jboss.server.config.file.name>standalone-full.xml</jboss.server.config.file.name>
     </properties>
 
-    <modules>
-        <module>deployment</module>
-        <module>inmodule</module>
-        <module>unit</module>
-    </modules>
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -125,4 +119,32 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <modules>
+                <module>deployment</module>
+                <module>inmodule</module>
+                <module>unit</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>override-jboss-home</id>
+            <activation>
+                <property>
+                    <name>server.home</name>
+                </property>
+            </activation>
+
+            <modules>
+                <module>deployment</module>
+                <module>unit</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>
