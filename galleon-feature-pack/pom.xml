@@ -104,7 +104,7 @@
         <dependency>
             <groupId>org.wildfly</groupId>
             <artifactId>wildfly-preview-feature-pack</artifactId>
-            <version>${version.org.wildfly}</version>
+            <version>${version.org.jboss.wildfly}</version>
             <type>zip</type>
         </dependency>
         <dependency>

@@ -39,6 +39,20 @@
                             </goals>
                         </execution>
                     </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.wildfly</groupId>
+                            <artifactId>wildfly-galleon-pack</artifactId>
+                            <version>${version.org.jboss.wildfly}</version>
+                            <type>zip</type>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.wildfly</groupId>
+                            <artifactId>wildfly-preview-feature-pack</artifactId>
+                            <version>${version.org.jboss.wildfly}</version>
+                            <type>zip</type>
+                        </dependency>
+                    </dependencies>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>

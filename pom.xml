@@ -82,7 +82,7 @@
         <version.jakarta.ws.rs>3.1.0</version.jakarta.ws.rs>
         <version.jakarta.servlet.servlet-api>5.0.0</version.jakarta.servlet.servlet-api>
         <version.org.springframework>6.0.0-M6</version.org.springframework>
-        <version.org.wildfly>27.0.0.Alpha5</version.org.wildfly>
+        <version.org.jboss.wildfly>27.0.0.Alpha5</version.org.jboss.wildfly>
 
         <version.junit>4.13.2</version.junit>
 
@@ -93,7 +93,7 @@
         <version.org.testng>6.14.2</version.org.testng>
         <version.resteasy.testsuite>${version.org.jboss.resteasy}</version.resteasy.testsuite>
         <version.junit>4.13.2</version.junit>
-        <server.version>${version.org.wildfly}</server.version>
+        <server.version>${version.org.jboss.wildfly}</server.version>
         <!-- Plugin Versions, please keep in alphabetical order -->
         <version.org.jboss.galleon>5.0.5.Final</version.org.jboss.galleon>
         <version.org.jboss.resteasy.checkstyle>1.0.0.Final</version.org.jboss.resteasy.checkstyle>
