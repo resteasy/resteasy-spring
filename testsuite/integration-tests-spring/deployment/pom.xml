@@ -14,6 +14,14 @@
     <artifactId>resteasy-integration-tests-spring-deployment</artifactId>
     <name>RESTEasy Main testsuite: Spring integration tests - Deployment</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-preview-feature-pack</artifactId>
+            <version>${version.org.wildfly}</version>
+            <type>zip</type>
+        </dependency>
+    </dependencies>
     <profiles>
         <!--
         Name:  download
