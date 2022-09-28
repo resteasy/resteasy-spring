@@ -114,17 +114,26 @@
                             <!-- <jboss-maven-dist/> -->
                             <jboss-fork-embedded>${galleon.fork.embedded}</jboss-fork-embedded>
                             <optional-packages>passive+</optional-packages>
-                            <jboss-jakarta-transform-artifacts>true</jboss-jakarta-transform-artifacts>
                         </plugin-options>
                         <feature-packs>
                             <feature-pack>
-                                <groupId>${feature.pack.groupId}</groupId>
-                                <artifactId>${feature.pack.artifactId}</artifactId>
-                                <version>${feature.pack.version}</version>
+                                <groupId>org.wildfly</groupId>
+                                <artifactId>wildfly-preview-feature-pack</artifactId>
+                                <version>${version.org.wildfly}</version>
                                 <excluded-packages>
                                     <name>product.conf</name>
                                     <name>docs.schema</name>
                                 </excluded-packages>
+                            </feature-pack>
+                            <feature-pack>
+                                <groupId>org.jboss.resteasy</groupId>
+                                <artifactId>galleon-feature-pack</artifactId>
+                                <version>${version.org.jboss.resteasy}</version>
+                            </feature-pack>
+                            <feature-pack>
+                                <groupId>${feature.pack.groupId}</groupId>
+                                <artifactId>${feature.pack.artifactId}</artifactId>
+                                <version>${feature.pack.version}</version>
                             </feature-pack>
                         </feature-packs>
                         <configurations>
