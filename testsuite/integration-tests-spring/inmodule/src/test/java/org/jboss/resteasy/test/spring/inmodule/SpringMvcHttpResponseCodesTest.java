@@ -140,7 +140,9 @@ public class SpringMvcHttpResponseCodesTest {
    public void testBadRequestException() {
       Response response = authorizedClient.target(generateURL("/" + TestResource.TEST_PATH + "/json")).request()
             .post(Entity.entity("[{customer:\"Zack\"}]", MediaType.APPLICATION_JSON_TYPE));
-      Assert.assertEquals(HttpResponseCodes.SC_BAD_REQUEST, response.getStatus());
+      // As of RESTEasy 6.2 the default ExceptionMapper returns a 500 if the error is not handled. Previously, 400 was
+      // returned.
+      Assert.assertEquals(HttpResponseCodes.SC_INTERNAL_SERVER_ERROR, response.getStatus());
    }
 
    /**

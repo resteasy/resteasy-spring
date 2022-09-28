@@ -1,59 +1,55 @@
 package org.jboss.resteasy.utils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.jboss.resteasy.utils.maven.MavenUtil;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.jboss.shrinkwrap.resolver.api.maven.PomEquippedResolveStage;
 
 /**
  * Base util class for RESTEasy spring related testing.
  */
 public class TestUtilSpring {
 
-    private static final String defaultSpringVersion = "5.3.7";
-
-    /**
-     * Get spring version
-     *
-     * @return Spring version.
-     */
-    private static String getSpringVersion() {
-        return System.getProperty("version.org.springframework", defaultSpringVersion);
-    }
-
     /**
      * Get Spring dependencies for specified spring version
      *
-     * @param springVersion
      * @return Spring libraries
      */
-    private static File[] resolveSpringDependencies(String springVersion, String... additionalDeps) {
-        MavenUtil mavenUtil;
-        mavenUtil = MavenUtil.create(true);
-        List<File> runtimeDependencies = new ArrayList<>();
+    private static File[] resolveSpringDependencies(String... additionalDeps) {
+        final PomEquippedResolveStage resolver = Maven.resolver().loadPomFromFile("pom.xml");
+        Set<File> runtimeDependencies = new HashSet<>();
 
         try {
-            runtimeDependencies.add(mavenUtil.createMavenGavFile("org.springframework:spring-core:" + springVersion));
-            runtimeDependencies.add(mavenUtil.createMavenGavFile("org.springframework:spring-web:" + springVersion));
-            runtimeDependencies.add(mavenUtil.createMavenGavFile("org.springframework:spring-webmvc:" + springVersion));
-            runtimeDependencies.add(mavenUtil.createMavenGavFile("org.springframework:spring-context:" + springVersion));
-            runtimeDependencies.add(mavenUtil.createMavenGavFile("org.springframework:spring-expression:" + springVersion));
-            runtimeDependencies.add(mavenUtil.createMavenGavFile("org.springframework:spring-beans:" + springVersion));
-            runtimeDependencies.add(mavenUtil.createMavenGavFile("org.springframework:spring-aop:" + springVersion));
+            final File[] springDeps = resolver.resolve(
+                            "org.springframework:spring-core",
+                            "org.springframework:spring-web",
+                            "org.springframework:spring-webmvc",
+                            "org.springframework:spring-context",
+                            "org.springframework:spring-expression",
+                            "org.springframework:spring-beans",
+                            "org.springframework:spring-aop"
+                    ).withTransitivity()
+                    .asFile();
+            runtimeDependencies.addAll(Arrays.asList(springDeps));
             if (includeResteasySpring()) {
-                runtimeDependencies.add(mavenUtil.createMavenGavFile("org.jboss.resteasy.spring:resteasy-spring:" + getResteasySpringVersion()));
+                runtimeDependencies.add(resolver.resolve("org.jboss.resteasy.spring:resteasy-spring").withoutTransitivity()
+                        .asSingleFile());
             }
-            for (String dep : additionalDeps) {
-                runtimeDependencies.add(mavenUtil.createMavenGavFile(dep));
+            if (additionalDeps != null && additionalDeps.length > 0) {
+                final File[] additional = resolver.resolve(additionalDeps)
+                        .withTransitivity()
+                        .asFile();
+                runtimeDependencies.addAll(Arrays.asList(additional));
             }
         } catch (Exception e) {
             throw new RuntimeException("Unable to get artifacts from maven via Aether library", e);
         }
 
-        File[] dependencies = runtimeDependencies.toArray(new File[]{});
-        return dependencies;
+        return runtimeDependencies.toArray(new File[0]);
     }
 
     /**
@@ -62,7 +58,7 @@ public class TestUtilSpring {
      * @param archive
      */
     public static void addSpringLibraries(WebArchive archive) {
-        archive.addAsLibraries(resolveSpringDependencies(getSpringVersion()));
+        archive.addAsLibraries(resolveSpringDependencies());
     }
 
     /**
@@ -71,7 +67,7 @@ public class TestUtilSpring {
      * @param archive
      */
     public static void addSpringLibraries(final WebArchive archive, final String... additionalDeps) {
-        archive.addAsLibraries(resolveSpringDependencies(getSpringVersion(), additionalDeps));
+        archive.addAsLibraries(resolveSpringDependencies(additionalDeps));
     }
 
     /**
