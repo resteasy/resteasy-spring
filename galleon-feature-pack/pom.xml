@@ -122,7 +122,10 @@
                 <exclusion>
                     <groupId>org.wildfly</groupId>
                     <artifactId>wildfly-ee-galleon-pack</artifactId>
-<!--                    <artifactId>wildfly-preview-feature-pack</artifactId>-->
+                </exclusion>
+                <exclusion>
+                    <groupId>org.wildfly</groupId>
+                    <artifactId>wildfly-preview-feature-pack</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -156,18 +159,6 @@
                         <phase>prepare-package</phase>
                         <configuration>
                             <fork-embedded>${galleon.fork.embedded}</fork-embedded>
-
-<!--                            <task-properties>-->
-<!--                                <jakarta.transform.artifacts>true</jakarta.transform.artifacts>-->
-<!--                                <jakarta.transform.modules>false</jakarta.transform.modules>-->
-<!--                                <jakarta.transform.artifacts.suffix>-ee9</jakarta.transform.artifacts.suffix>-->
-<!--                            </task-properties>-->
-<!--                            <jakarta-transform>true</jakarta-transform>-->
-<!--                            &lt;!&ndash;<jakarta-transform-verbose>true</jakarta-transform-verbose> &ndash;&gt;-->
-<!--                            <jakarta-transform-excluded-artifacts>-->
-<!--                                <exclude>org.jboss.resteasy:.*\z</exclude>-->
-<!--                            </jakarta-transform-excluded-artifacts>-->
-
                         </configuration>
                     </execution>
                 </executions>
