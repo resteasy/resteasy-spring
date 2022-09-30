@@ -89,7 +89,7 @@
         <!-- Test only dependencies -->
         <version.org.aspectj>1.7.3</version.org.aspectj>
         <version.aopalliance>1.0</version.aopalliance>
-        <version.org.jboss.arquillian>1.7.0.Alpha10</version.org.jboss.arquillian>
+        <version.org.jboss.arquillian>1.7.0.Alpha12</version.org.jboss.arquillian>
         <version.org.testng>6.14.2</version.org.testng>
         <version.resteasy.testsuite>${version.org.jboss.resteasy}</version.resteasy.testsuite>
         <version.junit>4.13.2</version.junit>
