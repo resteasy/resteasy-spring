@@ -18,9 +18,10 @@
   -->
 <build xmlns="urn:wildfly:feature-pack-build:3.1" producer="org.jboss.resteasy.spring:galleon-feature-pack">
     <transitive>
-        <dependency group-id="org.wildfly" artifact-id="wildfly-ee-galleon-pack" translate-to-fpl="true">
-<!--            <name>org.wildfly:wildfly-preview-feature-pack</name>-->
-            <name>org.wildfly:wildfly-ee-galleon-pack</name>
+        <dependency group-id="org.wildfly" artifact-id="wildfly-preview-feature-pack" translate-to-fpl="true">
+<!--        <dependency group-id="org.wildfly" artifact-id="wildfly-ee-galleon-pack" translate-to-fpl="true">-->
+            <name>org.wildfly:wildfly-preview-feature-pack</name>
+<!--            <name>org.wildfly:wildfly-ee-galleon-pack</name>-->
             <packages inherit="true">
                 <exclude name="org.jboss.resteasy.resteasy-yaml-provider"/>
                 <exclude name="org.jboss.resteasy.resteasy-jettison-provider"/>
@@ -34,7 +35,7 @@
     <dependencies>
         <dependency group-id="org.jboss.resteasy" artifact-id="galleon-feature-pack" translate-to-fpl="true">
             <name>org.jboss.resteasy:galleon-feature-pack</name>
-<!--            <default-configs inherit="false"/>-->
+            <default-configs inherit="false"/>
         </dependency>
     </dependencies>
     <default-packages>
