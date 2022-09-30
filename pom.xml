@@ -82,7 +82,7 @@
         <version.jakarta.ws.rs>3.1.0</version.jakarta.ws.rs>
         <version.jakarta.servlet.servlet-api>5.0.0</version.jakarta.servlet.servlet-api>
         <version.org.springframework>6.0.0-M5</version.org.springframework>
-        <version.org.wildfly>27.0.0.Alpha3</version.org.wildfly>
+        <version.org.wildfly>27.0.0.Beta1</version.org.wildfly>
 
         <version.junit>4.13.2</version.junit>
 
