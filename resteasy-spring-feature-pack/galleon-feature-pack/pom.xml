@@ -23,90 +23,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.jboss.resteasy.spring</groupId>
-        <artifactId>resteasy-spring-parent</artifactId>
+        <artifactId>resteasy-spring-feature-pack</artifactId>
         <version>3.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>galleon-feature-pack</artifactId>
-    <name>RESTEasy Spring: Galleon Feature Pack</name>
+    <name>RESEasy Spring: Galleon Feature Pack</name>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>resteasy-spring-bom</artifactId>
-                <version>${project.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <properties>
+        <common.resources.directory>${basedir}/../common/src/main/resources</common.resources.directory>
+    </properties>
+
+
     <dependencies>
-        <dependency>
-            <groupId>org.jboss.resteasy.spring</groupId>
-            <artifactId>resteasy-spring</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy.spring</groupId>
-            <artifactId>resteasy-spring-web</artifactId>
-        </dependency>
-
-
-        <!-- Spring Dependencies -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-expression</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>aopalliance</groupId>
-            <artifactId>aopalliance</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-        </dependency>
-
-        <!-- Other feature pack dependencies -->
+        <!-- Feature pack dependencies -->
         <dependency>
             <groupId>org.wildfly</groupId>
             <artifactId>wildfly-ee-galleon-pack</artifactId>
             <version>${version.org.wildfly}</version>
             <type>zip</type>
         </dependency>
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>galleon-feature-pack</artifactId>
@@ -118,6 +56,14 @@
                     <artifactId>wildfly-ee-galleon-pack</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- Add the common dependency to inherit default required dependencies -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>resteasy-spring-feature-pack-common</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
         </dependency>
     </dependencies>
 
@@ -138,11 +84,44 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <!-- Copy the common resources -->
+                    <execution>
+                        <id>copy-common-feature-pack-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${common.resources.directory}</directory>
+                                    <excludes>
+                                        <exclude>modules/**/module.xml</exclude>
+                                    </excludes>
+                                </resource>
+                                <resource>
+                                    <directory>${common.resources.directory}</directory>
+                                    <includes>
+                                        <include>modules/**/module.xml</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                            <overwrite>true</overwrite>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.wildfly.galleon-plugins</groupId>
                 <artifactId>wildfly-galleon-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>wildfly-template-feature-pack-build</id>
+                        <id>resteasy-spring-galleon-feature-pack</id>
                         <goals>
                             <goal>build-feature-pack</goal>
                         </goals>
