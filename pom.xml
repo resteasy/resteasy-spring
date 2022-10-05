@@ -78,7 +78,7 @@
         </version.org.jboss.logging.jboss-logging-annotations>
         <version.org.jboss.logging.jboss-logging-tools>2.2.1.Final</version.org.jboss.logging.jboss-logging-tools>
 
-        <version.org.jboss.resteasy>6.2.0.Final</version.org.jboss.resteasy>
+        <version.org.jboss.resteasy>6.2.1.Final-SNAPSHOT</version.org.jboss.resteasy>
         <version.jakarta.ws.rs>3.1.0</version.jakarta.ws.rs>
         <version.jakarta.servlet.servlet-api>5.0.0</version.jakarta.servlet.servlet-api>
         <version.org.springframework>6.0.0-M6</version.org.springframework>
@@ -126,7 +126,7 @@
         <module>resteasy-spring</module>
         <module>resteasy-spring-web</module>
         <module>resteasy-undertow-spring</module>
-        <module>galleon-feature-pack</module>
+        <module>resteasy-spring-feature-pack</module>
         <module>testsuite</module>
     </modules>
 
