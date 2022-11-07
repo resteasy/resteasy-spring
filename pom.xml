@@ -81,7 +81,7 @@
         <version.org.jboss.resteasy>6.2.1.Final</version.org.jboss.resteasy>
         <version.jakarta.ws.rs>3.1.0</version.jakarta.ws.rs>
         <version.jakarta.servlet.servlet-api>5.0.0</version.jakarta.servlet.servlet-api>
-        <version.org.springframework>6.0.0-RC2</version.org.springframework>
+        <version.org.springframework>6.0.0-RC3</version.org.springframework>
         <version.shrinkwrap.resolvers>3.1.4</version.shrinkwrap.resolvers>
         <version.org.wildfly>27.0.0.Beta1</version.org.wildfly>
 
