@@ -39,9 +39,17 @@
         <module>galleon-preview-feature-pack</module>
     </modules>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
     <dependencyManagement>
         <dependencies>
-<!--            todo: separate into a `resteasy-spring-dependencies` module.-->
+            <!--            todo: separate into a `resteasy-spring-dependencies` module.-->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>resteasy-spring-bom</artifactId>

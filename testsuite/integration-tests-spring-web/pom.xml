@@ -13,7 +13,7 @@
 
     <artifactId>resteasy-integration-tests-spring-web</artifactId>
     <packaging>pom</packaging>
-    <name>RESTEasy Main testsuite: Spring Web integration tests</name>
+    <name>RESTEasy Main testsuite: Spring Web Integration Tests</name>
 
     <modules>
         <module>deployment</module>
@@ -49,7 +49,6 @@
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
             <groupId>org.jboss.resteasy.spring</groupId>
             <artifactId>resteasy-spring-web</artifactId>
@@ -59,15 +58,8 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>shared</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-client</artifactId>
-            <version>${version.resteasy.testsuite}</version>
-            <scope>provided</scope>
+            <artifactId>testsuite-shared</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -77,18 +69,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>arquillian-utils</artifactId>
-            <scope>test</scope>
-            <version>${version.org.jboss.resteasy}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.inject</groupId>
-                    <artifactId>javax.inject</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>

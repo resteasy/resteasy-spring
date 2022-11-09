@@ -38,6 +38,7 @@
             <artifactId>resteasy-undertow</artifactId>
             <version>${version.org.jboss.resteasy}</version>
         </dependency>
+
         <dependency>
             <groupId>org.jboss.resteasy.spring</groupId>
             <artifactId>resteasy-spring</artifactId>
@@ -52,6 +53,15 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <!-- Test dependencies -->
@@ -72,4 +82,13 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

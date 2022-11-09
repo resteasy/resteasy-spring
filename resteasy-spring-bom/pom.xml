@@ -16,6 +16,17 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Can be removed when RESTEASY-3254 is resolved -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${version.commons-codec}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>${version.jakarta.annotation-api}</version>
+            </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>resteasy-spring</artifactId>
@@ -34,11 +45,6 @@
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-client</artifactId>
-                <version>${version.org.jboss.resteasy}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-core-spi</artifactId>
                 <version>${version.org.jboss.resteasy}</version>
             </dependency>
             <dependency>
@@ -61,9 +67,8 @@
                 <groupId>org.jboss.logging</groupId>
                 <artifactId>jboss-logging</artifactId>
                 <version>${version.org.jboss.logging.jboss-logging}</version>
-                <!--<scope>provided</scope> todo this should be provided-->
+                <scope>provided</scope>
             </dependency>
-
             <dependency>
                 <groupId>org.jboss.logging</groupId>
                 <artifactId>jboss-logging-annotations</artifactId>
