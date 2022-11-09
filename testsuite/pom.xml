@@ -23,7 +23,7 @@
     <properties>
         <version.download-plugin>1.6.6</version.download-plugin>
         <debug.port>8787</debug.port>
-<!--        <debugJvmArgs>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=${debug.port}</debugJvmArgs>-->
+        <!--        <debugJvmArgs>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=${debug.port}</debugJvmArgs>-->
         <debugJvmArgs></debugJvmArgs>
         <jboss.home>${project.build.directory}/test-server/wildfly-${server.version}</jboss.home>
         <version.test.org.jboss.resteasy.spring>${project.version}</version.test.org.jboss.resteasy.spring>
@@ -53,6 +53,27 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>arquillian-utils</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.core</groupId>
+            <artifactId>wildfly-cli</artifactId>
+            <version>${version.org.wildfly.core}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.shrinkwrap</groupId>
+            <artifactId>shrinkwrap-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.shrinkwrap.resolver</groupId>
+            <artifactId>shrinkwrap-resolver-depchain</artifactId>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
     <repositories>
         <!-- Required for provisioning WildFly. Not all dependencies currently exist on Maven Central. This is also
              useful for when we want to test with versions releases that have not yet been synchronized to Maven Central
@@ -96,7 +117,8 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <configuration>
                         <systemPropertyVariables>
-                            <version.test.org.jboss.resteasy.spring>${version.test.org.jboss.resteasy.spring}</version.test.org.jboss.resteasy.spring>
+                            <version.test.org.jboss.resteasy.spring>${version.test.org.jboss.resteasy.spring}
+                            </version.test.org.jboss.resteasy.spring>
                         </systemPropertyVariables>
                     </configuration>
                 </plugin>
@@ -152,6 +174,15 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <profiles>
@@ -174,7 +205,8 @@
                 </property>
             </activation>
             <properties>
-                <debugJvmArgs>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:${debug.port}</debugJvmArgs>
+                <debugJvmArgs>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:${debug.port}
+                </debugJvmArgs>
             </properties>
         </profile>
     </profiles>

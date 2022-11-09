@@ -55,7 +55,18 @@
                     <groupId>org.wildfly</groupId>
                     <artifactId>wildfly-ee-galleon-pack</artifactId>
                 </exclusion>
+                <!-- Can be removed when RESTEASY-3255 is resolved -->
+                <exclusion>
+                    <groupId>org.reactivestreams</groupId>
+                    <artifactId>reactive-streams</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+        <!-- Can be removed when RESTEASY-3255 is resolved -->
+        <dependency>
+            <groupId>org.reactivestreams</groupId>
+            <artifactId>reactive-streams</artifactId>
+            <version>${version.reactive-streams}</version>
         </dependency>
 
         <!-- Add the common dependency to inherit default required dependencies -->

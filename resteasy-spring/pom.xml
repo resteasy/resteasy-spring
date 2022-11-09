@@ -10,7 +10,7 @@
 
     <artifactId>resteasy-spring</artifactId>
     <packaging>jar</packaging>
-    <name>RESTEasy Spring integration</name>
+    <name>RESTEasy Spring Integration</name>
     <description/>
 
     <dependencyManagement>
@@ -28,11 +28,19 @@
     <dependencies>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-core-spi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-client</artifactId>
+            <!-- Can be removed when RESTEASY-3254 is resolved -->
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Can be removed when RESTEASY-3254 is resolved -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
         </dependency>
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
@@ -82,6 +90,14 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
     <profiles>
         <profile>
             <id>i18n</id>
