@@ -9,9 +9,11 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.UriInfo;
+import jakarta.enterprise.inject.Vetoed;
 
 @Path("/echo")
 @Produces(MediaType.TEXT_PLAIN)
+@Vetoed
 public class SpringWebappContextResource {
 
    private static Logger logger = Logger.getLogger(SpringWebappContextResource.class);
