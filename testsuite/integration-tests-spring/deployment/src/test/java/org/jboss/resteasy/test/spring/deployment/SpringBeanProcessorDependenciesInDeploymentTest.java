@@ -77,7 +77,8 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
       WebArchive archive = ShrinkWrap.create(WebArchive.class, SpringBeanProcessorDependenciesInDeploymentTest.class.getSimpleName() + ".war")
             .addAsWebInfResource(SpringBeanProcessorDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml");
       archive.addAsWebInfResource(SpringBeanProcessorDependenciesInDeploymentTest.class.getPackage(),
-            "springBeanProcessor/spring-bean-processor-test.xml", "applicationContext.xml");
+            "springBeanProcessor/spring-bean-processor-test.xml", "applicationContext.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
       archive.addClass(SpringBeanProcessorCounter.class);
       archive.addClass(SpringBeanProcessorCustomer.class);
       archive.addClass(SpringBeanProcessorCustomerService.class);

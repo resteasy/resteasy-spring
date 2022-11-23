@@ -82,7 +82,8 @@ public class AddSpringResteasyAsResourceRootTest {
             .addClass(TestResource.class)
             .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "mvc-dispatcher-servlet/web.xml", "web.xml")
             .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "mvc-dispatcher-servlet/mvc-dispatcher-servlet.xml", "mvc-dispatcher-servlet.xml")
-            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "mvc-dispatcher-servlet/applicationContext.xml", "applicationContext.xml");
+            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "mvc-dispatcher-servlet/applicationContext.xml", "applicationContext.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
 
       // PropertyPermission needed for "arquillian.debug" to run
       // remaining permissions needed to run springframework
@@ -127,7 +128,8 @@ public class AddSpringResteasyAsResourceRootTest {
       WebArchive archive = ShrinkWrap.create(WebArchive.class, deploymentWithSpringContextLoaderListenerSpringIncluded + ".war")
             .addClass(TestResource.class)
             .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "web.xml", "web.xml")
-            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "applicationContext.xml", "applicationContext.xml");
+            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "applicationContext.xml", "applicationContext.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
 
       // remaining permissions needed to run springframework
       archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
@@ -163,7 +165,8 @@ public class AddSpringResteasyAsResourceRootTest {
    private static Archive<?> createDeploymentWithoutSpringMvcDispatcherOrListener() {
       WebArchive archive = TestUtil.prepareArchive(deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded);
       archive.addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "web-no-mvc-no-listener.xml", "web.xml")
-            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "applicationContext.xml", "applicationContext.xml");
+            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "applicationContext.xml", "applicationContext.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
 
       TestUtilSpring.addSpringLibraries(archive);
       archive.as(ZipExporter.class).exportTo(new File("target", deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded + ".war"), true);

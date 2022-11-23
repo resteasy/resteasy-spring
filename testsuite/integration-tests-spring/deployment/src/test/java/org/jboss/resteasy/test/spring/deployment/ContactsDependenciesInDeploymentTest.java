@@ -76,7 +76,8 @@ public class ContactsDependenciesInDeploymentTest {
             .addClass(Contact.class)
             .addClass(ContactsDependenciesInDeploymentTest.class)
             .addAsWebInfResource(ContactsDependenciesInDeploymentTest.class.getPackage(), "contacts/web.xml", "web.xml")
-            .addAsWebInfResource(ContactsDependenciesInDeploymentTest.class.getPackage(), "contacts/springmvc-servlet.xml", "springmvc-servlet.xml");
+            .addAsWebInfResource(ContactsDependenciesInDeploymentTest.class.getPackage(), "contacts/springmvc-servlet.xml", "springmvc-servlet.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
 
       // spring specific permissions needed.
       // Permission  accessClassInPackage.sun.reflect.annotation is required in order

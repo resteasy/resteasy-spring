@@ -51,7 +51,8 @@ public class JaxrsWithSpringMVCTest {
       WebArchive archive = ShrinkWrap.create(WebArchive.class, JaxrsWithSpringMVCTest.class.getSimpleName() + ".war")
          .addAsWebInfResource(JaxrsWithSpringMVCTest.class.getPackage(), "jaxrsWithSpringMVC/web.xml", "web.xml");
       archive.addAsWebInfResource(JaxrsWithSpringMVCTest.class.getPackage(),
-         "jaxrsWithSpringMVC/spring-servlet.xml", "spring-servlet.xml");
+         "jaxrsWithSpringMVC/spring-servlet.xml", "spring-servlet.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
       archive.addClass(GreetingController.class);
       archive.addClass(Greeting.class);
       archive.addClass(NumbersResource.class);

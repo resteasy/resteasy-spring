@@ -41,7 +41,8 @@ public class ContextRefreshDependenciesInDeploymentTest {
             .addClass(ContextRefreshTrigger.class)
             .addClass(ContextRefreshDependenciesInDeploymentTest.class)
             .addAsWebInfResource(ContextRefreshDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml")
-            .addAsWebInfResource(ContextRefreshDependenciesInDeploymentTest.class.getPackage(), "contextRefresh/applicationContext.xml", "applicationContext.xml");
+            .addAsWebInfResource(ContextRefreshDependenciesInDeploymentTest.class.getPackage(), "contextRefresh/applicationContext.xml", "applicationContext.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
 
       // PropertyPermission for test to run in arquillian
       // remaining permissions needed to run springframework

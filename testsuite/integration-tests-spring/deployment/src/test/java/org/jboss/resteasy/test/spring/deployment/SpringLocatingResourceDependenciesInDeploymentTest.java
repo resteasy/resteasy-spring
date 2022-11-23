@@ -44,7 +44,8 @@ public class SpringLocatingResourceDependenciesInDeploymentTest {
       WebArchive archive = ShrinkWrap.create(WebArchive.class, SpringLocatingResourceDependenciesInDeploymentTest.class.getSimpleName() + ".war")
             .addAsWebInfResource(SpringLocatingResourceDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml");
       archive.addAsWebInfResource(SpringLocatingResourceDependenciesInDeploymentTest.class.getPackage(),
-            "springLocatingResource/applicationContext.xml", "applicationContext.xml");
+            "springLocatingResource/applicationContext.xml", "applicationContext.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
       archive.addClass(SpringLocatingLocatingResource.class);
       archive.addClass(SpringLocatingSimpleResource.class);
 

@@ -49,7 +49,8 @@ public class JavaConfigDependenciesInDeploymentTest {
             .addClass(JavaConfigResource.class)
             .addClass(JavaConfigService.class)
             .addClass(JavaConfigBeanConfiguration.class)
-            .addAsWebInfResource(JavaConfigDependenciesInDeploymentTest.class.getPackage(), "javaConfig/web.xml", "web.xml");
+            .addAsWebInfResource(JavaConfigDependenciesInDeploymentTest.class.getPackage(), "javaConfig/web.xml", "web.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
 
       // Permission needed for "arquillian.debug" to run
       // "suppressAccessChecks" required for access to arquillian-core.jar
