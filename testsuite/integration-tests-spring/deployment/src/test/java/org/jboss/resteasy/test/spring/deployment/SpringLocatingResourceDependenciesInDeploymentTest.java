@@ -45,7 +45,8 @@ public class SpringLocatingResourceDependenciesInDeploymentTest {
             .addAsWebInfResource(SpringLocatingResourceDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml");
       archive.addAsWebInfResource(SpringLocatingResourceDependenciesInDeploymentTest.class.getPackage(),
             "springLocatingResource/applicationContext.xml", "applicationContext.xml")
-              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "jboss-deployment-structure.xml", "jboss-deployment-structure.xml");
       archive.addClass(SpringLocatingLocatingResource.class);
       archive.addClass(SpringLocatingSimpleResource.class);
 

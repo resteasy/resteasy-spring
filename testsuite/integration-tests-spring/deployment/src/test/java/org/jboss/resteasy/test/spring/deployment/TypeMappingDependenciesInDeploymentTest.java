@@ -43,7 +43,8 @@ public class TypeMappingDependenciesInDeploymentTest {
       WebArchive archive = ShrinkWrap.create(WebArchive.class, TypeMappingDependenciesInDeploymentTest.class.getSimpleName() + ".war")
             .addAsWebInfResource(TypeMappingDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml");
       archive.addAsWebInfResource(TypeMappingDependenciesInDeploymentTest.class.getPackage(), "typeMapping/spring-typemapping-test-server.xml", "applicationContext.xml")
-              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "jboss-deployment-structure.xml", "jboss-deployment-structure.xml");
       archive.addClass(TypeMappingResource.class);
 
       archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(

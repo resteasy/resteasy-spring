@@ -52,7 +52,8 @@ public class JaxrsWithSpringMVCTest {
          .addAsWebInfResource(JaxrsWithSpringMVCTest.class.getPackage(), "jaxrsWithSpringMVC/web.xml", "web.xml");
       archive.addAsWebInfResource(JaxrsWithSpringMVCTest.class.getPackage(),
          "jaxrsWithSpringMVC/spring-servlet.xml", "spring-servlet.xml")
-              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "jboss-deployment-structure.xml", "jboss-deployment-structure.xml");
       archive.addClass(GreetingController.class);
       archive.addClass(Greeting.class);
       archive.addClass(NumbersResource.class);

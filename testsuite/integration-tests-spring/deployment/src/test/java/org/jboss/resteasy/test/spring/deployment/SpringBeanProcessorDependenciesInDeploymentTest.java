@@ -78,7 +78,8 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
             .addAsWebInfResource(SpringBeanProcessorDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml");
       archive.addAsWebInfResource(SpringBeanProcessorDependenciesInDeploymentTest.class.getPackage(),
             "springBeanProcessor/spring-bean-processor-test.xml", "applicationContext.xml")
-              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "jboss-deployment-structure.xml", "jboss-deployment-structure.xml");
       archive.addClass(SpringBeanProcessorCounter.class);
       archive.addClass(SpringBeanProcessorCustomer.class);
       archive.addClass(SpringBeanProcessorCustomerService.class);

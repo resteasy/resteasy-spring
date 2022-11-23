@@ -48,7 +48,8 @@ public class RequestScopedBeanDependenciesInDeploymentTest {
       WebArchive archive = ShrinkWrap.create(WebArchive.class, RequestScopedBeanDependenciesInDeploymentTest.class.getSimpleName() + ".war")
             .addAsWebInfResource(RequestScopedBeanDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml");
       archive.addAsWebInfResource(RequestScopedBeanDependenciesInDeploymentTest.class.getPackage(), "requestScopedBean/spring-request-scope-test-server.xml", "applicationContext.xml")
-              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml");
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "beans.xml", "beans.xml")
+              .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "jboss-deployment-structure.xml", "jboss-deployment-structure.xml");
       archive.addClass(RequestScopedBeanDependenciesInDeploymentTest.class);
       archive.addClass(RequestScopedBeanQualifierInjectorFactoryImpl.class);
       archive.addClass(RequestScopedBeanInnerBean.class);
