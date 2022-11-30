@@ -15,7 +15,6 @@ import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,7 +27,6 @@ import java.lang.reflect.ReflectPermission;
 import java.util.PropertyPermission;
 import java.util.logging.LoggingPermission;
 
-@Ignore
 @RunWith(Arquillian.class)
 @RunAsClient
 public class RESTEasy828Test {
@@ -68,7 +66,7 @@ public class RESTEasy828Test {
       archive.addAsLibraries(Maven
               .resolver()
               .loadPomFromFile("pom.xml")
-              .resolve("org.jboss.resteasy:resteasy-spring")
+              .resolve("org.jboss.resteasy.spring:resteasy-spring")
               .withTransitivity()
               .asFile());
 
