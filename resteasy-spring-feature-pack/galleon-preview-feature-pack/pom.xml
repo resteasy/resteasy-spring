@@ -60,6 +60,11 @@
                     <groupId>org.reactivestreams</groupId>
                     <artifactId>reactive-streams</artifactId>
                 </exclusion>
+                <!-- Can be removed when RESTEASY-3273 is resolved -->
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-databind</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <!-- Can be removed when RESTEASY-3255 is resolved -->
