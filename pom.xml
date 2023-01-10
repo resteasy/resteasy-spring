@@ -83,7 +83,7 @@
         <version.org.jboss.resteasy>6.2.2.Final</version.org.jboss.resteasy>
         <version.org.springframework>6.0.3</version.org.springframework>
         <version.org.wildfly.core>19.0.0.Final</version.org.wildfly.core>
-        <version.org.wildfly>27.0.0.Final</version.org.wildfly>
+        <version.org.wildfly>27.0.1.Final</version.org.wildfly>
         <version.reactive-streams>1.0.4</version.reactive-streams>
         <version.shrinkwrap.resolvers>3.1.4</version.shrinkwrap.resolvers>
 
