@@ -96,7 +96,7 @@
         <version.resteasy.testsuite>${version.org.jboss.resteasy}</version.resteasy.testsuite>
 
         <!-- Plugin Versions, please keep in alphabetical order -->
-        <version.org.jboss.galleon>5.0.5.Final</version.org.jboss.galleon>
+        <version.org.jboss.galleon>5.0.7.Final</version.org.jboss.galleon>
         <version.org.jboss.resteasy.checkstyle>1.0.0.Final</version.org.jboss.resteasy.checkstyle>
         <version.org.wildfly.galleon-plugins>6.2.0.Final</version.org.wildfly.galleon-plugins>
 
