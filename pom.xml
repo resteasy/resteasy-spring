@@ -13,7 +13,7 @@
 
     <groupId>org.jboss.resteasy.spring</groupId>
     <artifactId>resteasy-spring-parent</artifactId>
-    <version>3.0.2.Final</version>
+    <version>3.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <licenses>
