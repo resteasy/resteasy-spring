@@ -98,7 +98,7 @@
         <!-- Plugin Versions, please keep in alphabetical order -->
         <version.org.jboss.galleon>5.0.8.Final</version.org.jboss.galleon>
         <version.org.jboss.resteasy.checkstyle>1.0.0.Final</version.org.jboss.resteasy.checkstyle>
-        <version.org.wildfly.galleon-plugins>6.3.2.Final</version.org.wildfly.galleon-plugins>
+        <version.org.wildfly.galleon-plugins>6.3.3.Final</version.org.wildfly.galleon-plugins>
 
         <!-- print logs to file by default -->
         <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
