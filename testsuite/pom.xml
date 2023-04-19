@@ -57,12 +57,6 @@
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>arquillian-utils</artifactId>
-
-        </dependency>
-        <dependency>
-            <groupId>org.wildfly.core</groupId>
-            <artifactId>wildfly-cli</artifactId>
-            <version>${version.org.wildfly.core}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.shrinkwrap</groupId>
