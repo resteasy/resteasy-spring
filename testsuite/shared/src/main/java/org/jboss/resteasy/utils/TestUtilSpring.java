@@ -31,9 +31,7 @@ public class TestUtilSpring {
                             "org.springframework:spring-context",
                             "org.springframework:spring-expression",
                             "org.springframework:spring-beans",
-                            "org.springframework:spring-aop",
-                            "org.jboss:jboss-vfs"
-
+                            "org.springframework:spring-aop"
                     ).withTransitivity()
                     .asFile();
             runtimeDependencies.addAll(Arrays.asList(springDeps));

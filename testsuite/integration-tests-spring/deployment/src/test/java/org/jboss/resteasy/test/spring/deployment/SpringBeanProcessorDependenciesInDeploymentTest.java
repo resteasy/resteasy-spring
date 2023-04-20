@@ -202,9 +202,4 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
       Assert.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
       Assert.assertEquals(ERROR_MESSAGE, "Solomon", response.readEntity(String.class));
    }
-
-   @Test
-   public void ok() {
-      // ok
-   }
 }
