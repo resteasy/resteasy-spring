@@ -37,11 +37,15 @@ public class SpringApplicationArchiveProcessor implements ApplicationArchiveProc
     private static final String EXCLUDED_MODULES =
             // This module adds CDI support for RESTEasy and should not be used for Spring deployments
             "            <module name=\"org.jboss.resteasy.resteasy-cdi\"/>\n";
+    private static final String INCLUDED_MODULES =
+            // Spring requires VFS and WFCORE-6250 removed. For now we need to add it until WFLY-17921 is fixed.
+            "            <module name=\"org.jboss.vfs\"/>\n";
     private static final String SUBSYSTEMS =
             // This subsystem includes a resources which uses CDI and therefore cannot be used by Spring
             "            <subsystem name=\"microprofile-opentracing-smallrye\"/>\n" +
                     // May as well not have Weld process deployments
-                    "            <subsystem name=\"weld\"/>\n";
+                    "            <subsystem name=\"weld\"/>\n" +
+                    "            <subsystem name=\"jsf\"/>\n";
 
     private static final String FULL =
             "<?xml version=\"1.0\"?>\n" +
@@ -54,6 +58,9 @@ public class SpringApplicationArchiveProcessor implements ApplicationArchiveProc
                     "        <exclusions>\n" +
                     EXCLUDED_MODULES +
                     "        </exclusions>\n" +
+                    "        <dependencies>\n" +
+                    INCLUDED_MODULES +
+                    "        </dependencies>\n" +
                     "    </deployment>\n" +
                     "</jboss-deployment-structure>";
 
