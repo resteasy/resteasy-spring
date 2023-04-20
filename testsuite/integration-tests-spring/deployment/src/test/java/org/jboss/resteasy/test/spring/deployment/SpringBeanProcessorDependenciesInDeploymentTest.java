@@ -7,9 +7,9 @@ import java.util.logging.LoggingPermission;
 
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
+
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -78,6 +78,8 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
             .addAsWebInfResource(SpringBeanProcessorDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml");
       archive.addAsWebInfResource(SpringBeanProcessorDependenciesInDeploymentTest.class.getPackage(),
             "springBeanProcessor/spring-bean-processor-test.xml", "applicationContext.xml");
+
+      archive.addAsManifestResource(SpringBeanProcessorDependenciesInDeploymentTest.class.getPackage(), "jboss-deployment-structure.xml", "jboss-deployment-structure.xml");
       archive.addClass(SpringBeanProcessorCounter.class);
       archive.addClass(SpringBeanProcessorCustomer.class);
       archive.addClass(SpringBeanProcessorCustomerService.class);
@@ -95,7 +97,6 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
       archive.addClass(SpringBeanProcessorCustomerParamConverter.class);
       archive.addClass(SpringBeanProcessorCustomerParamConverterProvider.class);
       archive.addClass(SpringBeanProcessorScannedResource.class);
-
       // Permission needed for "arquillian.debug" to run
       // "suppressAccessChecks" required for access to arquillian-core.jar
       // remaining permissions needed to run springframework
@@ -114,6 +115,7 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
 
       TestUtilSpring.addSpringLibraries(archive);
       TestUtil.addOtherLibrary(archive, "aopalliance:aopalliance:" + System.getProperty("version.aopalliance", "1.0"));
+
       return archive;
    }
 
@@ -199,5 +201,10 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
       response = target.request().get();
       Assert.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
       Assert.assertEquals(ERROR_MESSAGE, "Solomon", response.readEntity(String.class));
+   }
+
+   @Test
+   public void ok() {
+      // ok
    }
 }

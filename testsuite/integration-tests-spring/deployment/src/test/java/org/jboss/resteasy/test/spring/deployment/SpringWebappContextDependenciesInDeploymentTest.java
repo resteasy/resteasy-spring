@@ -61,6 +61,7 @@ public class SpringWebappContextDependenciesInDeploymentTest {
       ), "permissions.xml");
 
       TestUtilSpring.addSpringLibraries(archive);
+
       return archive;
    }
 

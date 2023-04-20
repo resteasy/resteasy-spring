@@ -56,6 +56,7 @@ public class JaxrsWithSpringMVCTest {
       archive.addClass(Greeting.class);
       archive.addClass(NumbersResource.class);
       archive.addClass(JaxrsApplication.class);
+      archive.addAsManifestResource(JaxrsWithSpringMVCTest.class.getPackage(), "jboss-deployment-structure.xml", "jboss-deployment-structure.xml");
 
       // spring specific permissions needed.
       // Permission  accessClassInPackage.sun.reflect.annotation is required in order

@@ -53,6 +53,7 @@ public class RESTEasy828Test {
               .addAsWebInfResource(RESTEasy828Test.class.getPackage(), "resteasy828/web.xml", "web.xml");
       archive.addAsWebInfResource(RESTEasy828Test.class.getPackage(),
               "resteasy828/applicationContext.xml", "applicationContext.xml");
+      archive.addAsManifestResource(RESTEasy828Test.class.getPackage(), "jboss-deployment-structure.xml", "jboss-deployment-structure.xml");
 
       archive.addClass(RESTEasy828Resource.class);
 

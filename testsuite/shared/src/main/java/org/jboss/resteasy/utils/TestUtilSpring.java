@@ -31,7 +31,9 @@ public class TestUtilSpring {
                             "org.springframework:spring-context",
                             "org.springframework:spring-expression",
                             "org.springframework:spring-beans",
-                            "org.springframework:spring-aop"
+                            "org.springframework:spring-aop",
+                            "org.jboss:jboss-vfs"
+
                     ).withTransitivity()
                     .asFile();
             runtimeDependencies.addAll(Arrays.asList(springDeps));
@@ -51,6 +53,7 @@ public class TestUtilSpring {
 
         return runtimeDependencies.toArray(new File[0]);
     }
+
 
     /**
      * Adds Spring libraries and its dependencies into webarchove

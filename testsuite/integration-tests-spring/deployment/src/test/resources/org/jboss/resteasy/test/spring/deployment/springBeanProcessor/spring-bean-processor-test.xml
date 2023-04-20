@@ -3,7 +3,6 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <context:component-scan base-package="org.jboss.resteasy.test.spring.deployment.resource" >
@@ -11,10 +10,10 @@
     </context:component-scan>
 	<context:annotation-config />
 
-	<!-- we're doing a mix of annotation scanning, @Configuration and XML beans 
+	<!-- we're doing a mix of annotation scanning, @Configuration and XML beans
 		for the purposes of rounding out a variety of spring use cases -->
 	<bean class="org.jboss.resteasy.test.spring.deployment.resource.SpringBeanProcessorResourceConfiguration" />
-	
+
     <bean id="bill" class="org.jboss.resteasy.test.spring.deployment.resource.SpringBeanProcessorCustomer" p:name="bill"/>
 
     <bean id="springBeanProcessorMyResource" class="org.jboss.resteasy.test.spring.deployment.resource.SpringBeanProcessorMyResource" p:springBeanProcessorCustomer-ref="bill" />

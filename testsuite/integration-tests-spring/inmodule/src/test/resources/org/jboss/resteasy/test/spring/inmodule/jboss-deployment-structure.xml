@@ -1,0 +1,7 @@
+<jboss-deployment-structure>
+    <deployment>
+        <dependencies>
+            <module name="org.jboss.vfs" export="TRUE"/>
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>
