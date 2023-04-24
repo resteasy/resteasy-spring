@@ -5,22 +5,45 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - "main"
   pull_request:
-    branches: [ main ]
+    branches:
+      - "main"
+
+# Only run the latest job
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest ]
+        java: ['17']
+        wildfly-version: ['27.0.1.Final', '28.0.0.Final']
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 17
+    - name: Set up JDK ${{ matrix.java }}
       uses: actions/setup-java@v3
       with:
-        java-version: '17'
-        distribution: 'adopt'
+        java-version: ${{ matrix.java }}
+        distribution: 'temurin'
         cache: 'maven'
-    - name: Install With Maven
-      run: mvn -B clean install
+    - name: Build and test with ${{ matrix.java }} on WildFly ${{ matrix.wildfly-version }} - ${{ matrix.os }}
+      run: mvn -B clean install '-Dversion.org.wildfly=${{ matrix.wildfly-version }}'
+    - uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: surefire-reports-${{ matrix.os }}-${{ matrix.java }}-${{ matrix.wildfly-version }}
+        path: '**/surefire-reports/*.txt'
+    - uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: server-logs-${{ matrix.os }}-${{ matrix.java }}-${{ matrix.wildfly-version }}
+        path: '**/server.log'
