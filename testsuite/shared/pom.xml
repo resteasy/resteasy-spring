@@ -23,4 +23,12 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <!-- Required by the Arquillian Maven Resolver -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
