@@ -50,7 +50,7 @@ jobs:
           cache: 'maven'
       - name: Build with Maven Java ${{ matrix.java }}
         run: |
-          mvn  -B clean install '-Dversion.org.jboss.resteasy=${{ needs.resteasy-build.outputs.resteasy-version }}' '-Dversion.jakarta.servlet.servlet-api=6.0.0'
+          mvn  -B clean install '-Dversion.org.jboss.resteasy=${{ needs.resteasy-build.outputs.resteasy-version }}'
       - name: Upload surefire reports
         uses: actions/upload-artifact@v3
         if: failure()
