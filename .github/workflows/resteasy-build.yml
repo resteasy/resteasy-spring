@@ -6,6 +6,9 @@ on:
   push:
     branches:
       - 'main'
+  pull_request:
+    branches:
+      - "main"
   schedule:
     - cron: '0 0 * * *' # Every day at 00:00 UTC
 
@@ -46,7 +49,8 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
       - name: Build with Maven Java ${{ matrix.java }}
-        run: mvn  -B clean install '-Dversion.org.jboss.resteasy=${{ needs.resteasy-build.outputs.resteasy-version }}'
+        run: |
+          mvn  -B clean install '-Dversion.org.jboss.resteasy=${{ needs.resteasy-build.outputs.resteasy-version }}' '-Dversion.jakarta.servlet.servlet-api=6.0.0'
       - name: Upload surefire reports
         uses: actions/upload-artifact@v3
         if: failure()
