@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.jboss.resteasy.spring</groupId>
         <artifactId>resteasy-spring-testsuite</artifactId>
-        <version>3.0.3-SNAPSHOT</version>
+        <version>3.0.3.Final</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
