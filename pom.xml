@@ -86,7 +86,7 @@
         <version.org.springframework>6.0.10</version.org.springframework>
         <version.org.wildfly>28.0.1.Final</version.org.wildfly>
         <version.reactive-streams>1.0.4</version.reactive-streams>
-        <version.shrinkwrap.resolvers>3.1.6</version.shrinkwrap.resolvers>
+        <version.shrinkwrap.resolvers>3.2.0</version.shrinkwrap.resolvers>
 
         <!-- Test only dependencies -->
         <server.version>${version.org.wildfly}</server.version>
