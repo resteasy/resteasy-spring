@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:2.0" name="resteasy-spring">
+    <props>
+        <!-- TODO, need to check what we need -->
+        <prop name="org.wildfly.rule.xml-path" value="/WEB-INF/web.xml,/web-app/listener/listener-class,org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap"/>
+    </props>
+    <packages>
+        <package name="org.jboss.resteasy.resteasy-spring"/>
+        <package name="org.springframework.spring"/>
+        <package name="org.jboss.resteasy.resteasy-spring-web"/>
+    </packages>
+</layer-spec>
+
