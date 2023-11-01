@@ -5,7 +5,7 @@
     </props>
     <packages>
         <package name="org.jboss.resteasy.resteasy-spring"/>
-        <package name="org.springframework.spring"/>
+<!--        <package name="org.springframework.spring"/>-->
         <package name="org.jboss.resteasy.resteasy-spring-web"/>
     </packages>
 </layer-spec>
