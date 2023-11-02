@@ -18,6 +18,7 @@
         <module>shared</module>
         <module>integration-tests-spring</module>
         <module>integration-tests-spring-web</module>
+        <module>layers-metadata-tests</module>
     </modules>
 
     <properties>
