@@ -52,7 +52,7 @@
         <repository>
             <id>spring-repo</id>
             <name>Spring Repository</name>
-            <url>https://repo.spring.io/milestone</url>
+            <url>https://repo.spring.io/release</url>
         </repository>
         <!-- Remove below repo after opensaml 4.2.0 is accessible from maven central repo-->
         <repository>
