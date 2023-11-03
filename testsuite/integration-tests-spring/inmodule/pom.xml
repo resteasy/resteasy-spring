@@ -47,6 +47,13 @@
                                 <goals>
                                     <goal>provision</goal>
                                 </goals>
+                                <configuration>
+                                    <layers>
+                                        <layer>jaxrs</layer>
+                                        <layer>resteasy-spring</layer>
+                                        <layer>spring</layer>
+                                    </layers>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

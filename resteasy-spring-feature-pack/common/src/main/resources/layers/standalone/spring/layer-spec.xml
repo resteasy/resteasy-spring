@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<layer-spec xmlns="urn:jboss:galleon:layer-spec:2.0" name="spring">
+    <packages>
+        <package name="org.springframework.spring"/>
+    </packages>
+</layer-spec>
+
