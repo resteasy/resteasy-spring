@@ -14,11 +14,6 @@
     <artifactId>resteasy-integration-tests-spring-web-deployment</artifactId>
     <name>RESTEasy Main testsuite: Spring Web integration tests - Deployment</name>
 
-    <properties>
-        <module.spring.slot>main</module.spring.slot><!-- beware jbossws spring integration preinstalled in default distribution expects main slot -->
-        <module.spring.path>${jboss.home}/modules/system/add-ons/spring/org/springframework/spring/${module.spring.slot}</module.spring.path>
-    </properties>
-
     <profiles>
         <!--
         Name:  download
@@ -43,6 +38,12 @@
                                 <goals>
                                     <goal>provision</goal>
                                 </goals>
+                                <configuration>
+                                    <layers>
+                                        <layer>jaxrs</layer>
+                                        <layer>resteasy-spring</layer>
+                                    </layers>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
