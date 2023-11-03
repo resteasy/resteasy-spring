@@ -38,11 +38,12 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.jboss.galleon</groupId>
-                        <artifactId>galleon-maven-plugin</artifactId>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>server-provisioning</id>
+                                <phase>generate-test-resources</phase>
                                 <goals>
                                     <goal>provision</goal>
                                 </goals>
@@ -59,50 +60,6 @@
                                 </property>
                             </systemProperties>
                         </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>add-resteasy-spring</id>
-            <activation>
-                <property>
-                    <name>include.resteasy.spring</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.jboss.galleon</groupId>
-                        <artifactId>galleon-maven-plugin</artifactId>
-                        <configuration>
-                            <!-- First configure the feature pack we are overriding -->
-                            <feature-packs>
-                                <feature-pack>
-                                    <groupId>${feature.pack.groupId}</groupId>
-                                    <artifactId>${feature.pack.artifactId}</artifactId>
-                                    <version>${feature.pack.version}</version>
-                                    <excluded-packages>
-                                        <name>product.conf</name>
-                                        <name>docs.schema</name>
-                                    </excluded-packages>
-                                </feature-pack>
-                                <!-- Next include our own feature pack -->
-                                <feature-pack>
-                                    <groupId>org.jboss.resteasy.spring</groupId>
-                                    <artifactId>galleon-feature-pack</artifactId>
-                                    <version>${project.version}</version>
-                                </feature-pack>
-                            </feature-packs>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>server-provisioning-overridden</id>
-                                <goals>
-                                    <goal>provision</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>
