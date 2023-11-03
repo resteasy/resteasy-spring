@@ -34,11 +34,12 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.jboss.galleon</groupId>
-                        <artifactId>galleon-maven-plugin</artifactId>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
                         <executions>
                             <execution>
                                 <id>server-provisioning</id>
+                                <phase>generate-test-resources</phase>
                                 <goals>
                                     <goal>provision</goal>
                                 </goals>

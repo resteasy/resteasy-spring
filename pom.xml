@@ -98,9 +98,9 @@
         <version.wildfly.glow>1.0.0.Alpha7</version.wildfly.glow>
 
         <!-- Plugin Versions, please keep in alphabetical order -->
-        <version.org.jboss.galleon>5.2.2.Final</version.org.jboss.galleon>
         <version.org.jboss.resteasy.checkstyle>1.0.0.Final</version.org.jboss.resteasy.checkstyle>
         <version.org.wildfly.galleon-plugins>6.5.3.Final</version.org.wildfly.galleon-plugins>
+        <version.org.wildfly.wildfly-maven-plugin>4.2.0.Final</version.org.wildfly.wildfly-maven-plugin>
 
         <!-- print logs to file by default -->
         <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
@@ -144,11 +144,6 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.jboss.galleon</groupId>
-                    <artifactId>galleon-maven-plugin</artifactId>
-                    <version>${version.org.jboss.galleon}</version>
-                </plugin>
                 <plugin>
                     <groupId>org.wildfly.galleon-plugins</groupId>
                     <artifactId>wildfly-galleon-maven-plugin</artifactId>
