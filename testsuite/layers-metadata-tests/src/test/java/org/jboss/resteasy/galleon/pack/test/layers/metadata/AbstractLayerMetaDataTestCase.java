@@ -1,7 +1,6 @@
 package org.jboss.resteasy.galleon.pack.test.layers.metadata;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -26,7 +25,7 @@ import java.util.stream.Collectors;
 public class AbstractLayerMetaDataTestCase {
 
     private static String URL_PROPERTY = "wildfly-glow-galleon-feature-packs-url";
-    private static Path ARCHIVES_PATH = Paths.get("target/glow-archives");
+    static Path ARCHIVES_PATH = Paths.get("target/glow-archives");
 
     @BeforeClass
     public static void prepareArchivesDirectory() throws Exception {
@@ -51,21 +50,16 @@ public class AbstractLayerMetaDataTestCase {
     }
 
 
-    protected static Path createWebArchive(String archiveName, String xmlName, URL xmlContent) {
+    protected static WebArchive createWebArchive(String xmlName, URL xmlContent) {
         WebArchive war = ShrinkWrap.create(WebArchive.class);
         war.addAsWebInfResource(xmlContent, xmlName);
-        ZipExporter exporter = war.as(ZipExporter.class);
-        Path path = ARCHIVES_PATH.resolve(archiveName);
-        exporter.exportTo(path.toFile());
-        return path;
+        return war;
     }
 
     protected Set<String> checkLayersForArchive(Path archivePath, String expectedLayer) throws Exception {
         Arguments arguments = Arguments.scanBuilder().setBinaries(Collections.singletonList(archivePath)).build();
         ScanResults scanResults = GlowSession.scan(MavenResolver.newMavenResolver(), arguments, GlowMessageWriter.DEFAULT);
         Set<String> foundLayers = scanResults.getDiscoveredLayers().stream().map(l -> l.getName()).collect(Collectors.toSet());
-
-
         Assert.assertTrue(foundLayers.contains(expectedLayer));
 
         return foundLayers;
