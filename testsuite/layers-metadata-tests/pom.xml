@@ -48,6 +48,24 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.jboss.resteasy.spring</groupId>
+            <artifactId>resteasy-spring-web</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>testsuite-shared</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${version.org.springframework}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.wildfly.glow</groupId>
             <artifactId>wildfly-glow-maven-resolver</artifactId>
             <scope>test</scope>
