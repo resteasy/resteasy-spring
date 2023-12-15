@@ -83,7 +83,7 @@
         <version.org.jboss.logging.jboss-logging-tools>2.2.1.Final</version.org.jboss.logging.jboss-logging-tools>
         <version.org.jboss.logging.jboss-logging>3.5.3.Final</version.org.jboss.logging.jboss-logging>
         <version.org.jboss.resteasy>6.2.6.Final</version.org.jboss.resteasy>
-        <version.org.springframework>6.0.14</version.org.springframework>
+        <version.org.springframework>6.0.15</version.org.springframework>
         <version.org.wildfly>29.0.1.Final</version.org.wildfly>
         <version.reactive-streams>1.0.4</version.reactive-streams>
         <version.shrinkwrap.resolvers>3.2.1</version.shrinkwrap.resolvers>
@@ -91,7 +91,7 @@
         <!-- Test only dependencies -->
         <server.version>${version.org.wildfly}</server.version>
         <version.aopalliance>1.0</version.aopalliance>
-        <version.org.aspectj>1.9.20.1</version.org.aspectj>
+        <version.org.aspectj>1.9.21</version.org.aspectj>
         <version.org.jboss.arquillian>1.7.2.Final</version.org.jboss.arquillian>
         <version.org.testng>7.6.1</version.org.testng>
         <version.resteasy.testsuite>6.2.6.Final</version.resteasy.testsuite>
