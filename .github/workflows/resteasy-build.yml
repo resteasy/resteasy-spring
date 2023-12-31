@@ -16,9 +16,9 @@ concurrency:
 
 jobs:
   resteasy-build:
-    uses: resteasy/resteasy/.github/workflows/shared-resteasy-build.yml@6.2
+    uses: resteasy/resteasy/.github/workflows/shared-resteasy-build.yml@main
     with:
-      resteasy-branch: "6.2"
+      resteasy-branch: "main"
       resteasy-repo: "resteasy/resteasy"
 
   resteasy-spring-build:
