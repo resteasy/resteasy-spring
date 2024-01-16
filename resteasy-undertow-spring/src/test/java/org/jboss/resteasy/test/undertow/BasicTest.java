@@ -7,9 +7,9 @@ import io.undertow.servlet.Servlets;
 import io.undertow.servlet.api.DeploymentInfo;
 import io.undertow.servlet.api.DeploymentManager;
 import org.jboss.resteasy.plugins.server.undertow.UndertowJaxrsServer;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 public class BasicTest {
     private static UndertowJaxrsServer server;
 
-    @Before
+    @BeforeEach
     public void before() throws Exception {
         server = new UndertowJaxrsServer().start();
         DeploymentInfo deploymentInfo = Servlets.deployment()
@@ -39,7 +39,7 @@ public class BasicTest {
         server.start();
     }
 
-    @After
+    @AfterEach
     public void after() {
         server.stop();
     }

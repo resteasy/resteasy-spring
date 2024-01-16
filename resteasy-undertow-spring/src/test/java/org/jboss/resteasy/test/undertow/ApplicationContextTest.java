@@ -4,13 +4,13 @@ import io.undertow.servlet.api.DeploymentInfo;
 import org.jboss.resteasy.core.AsynchronousDispatcher;
 import org.jboss.resteasy.plugins.server.undertow.spring.UndertowJaxrsSpringServer;
 import org.jboss.resteasy.springmvc.test.client.BasicSpringTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ApplicationContextTest {
 

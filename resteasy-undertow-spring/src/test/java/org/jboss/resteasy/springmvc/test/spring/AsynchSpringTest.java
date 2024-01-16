@@ -5,10 +5,9 @@ import org.jboss.resteasy.core.AsynchronousDispatcher;
 import org.jboss.resteasy.plugins.server.undertow.spring.UndertowJaxrsSpringServer;
 import org.jboss.resteasy.springmvc.test.client.BasicSpringTest;
 import org.jboss.resteasy.test.TestPortProvider;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,13 +25,16 @@ import java.net.URI;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class AsynchSpringTest {
    private static CountDownLatch latch;
 
    UndertowJaxrsSpringServer server;
    Client client;
 
-   @Before
+   @BeforeEach
    public void before() {
       server = new UndertowJaxrsSpringServer();
 
@@ -47,7 +49,7 @@ public class AsynchSpringTest {
       client = ClientBuilder.newClient();
    }
 
-   @After
+   @AfterEach
    public void after() {
       server.stop();
       client.close();
@@ -60,9 +62,9 @@ public class AsynchSpringTest {
       long start = System.currentTimeMillis();
       Response response = target.request().put(Entity.entity("content", "text/plain"));
       long end = System.currentTimeMillis() - start;
-      Assert.assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
-      Assert.assertTrue(end < 1000);
-      Assert.assertTrue(latch.await(2, TimeUnit.SECONDS));
+      assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
+      assertTrue(end < 1000);
+      assertTrue(latch.await(2, TimeUnit.SECONDS));
       response.close();
    }
 
@@ -74,14 +76,14 @@ public class AsynchSpringTest {
       long start = System.currentTimeMillis();
       response = client.target("http://localhost:" + TestPortProvider.getPort() + "?asynch=true").request().post(Entity.entity("content", "text/plain"));
       long end = System.currentTimeMillis() - start;
-      Assert.assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
+      assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
       String jobUrl = response.getHeaderString(HttpHeaders.LOCATION);
       response.close();
 
       Builder jobBuilder = client.target(jobUrl).request();
       response = jobBuilder.get();
-      Assert.assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
-      Assert.assertTrue(latch.await(3, TimeUnit.SECONDS));
+      assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
+      assertTrue(latch.await(3, TimeUnit.SECONDS));
       response.close();
       // there's a lag between when the latch completes and the executor
       // registers the completion of the call
@@ -90,20 +92,20 @@ public class AsynchSpringTest {
       String newQuery = (existingQueryString == null ? "" : "&") + "wait=1000";
       URI newUri = new URI(oldUri.getScheme(), oldUri.getAuthority(), oldUri.getPath(), newQuery, oldUri.getFragment());
       response = client.target(newUri).request().get();
-      Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
-      Assert.assertEquals("content", response.readEntity(String.class));
+      assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+      assertEquals("content", response.readEntity(String.class));
 
       // test its still there
       response = jobBuilder.get();
-      Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
-      Assert.assertEquals("content", response.readEntity(String.class));
+      assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+      assertEquals("content", response.readEntity(String.class));
 
       // delete and test delete
       response = jobBuilder.delete();
-      Assert.assertEquals(HttpServletResponse.SC_NO_CONTENT, response.getStatus());
+      assertEquals(HttpServletResponse.SC_NO_CONTENT, response.getStatus());
 
       response = jobBuilder.get();
-      Assert.assertEquals(HttpServletResponse.SC_GONE, response.getStatus());
+      assertEquals(HttpServletResponse.SC_GONE, response.getStatus());
       response.close();
 
    }
@@ -116,37 +118,37 @@ public class AsynchSpringTest {
       latch = new CountDownLatch(1);
       Builder builder = client.target("http://localhost:" + TestPortProvider.getPort() + "?asynch=true").request();
       response = builder.post(Entity.entity("content", "text/plain"));
-      Assert.assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
+      assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
       String jobUrl1 = response.getHeaderString(HttpHeaders.LOCATION);
-      Assert.assertTrue(latch.await(3, TimeUnit.SECONDS));
+      assertTrue(latch.await(3, TimeUnit.SECONDS));
       response.close();
 
       latch = new CountDownLatch(1);
       response = builder.post(Entity.entity("content", "text/plain"));
-      Assert.assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
+      assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
       String jobUrl2 = response.getHeaderString(HttpHeaders.LOCATION);
-      Assert.assertTrue(latch.await(3, TimeUnit.SECONDS));
-      Assert.assertTrue(!jobUrl1.equals(jobUrl2));
+      assertTrue(latch.await(3, TimeUnit.SECONDS));
+      assertTrue(!jobUrl1.equals(jobUrl2));
       response.close();
 
       builder = client.target(jobUrl1).request();
       response = builder.get();
-      Assert.assertEquals(HttpServletResponse.SC_GONE, response.getStatus());
+      assertEquals(HttpServletResponse.SC_GONE, response.getStatus());
       response.close();
 
       // test its still there
       Thread.sleep(1000);
       builder = client.target(jobUrl2).request();
       response = builder.get();
-      Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
-      Assert.assertEquals("content", response.readEntity(String.class));
+      assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+      assertEquals("content", response.readEntity(String.class));
 
       // delete and test delete
       response = builder.delete();
-      Assert.assertEquals(HttpServletResponse.SC_NO_CONTENT, response.getStatus());
+      assertEquals(HttpServletResponse.SC_NO_CONTENT, response.getStatus());
 
       response = builder.get();
-      Assert.assertEquals(HttpServletResponse.SC_GONE, response.getStatus());
+      assertEquals(HttpServletResponse.SC_GONE, response.getStatus());
       response.close();
    }
 
@@ -165,9 +167,9 @@ public class AsynchSpringTest {
       latch = new CountDownLatch(1);
       Builder builder = client.target("http://localhost:" + TestPortProvider.getPort() + "?asynch=true").request();
       response = builder.post(Entity.entity("content", "text/plain"));
-      Assert.assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
+      assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
       String jobUrl2 = response.getHeaderString(HttpHeaders.LOCATION);
-      Assert.assertTrue(latch.await(3, TimeUnit.SECONDS));
+      assertTrue(latch.await(3, TimeUnit.SECONDS));
       response.close();
 
       Thread.sleep(1000);
@@ -175,12 +177,12 @@ public class AsynchSpringTest {
       // test its still there
       builder = client.target(jobUrl2).request();
       response = builder.post(Entity.entity("content", "text/plain"));
-      Assert.assertEquals(HttpServletResponse.SC_OK, response.getStatus());
-      Assert.assertEquals("content", response.readEntity(String.class));
+      assertEquals(HttpServletResponse.SC_OK, response.getStatus());
+      assertEquals("content", response.readEntity(String.class));
 
       builder = client.target(jobUrl2).request();
       response = builder.get();
-      Assert.assertEquals(HttpServletResponse.SC_GONE, response.getStatus());
+      assertEquals(HttpServletResponse.SC_GONE, response.getStatus());
       response.close();
 
    }
@@ -197,7 +199,7 @@ public class AsynchSpringTest {
 
       @PUT
       public void put(String content) throws Exception {
-         Assert.assertEquals("content", content);
+         assertEquals("content", content);
          Thread.sleep(500);
          latch.countDown();
       }

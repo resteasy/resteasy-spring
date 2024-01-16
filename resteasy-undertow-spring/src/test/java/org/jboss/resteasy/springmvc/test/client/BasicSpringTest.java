@@ -6,19 +6,20 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
 import org.jboss.resteasy.plugins.server.undertow.spring.UndertowJaxrsSpringServer;
 import org.jboss.resteasy.test.TestPortProvider;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BasicSpringTest {
 
    UndertowJaxrsSpringServer server;
    ResteasyClient client;
 
-   @Before
+   @BeforeEach
    public void before() throws Exception {
       server = new UndertowJaxrsSpringServer();
 
@@ -34,7 +35,7 @@ public class BasicSpringTest {
       client = new ResteasyClientBuilderImpl().build();
    }
 
-   @After
+   @AfterEach
    public void after() {
       server.stop();
       client.close();
@@ -46,25 +47,25 @@ public class BasicSpringTest {
       ResteasyWebTarget target = client.target(TestPortProvider.generateURL("/"));
 
       BasicResource br = target.proxy(BasicResource.class);
-      Assert.assertEquals("org/jboss/resteasy/springmvc/test", br.getBasicString());
+      assertEquals("org/jboss/resteasy/springmvc/test", br.getBasicString());
 
-      Assert.assertEquals("something", br.getBasicObject().getSomething());
+      assertEquals("something", br.getBasicObject().getSomething());
 
-      Assert.assertEquals("Hi, I'm custom!", br.getSpringMvcValue());
+      assertEquals("Hi, I'm custom!", br.getSpringMvcValue());
 
-      Assert.assertEquals(1, br.getSingletonCount().intValue());
-      Assert.assertEquals(2, br.getSingletonCount().intValue());
+      assertEquals(1, br.getSingletonCount().intValue());
+      assertEquals(2, br.getSingletonCount().intValue());
 
-      Assert.assertEquals(1, br.getPrototypeCount().intValue());
-      Assert.assertEquals(1, br.getPrototypeCount().intValue());
+      assertEquals(1, br.getPrototypeCount().intValue());
+      assertEquals(1, br.getPrototypeCount().intValue());
 
-      Assert.assertEquals("text/plain", br.getContentTypeHeader());
+      assertEquals("text/plain", br.getContentTypeHeader());
 
       Integer interceptorCount = br
             .getSpringInterceptorCount("afterCompletion");
 
-      Assert.assertEquals(Integer.valueOf(8), interceptorCount);
-      Assert.assertEquals("text/plain", br.getContentTypeHeader());
-      Assert.assertEquals("springSomething", br.testSpringXml().getSomething());
+      assertEquals(Integer.valueOf(8), interceptorCount);
+      assertEquals("text/plain", br.getContentTypeHeader());
+      assertEquals("springSomething", br.testSpringXml().getSomething());
    }
 }
