@@ -94,7 +94,7 @@
         <version.org.aspectj>1.9.21</version.org.aspectj>
         <version.org.jboss.arquillian>1.7.2.Final</version.org.jboss.arquillian>
         <version.org.testng>7.6.1</version.org.testng>
-        <version.resteasy.testsuite>6.2.6.Final</version.resteasy.testsuite>
+        <version.resteasy.testsuite>6.2.7.Final</version.resteasy.testsuite>
 
         <!-- Plugin Versions, please keep in alphabetical order -->
         <version.org.jboss.galleon>5.2.2.Final</version.org.jboss.galleon>
