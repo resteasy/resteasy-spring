@@ -432,7 +432,7 @@ public class SpringBeanProcessor implements BeanFactoryPostProcessor, SmartAppli
             }
             else
             {
-               factoryClassName = beanFactory.getType(name).getName();
+               factoryClassName = beanDef.getBeanClassName();
             }
          }
 
