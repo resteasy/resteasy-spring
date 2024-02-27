@@ -31,6 +31,7 @@ import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -43,6 +44,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ServerSetup({SpringMvcHttpResponseCodesTest.SecurityDomainSetup.class})
 @ExtendWith(ArquillianExtension.class)
 @RunAsClient
+@Disabled("Requires an upgrade to RESTEasy 6.2.8.Final")
 public class SpringMvcHttpResponseCodesTest {
    private static Client authorizedClient;
    private static Client userAuthorizedClient;
