@@ -2,7 +2,7 @@ package org.jboss.resteasy.test.spring.inmodule;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.resteasy.spi.HttpResponseCodes;
 import org.jboss.resteasy.test.spring.inmodule.resource.RESTEasy828Resource;
 
@@ -12,22 +12,23 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import java.io.FilePermission;
 import java.lang.reflect.ReflectPermission;
 import java.util.PropertyPermission;
 import java.util.logging.LoggingPermission;
 
-@RunWith(Arquillian.class)
+@ExtendWith(ArquillianExtension.class)
 @RunAsClient
 public class RESTEasy828Test {
 
@@ -37,12 +38,12 @@ public class RESTEasy828Test {
       return PortProviderUtil.generateURL(path, RESTEasy828Test.class.getSimpleName());
    }
 
-   @Before
+   @BeforeEach
    public void init() {
       client = ClientBuilder.newClient();
    }
 
-   @After
+   @AfterEach
    public void after() {
       client.close();
    }
@@ -104,7 +105,7 @@ public class RESTEasy828Test {
    public void testResteasy828() throws InterruptedException {
       WebTarget target = client.target(generateURL("/resteasy828"));
       Response response = target.request().get();
-      Assert.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
-      Assert.assertNotNull(target.request().get(String.class));
+      Assertions.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
+      Assertions.assertNotNull(target.request().get(String.class));
    }
 }

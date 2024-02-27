@@ -89,6 +89,7 @@
             <artifactId>resteasy-json-binding-provider</artifactId>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <profiles>
