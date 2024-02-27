@@ -1,7 +1,7 @@
 package org.jboss.resteasy.test.spring.inmodule;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.test.spring.inmodule.resource.ContextRefreshResource;
 import org.jboss.resteasy.test.spring.inmodule.resource.ContextRefreshTrigger;
@@ -10,9 +10,9 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.FilePermission;
@@ -28,7 +28,7 @@ import java.util.logging.LoggingPermission;
  * @tpTestCaseDetails Spring context refresh, RESTEASY-632
  * @tpSince RESTEasy 3.0.16
  */
-@RunWith(Arquillian.class)
+@ExtendWith(ArquillianExtension.class)
 public class ContextRefreshTest {
 
 
@@ -64,13 +64,13 @@ public class ContextRefreshTest {
     */
    @Test
    public void testContextRefresh() throws Exception {
-      Assert.assertTrue(ContextRefreshTrigger.isOK());
+      Assertions.assertTrue(ContextRefreshTrigger.isOK());
       Enumeration<?> en = ContextRefreshTrigger.getApplicationContext().getServletContext().getAttributeNames();
       while (en.hasMoreElements()) {
          logger.info(en.nextElement());
       }
       Object o = ContextRefreshTrigger.getApplicationContext().getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
       logger.info(o);
-      Assert.assertFalse(o instanceof Exception);
+      Assertions.assertFalse(o instanceof Exception);
    }
 }

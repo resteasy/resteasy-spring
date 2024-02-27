@@ -2,8 +2,8 @@ package org.jboss.resteasy.galleon.pack.test.layers.metadata;
 
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.wildfly.glow.Arguments;
 import org.wildfly.glow.GlowMessageWriter;
 import org.wildfly.glow.GlowSession;
@@ -27,7 +27,7 @@ public class AbstractLayerMetaDataTestCase {
     private static String URL_PROPERTY = "wildfly-glow-galleon-feature-packs-url";
     static Path ARCHIVES_PATH = Paths.get("target/glow-archives");
 
-    @BeforeClass
+    @BeforeAll
     public static void prepareArchivesDirectory() throws Exception {
         Path glowXmlPath = Path.of("target/test-classes/glow");
         System.setProperty(URL_PROPERTY, glowXmlPath.toUri().toString());
@@ -60,7 +60,7 @@ public class AbstractLayerMetaDataTestCase {
         Arguments arguments = Arguments.scanBuilder().setBinaries(Collections.singletonList(archivePath)).build();
         ScanResults scanResults = GlowSession.scan(MavenResolver.newMavenResolver(), arguments, GlowMessageWriter.DEFAULT);
         Set<String> foundLayers = scanResults.getDiscoveredLayers().stream().map(l -> l.getName()).collect(Collectors.toSet());
-        Assert.assertTrue(foundLayers.contains(expectedLayer));
+        Assertions.assertTrue(foundLayers.contains(expectedLayer));
 
         return foundLayers;
     }
