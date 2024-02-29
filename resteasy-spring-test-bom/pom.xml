@@ -16,6 +16,15 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- This is required first to override the dependencies in the Arquillian BOM -->
+            <!-- For reference: https://github.com/resteasy/resteasy/blob/4f7d0ccef2ccff496033d5a9f446cdf364d75c7d/testsuite/pom.xml#L34 -->
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.resolver</groupId>
+                <artifactId>shrinkwrap-resolver-bom</artifactId>
+                <version>${version.shrinkwrap.resolvers}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
@@ -105,13 +114,6 @@
             </dependency>
             <dependency>
                 <groupId>org.jboss.shrinkwrap.resolver</groupId>
-                <artifactId>shrinkwrap-resolver-bom</artifactId>
-                <version>${version.shrinkwrap.resolvers}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.shrinkwrap.resolver</groupId>
                 <artifactId>shrinkwrap-resolver-depchain</artifactId>
                 <version>${version.shrinkwrap.resolvers}</version>
                 <type>pom</type>
@@ -119,10 +121,6 @@
                     <exclusion>
                         <groupId>javax.inject</groupId>
                         <artifactId>javax.inject</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>javax.enterprise</groupId>
-                        <artifactId>cdi-api</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
