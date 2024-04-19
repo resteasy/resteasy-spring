@@ -23,11 +23,6 @@
                 <version>${version.commons-codec}</version>
             </dependency>
             <dependency>
-                <groupId>jakarta.annotation</groupId>
-                <artifactId>jakarta.annotation-api</artifactId>
-                <version>${version.jakarta.annotation-api}</version>
-            </dependency>
-            <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>resteasy-spring</artifactId>
                 <version>${project.version}</version>
