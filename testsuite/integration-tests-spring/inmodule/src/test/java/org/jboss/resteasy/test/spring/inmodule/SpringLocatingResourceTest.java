@@ -7,7 +7,6 @@ import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringLocatingLocatingResource;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringLocatingSimpleResource;
 import org.jboss.resteasy.spi.HttpResponseCodes;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.resteasy.utils.PortProviderUtil;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -24,6 +23,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 import java.io.FilePermission;
 import java.lang.reflect.ReflectPermission;
@@ -54,7 +54,7 @@ public class SpringLocatingResourceTest {
         // Permission needed for "arquillian.debug" to run
         // "suppressAccessChecks" required for access to arquillian-core.jar
         // remaining permissions needed to run springframework
-        archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+        archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
                 new PropertyPermission("arquillian.*", "read"),
                 new ReflectPermission("suppressAccessChecks"),
                 new RuntimePermission("accessDeclaredMembers"),
