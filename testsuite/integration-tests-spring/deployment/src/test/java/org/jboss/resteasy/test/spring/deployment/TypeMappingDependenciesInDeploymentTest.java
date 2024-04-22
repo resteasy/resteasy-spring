@@ -6,7 +6,6 @@ import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.spi.HttpResponseCodes;
 import org.jboss.resteasy.test.spring.deployment.resource.TypeMappingResource;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.resteasy.utils.PortProviderUtil;
 import org.jboss.resteasy.utils.TestUtilSpring;
 import org.jboss.shrinkwrap.api.Archive;
@@ -19,6 +18,7 @@ import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 import java.io.FilePermission;
 import java.lang.reflect.ReflectPermission;
@@ -45,7 +45,7 @@ public class TypeMappingDependenciesInDeploymentTest {
         archive.addAsWebInfResource(TypeMappingDependenciesInDeploymentTest.class.getPackage(), "typeMapping/spring-typemapping-test-server.xml", "applicationContext.xml");
         archive.addClass(TypeMappingResource.class);
 
-        archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+        archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
                 new PropertyPermission("org.graalvm.nativeimage.imagecode", "read"),
                 new RuntimePermission("getenv.RESTEASY_SERVER_TRACING_THRESHOLD"),
                 new RuntimePermission("getenv.resteasy_server_tracing_threshold"),

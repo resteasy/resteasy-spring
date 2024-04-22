@@ -12,7 +12,6 @@ import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.as.arquillian.api.ServerSetup;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient43Engine;
-import org.jboss.resteasy.setup.AbstractUsersRolesSecurityDomainSetup;
 import org.jboss.resteasy.spi.HttpResponseCodes;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringMvcHttpResponseCodesPerson;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringMvcHttpResponseCodesResource;
@@ -187,6 +186,7 @@ public class SpringMvcHttpResponseCodesTest {
       Assertions.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
    }
 
+   // TODO (jrp) this can be removed once 6.2.9.Final is released and integrated
    static class SecurityDomainSetup extends AbstractUsersRolesSecurityDomainSetup {
       SecurityDomainSetup() {
          super(SpringMvcHttpResponseCodesTest.class.getResource("users.properties"),

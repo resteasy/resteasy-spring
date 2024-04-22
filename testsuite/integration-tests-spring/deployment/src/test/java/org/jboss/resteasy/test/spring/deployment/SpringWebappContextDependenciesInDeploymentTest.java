@@ -5,7 +5,6 @@ import org.jboss.logging.Logger;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.test.spring.deployment.resource.SpringWebappContextResource;
 import org.jboss.resteasy.spi.HttpResponseCodes;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.resteasy.utils.TestUtilSpring;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -19,6 +18,7 @@ import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 import java.io.FilePermission;
 import java.lang.reflect.ReflectPermission;
@@ -53,7 +53,7 @@ public class SpringWebappContextDependenciesInDeploymentTest {
         // Permission needed for "arquillian.debug" to run
         // "suppressAccessChecks" required for access to arquillian-core.jar
         // remaining permissions needed to run springframework
-        archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+        archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
                 new PropertyPermission("arquillian.*", "read"),
                 new ReflectPermission("suppressAccessChecks"),
                 new RuntimePermission("accessDeclaredMembers"),

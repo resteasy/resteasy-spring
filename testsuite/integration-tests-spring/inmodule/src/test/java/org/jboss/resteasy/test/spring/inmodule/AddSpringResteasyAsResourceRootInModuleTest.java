@@ -22,7 +22,6 @@ import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.resteasy.plugins.spring.SpringContextLoaderListener;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.resteasy.utils.PortProviderUtil;
 import org.jboss.resteasy.utils.TestUtil;
 import org.jboss.shrinkwrap.api.Archive;
@@ -36,6 +35,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.context.ApplicationContext;
 import org.jboss.resteasy.test.spring.inmodule.resource.TestResource;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 /**
  * @tpSubChapter Spring
@@ -112,7 +112,7 @@ public class AddSpringResteasyAsResourceRootInModuleTest {
                 .addAsWebInfResource(AddSpringResteasyAsResourceRootInModuleTest.class.getPackage(), "applicationContext.xml", "applicationContext.xml");
         addSpringLibraries(archive);
 
-        archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+        archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
                 new ReflectPermission("suppressAccessChecks"),
                 new RuntimePermission("accessDeclaredMembers"),
                 new RuntimePermission("getClassLoader"),

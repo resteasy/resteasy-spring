@@ -11,7 +11,6 @@ import org.jboss.resteasy.test.spring.inmodule.resource.ContactService;
 import org.jboss.resteasy.test.spring.inmodule.resource.Contacts;
 import org.jboss.resteasy.test.spring.inmodule.resource.ContactsResource;
 import org.jboss.resteasy.util.HttpHeaderNames;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.resteasy.utils.PortProviderUtil;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -29,6 +28,7 @@ import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 import java.io.FilePermission;
 import java.lang.reflect.ReflectPermission;
@@ -74,7 +74,7 @@ public class ContactsTest {
                 .addAsWebInfResource(ContactsTest.class.getPackage(), "contacts/springmvc-servlet.xml", "springmvc-servlet.xml");
         archive.addAsManifestResource(new StringAsset("Dependencies: org.springframework.spring meta-inf\n"), "MANIFEST.MF");
 
-        archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+        archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
                 new ReflectPermission("suppressAccessChecks"),
                 new RuntimePermission("accessDeclaredMembers"),
                 new RuntimePermission("getClassLoader"),
