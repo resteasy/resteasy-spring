@@ -96,7 +96,7 @@
         <version.org.wildfly.arquillian>5.1.0.Beta2</version.org.wildfly.arquillian>
         <version.org.testng>7.6.1</version.org.testng>
         <version.resteasy.testsuite>6.2.8.Final</version.resteasy.testsuite>
-        <version.wildfly.glow>1.0.1.Final</version.wildfly.glow>
+        <version.wildfly.glow>1.0.4.Final</version.wildfly.glow>
 
         <!-- Plugin Versions, please keep in alphabetical order -->
         <version.org.jboss.resteasy.checkstyle>1.0.0.Final</version.org.jboss.resteasy.checkstyle>
