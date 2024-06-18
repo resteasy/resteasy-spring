@@ -6,7 +6,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.test.spring.inmodule.resource.TypeMappingResource;
 import org.jboss.resteasy.spi.HttpResponseCodes;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.resteasy.utils.PortProviderUtil;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -19,6 +18,7 @@ import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 import java.io.FilePermission;
 import java.lang.reflect.ReflectPermission;
@@ -46,7 +46,7 @@ public class TypeMappingTest {
       archive.addAsManifestResource(new StringAsset("Dependencies: org.springframework.spring meta-inf\n"), "MANIFEST.MF");
       archive.addClass(TypeMappingResource.class);
 
-      archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+      archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
             new ReflectPermission("suppressAccessChecks"),
             new RuntimePermission("accessDeclaredMembers"),
             new RuntimePermission("getClassLoader"),

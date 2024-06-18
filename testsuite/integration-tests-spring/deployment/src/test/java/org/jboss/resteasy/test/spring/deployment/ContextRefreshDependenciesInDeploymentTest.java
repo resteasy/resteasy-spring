@@ -5,7 +5,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.test.spring.deployment.resource.ContextRefreshResource;
 import org.jboss.resteasy.test.spring.deployment.resource.ContextRefreshTrigger;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.resteasy.utils.TestUtilSpring;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -14,6 +13,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.web.context.WebApplicationContext;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 import java.io.FilePermission;
 import java.lang.reflect.ReflectPermission;
@@ -45,7 +45,7 @@ public class ContextRefreshDependenciesInDeploymentTest {
 
       // PropertyPermission for test to run in arquillian
       // remaining permissions needed to run springframework
-      archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+      archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
             new PropertyPermission("arquillian.*", "read"),
             new ReflectPermission("suppressAccessChecks"),
             new RuntimePermission("accessDeclaredMembers"),

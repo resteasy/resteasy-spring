@@ -5,7 +5,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.test.spring.inmodule.resource.ContextRefreshResource;
 import org.jboss.resteasy.test.spring.inmodule.resource.ContextRefreshTrigger;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
@@ -14,6 +13,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.web.context.WebApplicationContext;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 import java.io.FilePermission;
 import java.lang.reflect.ReflectPermission;
@@ -47,7 +47,7 @@ public class ContextRefreshTest {
       // Permission needed for "arquillian.debug" to run
       // "suppressAccessChecks" required for access to arquillian-core.jar
       // remaining permissions needed to run springframework
-      archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+      archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
             new PropertyPermission("arquillian.*", "read"),
             new ReflectPermission("suppressAccessChecks"),
             new RuntimePermission("accessDeclaredMembers"),

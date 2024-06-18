@@ -28,7 +28,6 @@ import org.jboss.resteasy.test.spring.deployment.resource.ContactService;
 import org.jboss.resteasy.test.spring.deployment.resource.Contacts;
 import org.jboss.resteasy.test.spring.deployment.resource.ContactsResource;
 import org.jboss.resteasy.util.HttpHeaderNames;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.resteasy.utils.PortProviderUtil;
 import org.jboss.resteasy.utils.TestUtilSpring;
 import org.jboss.shrinkwrap.api.Archive;
@@ -37,6 +36,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 /**
  * @tpSubChapter Spring
@@ -82,7 +82,7 @@ public class ContactsDependenciesInDeploymentTest {
       // Permission  accessClassInPackage.sun.reflect.annotation is required in order
       // for spring to introspect annotations.  Security exception is eaten by spring
       // and not posted via the server.
-      archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+      archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
               new PropertyPermission("org.graalvm.nativeimage.imagecode", "read"),
               new RuntimePermission("getenv.RESTEASY_SERVER_TRACING_THRESHOLD"),
               new RuntimePermission("getenv.resteasy_server_tracing_threshold"),
