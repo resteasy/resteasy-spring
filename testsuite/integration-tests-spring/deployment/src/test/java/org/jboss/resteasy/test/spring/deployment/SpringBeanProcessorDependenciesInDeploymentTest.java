@@ -31,7 +31,6 @@ import org.jboss.resteasy.test.spring.deployment.resource.SpringBeanProcessorMyW
 import org.jboss.resteasy.test.spring.deployment.resource.SpringBeanProcessorResourceConfiguration;
 import org.jboss.resteasy.test.spring.deployment.resource.SpringBeanProcessorScannedResource;
 import org.jboss.resteasy.test.spring.deployment.resource.SpringBeanProcessorSpringBeanProcessorMyInnerBeanImpl;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.resteasy.utils.PortProviderUtil;
 import org.jboss.resteasy.utils.TestUtil;
 import org.jboss.resteasy.utils.TestUtilSpring;
@@ -43,6 +42,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 /**
  * @tpSubChapter Spring
@@ -99,7 +99,7 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
       // Permission needed for "arquillian.debug" to run
       // "suppressAccessChecks" required for access to arquillian-core.jar
       // remaining permissions needed to run springframework
-      archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+      archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
               new PropertyPermission("org.springframework.cglib.test.stressHashCodes", "read"),
             new PropertyPermission("arquillian.*", "read"),
             new PropertyPermission("cglib.debugLocation", "read"),

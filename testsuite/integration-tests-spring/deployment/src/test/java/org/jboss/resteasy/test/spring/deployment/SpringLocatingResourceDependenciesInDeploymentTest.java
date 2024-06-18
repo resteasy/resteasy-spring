@@ -6,7 +6,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.resteasy.test.spring.deployment.resource.SpringLocatingLocatingResource;
 import org.jboss.resteasy.test.spring.deployment.resource.SpringLocatingSimpleResource;
 import org.jboss.resteasy.spi.HttpResponseCodes;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.resteasy.utils.PortProviderUtil;
 import org.jboss.resteasy.utils.TestUtilSpring;
 import org.jboss.shrinkwrap.api.Archive;
@@ -23,6 +22,8 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
+
 import java.io.FilePermission;
 import java.lang.reflect.ReflectPermission;
 import java.util.PropertyPermission;
@@ -51,7 +52,7 @@ public class SpringLocatingResourceDependenciesInDeploymentTest {
       // Permission needed for "arquillian.debug" to run
       // "suppressAccessChecks" required for access to arquillian-core.jar
       // remaining permissions needed to run springframework
-      archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+      archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
          new PropertyPermission("arquillian.*", "read"),
          new ReflectPermission("suppressAccessChecks"),
          new RuntimePermission("accessDeclaredMembers"),

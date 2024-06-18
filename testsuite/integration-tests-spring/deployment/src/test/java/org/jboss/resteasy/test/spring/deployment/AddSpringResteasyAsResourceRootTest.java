@@ -24,7 +24,6 @@ import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.resteasy.plugins.spring.SpringContextLoaderListener;
 import org.jboss.resteasy.test.spring.deployment.resource.TestResource;
-import org.jboss.resteasy.utils.PermissionUtil;
 import org.jboss.resteasy.utils.PortProviderUtil;
 import org.jboss.resteasy.utils.TestUtil;
 import org.jboss.resteasy.utils.TestUtilSpring;
@@ -37,6 +36,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 /**
  * @tpSubChapter Spring
@@ -86,7 +86,7 @@ public class AddSpringResteasyAsResourceRootTest {
 
       // PropertyPermission needed for "arquillian.debug" to run
       // remaining permissions needed to run springframework
-      archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+      archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
               new PropertyPermission("org.graalvm.nativeimage.imagecode", "read"),
               new SecurityPermission("insertProvider"),
               new RuntimePermission("getClassLoader"),
@@ -130,7 +130,7 @@ public class AddSpringResteasyAsResourceRootTest {
             .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "applicationContext.xml", "applicationContext.xml");
 
       // remaining permissions needed to run springframework
-      archive.addAsManifestResource(PermissionUtil.createPermissionsXmlAsset(
+      archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
          new RuntimePermission("accessDeclaredMembers"),
          new FilePermission("<<ALL FILES>>", "read"),
          new LoggingPermission("control", "")
