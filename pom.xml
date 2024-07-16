@@ -70,7 +70,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Dependency versions, please keep in alphabetical order -->
-        <version.commons-codec>1.17.0</version.commons-codec>
+        <version.commons-codec>1.17.1</version.commons-codec>
         <version.com.google.guava>31.1-jre</version.com.google.guava>
         <version.jakarta.servlet.servlet-api>6.0.0</version.jakarta.servlet.servlet-api>
         <version.jakarta.ws.rs>3.1.0</version.jakarta.ws.rs>
