@@ -28,6 +28,17 @@
     <artifactId>galleon-feature-pack-layers-metadata-tests</artifactId>
     <name>RESTEasy Galleon feature-pack layers metadata tests</name>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap</groupId>
+                <artifactId>shrinkwrap-bom</artifactId>
+                <version>${version.org.jboss.shrinkwrap}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
