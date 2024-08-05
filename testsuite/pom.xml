@@ -84,9 +84,16 @@
             <artifactId>wildfly-testing-tools</artifactId>
             <scope>test</scope>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.jboss.shrinkwrap</groupId>-->
+<!--            <artifactId>shrinkwrap-api</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.jboss.shrinkwrap</groupId>
-            <artifactId>shrinkwrap-api</artifactId>
+            <artifactId>shrinkwrap-bom</artifactId>
+            <version>${version.org.jboss.shrinkwrap}</version>
+            <scope>import</scope>
+            <type>pom</type>
         </dependency>
     </dependencies>
     <repositories>
