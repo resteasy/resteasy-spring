@@ -100,7 +100,7 @@
 
         <!-- Plugin Versions, please keep in alphabetical order -->
         <version.org.jboss.resteasy.checkstyle>1.0.0.Final</version.org.jboss.resteasy.checkstyle>
-        <version.org.wildfly.galleon-plugins>7.2.0.Final</version.org.wildfly.galleon-plugins>
+        <version.org.wildfly.galleon-plugins>7.2.1.Final</version.org.wildfly.galleon-plugins>
         <version.org.wildfly.wildfly-maven-plugin>5.0.1.Final</version.org.wildfly.wildfly-maven-plugin>
 
         <!-- print logs to file by default -->
