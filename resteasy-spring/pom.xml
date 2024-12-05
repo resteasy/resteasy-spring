@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.jboss.resteasy.spring</groupId>
         <artifactId>resteasy-spring-parent</artifactId>
-        <version>3.1.4-SNAPSHOT</version>
+        <version>3.2.0.Final</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
