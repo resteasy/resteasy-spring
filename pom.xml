@@ -92,7 +92,7 @@
         <version.aopalliance>1.0</version.aopalliance>
         <version.org.aspectj>1.9.22.1</version.org.aspectj>
         <version.org.jboss.arquillian>1.7.2.Final</version.org.jboss.arquillian>
-        <version.org.wildfly.arquillian>5.1.0.Beta6</version.org.wildfly.arquillian>
+        <version.org.wildfly.arquillian>5.1.0.Beta9</version.org.wildfly.arquillian>
         <version.org.testng>7.6.1</version.org.testng>
         <version.resteasy.testsuite>6.2.11.Final</version.resteasy.testsuite>
 
