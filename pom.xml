@@ -93,7 +93,7 @@
         <!-- The Arquillian version used here should keep same with the one in RESTEasy -->
         <version.org.jboss.arquillian.core>1.9.2.Final</version.org.jboss.arquillian.core>
         <version.org.jboss.shrinkwrap>1.2.6</version.org.jboss.shrinkwrap>
-        <version.org.wildfly.arquillian>5.1.0.Beta7</version.org.wildfly.arquillian>
+        <version.org.wildfly.arquillian>5.1.0.Beta9</version.org.wildfly.arquillian>
         <version.org.testng>7.6.1</version.org.testng>
         <version.resteasy.testsuite>6.2.11.Final</version.resteasy.testsuite>
         <version.wildfly.glow>1.2.0.Final</version.wildfly.glow>
