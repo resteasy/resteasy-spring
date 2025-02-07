@@ -101,7 +101,7 @@
         <!-- Plugin Versions, please keep in alphabetical order -->
         <version.org.jboss.resteasy.checkstyle>1.0.0.Final</version.org.jboss.resteasy.checkstyle>
         <version.org.wildfly.galleon-plugins>7.3.1.Final</version.org.wildfly.galleon-plugins>
-        <version.org.wildfly.wildfly-maven-plugin>5.1.1.Final</version.org.wildfly.wildfly-maven-plugin>
+        <version.org.wildfly.wildfly-maven-plugin>5.1.2.Final</version.org.wildfly.wildfly-maven-plugin>
 
         <!-- print logs to file by default -->
         <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
