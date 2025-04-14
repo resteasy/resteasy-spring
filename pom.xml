@@ -89,7 +89,7 @@
         <!-- Test only dependencies -->
         <server.version>${version.org.wildfly}</server.version>
         <version.aopalliance>1.0</version.aopalliance>
-        <version.org.aspectj>1.9.23</version.org.aspectj>
+        <version.org.aspectj>1.9.24</version.org.aspectj>
         <!-- The Arquillian version used here should keep same with the one in RESTEasy -->
         <version.org.jboss.arquillian.core>1.9.4.Final</version.org.jboss.arquillian.core>
         <version.org.jboss.shrinkwrap>1.2.6</version.org.jboss.shrinkwrap>
