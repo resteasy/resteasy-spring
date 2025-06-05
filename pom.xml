@@ -91,7 +91,7 @@
         <version.aopalliance>1.0</version.aopalliance>
         <version.org.aspectj>1.9.24</version.org.aspectj>
         <!-- The Arquillian version used here should keep same with the one in RESTEasy -->
-        <version.org.jboss.arquillian.core>1.9.4.Final</version.org.jboss.arquillian.core>
+        <version.org.jboss.arquillian.core>1.9.5.Final</version.org.jboss.arquillian.core>
         <version.org.jboss.shrinkwrap>1.2.6</version.org.jboss.shrinkwrap>
         <version.org.wildfly.arquillian>5.1.0.Beta11</version.org.wildfly.arquillian>
         <version.org.testng>7.6.1</version.org.testng>
