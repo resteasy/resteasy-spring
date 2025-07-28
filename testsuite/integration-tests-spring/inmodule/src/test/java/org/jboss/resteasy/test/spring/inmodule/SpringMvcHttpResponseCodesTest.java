@@ -1,17 +1,11 @@
 package org.jboss.resteasy.test.spring.inmodule;
 
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import dev.resteasy.client.util.authentication.HttpAuthenticators;
+import dev.resteasy.client.util.authentication.UserCredentials;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.as.arquillian.api.ServerSetup;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient43Engine;
 import org.jboss.resteasy.spi.HttpResponseCodes;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringMvcHttpResponseCodesPerson;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringMvcHttpResponseCodesResource;
@@ -63,22 +57,12 @@ public class SpringMvcHttpResponseCodesTest {
    public void init() {
       // authorized client
       {
-         UsernamePasswordCredentials credentials = new UsernamePasswordCredentials("bill", "password1");
-         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-         credentialsProvider.setCredentials(new AuthScope(AuthScope.ANY), credentials);
-         CloseableHttpClient client = HttpClients.custom().setDefaultCredentialsProvider(credentialsProvider).build();
-         ApacheHttpClient43Engine engine = new ApacheHttpClient43Engine(client);
-         authorizedClient = ((ResteasyClientBuilder)ClientBuilder.newBuilder()).httpEngine(engine).build();
+         authorizedClient = ClientBuilder.newBuilder().register(HttpAuthenticators.basic(UserCredentials.clear("bill", "password1".toCharArray()))).build();
       }
 
       // userAuthorizedClient
       {
-         UsernamePasswordCredentials credentials_other = new UsernamePasswordCredentials("ordinaryUser", "password2");
-         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-         credentialsProvider.setCredentials(new AuthScope(AuthScope.ANY), credentials_other);
-         CloseableHttpClient client = HttpClients.custom().setDefaultCredentialsProvider(credentialsProvider).build();
-         ApacheHttpClient43Engine engine = new ApacheHttpClient43Engine(client);
-         userAuthorizedClient = ((ResteasyClientBuilder)ClientBuilder.newBuilder()).httpEngine(engine).build();
+         userAuthorizedClient = ClientBuilder.newBuilder().register(HttpAuthenticators.basic(UserCredentials.clear("ordinaryUser", "password2".toCharArray()))).build();
       }
 
       // non-authorized client
@@ -186,8 +170,7 @@ public class SpringMvcHttpResponseCodesTest {
       Assertions.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
    }
 
-   // TODO (jrp) this can be removed once 6.2.9.Final is released and integrated
-   static class SecurityDomainSetup extends AbstractUsersRolesSecurityDomainSetup {
+   static class SecurityDomainSetup extends org.jboss.resteasy.setup.AbstractUsersRolesSecurityDomainSetup {
       SecurityDomainSetup() {
          super(SpringMvcHttpResponseCodesTest.class.getResource("users.properties"),
                  SpringMvcHttpResponseCodesTest.class.getResource("roles.properties"));
