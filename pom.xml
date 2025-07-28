@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>40</version>
+        <version>49</version>
         <relativePath/>
     </parent>
 
@@ -24,49 +24,28 @@
         </license>
     </licenses>
 
+    <modules>
+        <module>resteasy-spring-bom</module>
+        <module>resteasy-spring-test-bom</module>
+        <module>resteasy-spring</module>
+        <module>resteasy-spring-web</module>
+        <module>resteasy-undertow-spring</module>
+        <module>resteasy-spring-feature-pack</module>
+        <module>testsuite</module>
+    </modules>
+
     <scm>
-        <connection>scm:git:git://github.com/resteasy/resteasy-microprofile.git</connection>
-        <developerConnection>scm:git:git@github.com:resteasy/resteasy-microprofile.git</developerConnection>
-        <url>https://github.com/resteasy/resteasy-microprofile/tree/main/</url>
+        <connection>scm:git:git://github.com/resteasy/resteasy-spring.git</connection>
+        <developerConnection>scm:git:git@github.com:resteasy/resteasy-spring.git</developerConnection>
+        <url>https://github.com/resteasy/resteasy-spring/</url>
     </scm>
 
-    <repositories>
-        <!-- Required for provisioning WildFly. Not all dependencies currently exist on Maven Central. This is also
-           useful for when we want to test with versions releases that have not yet been synchronized to Maven Central
-           from JBoss Nexus.
-       -->
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </snapshots>
-            <id>jboss-public-repository-group</id>
-            <name>JBoss Public Repository Group</name>
-            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-            <layout>default</layout>
-        </repository>
-        <repository>
-            <id>spring-repo</id>
-            <name>Spring Repository</name>
-            <url>https://repo.spring.io/release</url>
-        </repository>
-        <!-- Remove below repo after opensaml 4.2.0 is accessible from maven central repo-->
-        <repository>
-            <id>opensaml-repo</id>
-            <name>opensaml</name>
-            <url>https://build.shibboleth.net/nexus/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-    </repositories>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/resteasy/resteasy-spring/issues</url>
+    </issueManagement>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Dependency versions, please keep in alphabetical order -->
@@ -122,23 +101,26 @@
         <galleon.offline>false</galleon.offline>
     </properties>
 
-    <modules>
-        <module>resteasy-spring-bom</module>
-        <module>resteasy-spring-test-bom</module>
-        <module>resteasy-spring</module>
-        <module>resteasy-spring-web</module>
-        <module>resteasy-undertow-spring</module>
-        <module>resteasy-spring-feature-pack</module>
-        <module>testsuite</module>
-    </modules>
-
-    <distributionManagement>
+    <repositories>
+        <!-- Required for provisioning WildFly. Not all dependencies currently exist on Maven Central. This is also
+           useful for when we want to test with versions releases that have not yet been synchronized to Maven Central
+           from JBoss Nexus.
+       -->
         <repository>
-            <id>jboss-releases-repository</id>
-            <name>JBoss Releases Repository</name>
-            <url>https://repository.jboss.org/nexus/service/local/staging/deploy/maven2/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
+            <layout>default</layout>
         </repository>
-    </distributionManagement>
+    </repositories>
 
     <build>
         <pluginManagement>
