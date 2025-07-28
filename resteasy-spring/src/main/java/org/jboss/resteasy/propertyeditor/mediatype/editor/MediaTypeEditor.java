@@ -1,7 +1,8 @@
 package org.jboss.resteasy.propertyeditor.mediatype.editor;
 
-import jakarta.ws.rs.core.MediaType;
 import java.beans.PropertyEditorSupport;
+
+import jakarta.ws.rs.core.MediaType;
 
 /**
  * Spring uses property editors heavily for managing conversion
@@ -13,7 +14,7 @@ import java.beans.PropertyEditorSupport;
  * class they handle. Also, these need to have the same name
  * as that class plus the Editor suffix
  *
- * This is a property editor for jakarta.ws.rs.core.MediaType.  This
+ * This is a property editor for jakarta.ws.rs.core.MediaType. This
  * editor does not reside in the same package as MediaType, so
  * a custom binding between the required type and the property editor
  * would need to be defined in order to Spring-framework to use it.
@@ -24,32 +25,29 @@ import java.beans.PropertyEditorSupport;
  *
  * {@literal @}InitBinder
  * public void initBinder(WebDataBinder binder) {
- *     binder.registerCustomEditor(MediaType.class,
- *         new MediaTypeEditor());
+ * binder.registerCustomEditor(MediaType.class,
+ * new MediaTypeEditor());
  * }
  *
  * @author <a href="justin@justinedelson.com">Justin Edelson</a>
  * @version $Revision$
  */
-public class MediaTypeEditor extends PropertyEditorSupport
-{
+public class MediaTypeEditor extends PropertyEditorSupport {
 
-   /**
-    * {@inheritDoc}
-    */
-   @Override
-   public String getAsText()
-   {
-      return ((MediaType) getValue()).toString();
-   }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getAsText() {
+        return ((MediaType) getValue()).toString();
+    }
 
-   /**
-    * {@inheritDoc}
-    */
-   @Override
-   public void setAsText(String text) throws IllegalArgumentException
-   {
-      setValue(MediaType.valueOf(text));
-   }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setAsText(String text) throws IllegalArgumentException {
+        setValue(MediaType.valueOf(text));
+    }
 
 }

@@ -1,5 +1,7 @@
 package org.jboss.resteasy.test.spring.unit;
 
+import jakarta.servlet.ServletContext;
+
 import org.jboss.resteasy.core.ResteasyDeploymentImpl;
 import org.jboss.resteasy.spi.ResteasyDeployment;
 import org.junit.jupiter.api.Assertions;
@@ -7,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.StaticWebApplicationContext;
-import jakarta.servlet.ServletContext;
-
 
 /**
  * @tpSubChapter Spring
@@ -30,7 +30,8 @@ public class SpringContextLoaderTest {
      */
     @Test
     public void testThatDeploymentIsRequired() {
-        Assertions.assertThrows(RuntimeException.class, () -> contextLoader.customizeContext(mockServletContext(null), mockWebApplicationContext()));
+        Assertions.assertThrows(RuntimeException.class,
+                () -> contextLoader.customizeContext(mockServletContext(null), mockWebApplicationContext()));
 
     }
 
@@ -45,7 +46,8 @@ public class SpringContextLoaderTest {
         contextLoader.customizeContext(mockServletContext(someDeployment()), context);
         int numListenersNow = context.getApplicationListeners().size();
         Assertions.assertEquals(
-                numListeners + 1, numListenersNow, "Expected to add exactly one new listener; in fact added " + (numListenersNow - numListeners));
+                numListeners + 1, numListenersNow,
+                "Expected to add exactly one new listener; in fact added " + (numListenersNow - numListeners));
     }
 
     private StaticWebApplicationContext mockWebApplicationContext() {

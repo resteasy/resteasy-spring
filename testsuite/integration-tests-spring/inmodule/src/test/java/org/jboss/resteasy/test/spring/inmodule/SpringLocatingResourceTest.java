@@ -1,34 +1,33 @@
 package org.jboss.resteasy.test.spring.inmodule;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
-
-import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.resteasy.test.spring.inmodule.resource.SpringLocatingLocatingResource;
-import org.jboss.resteasy.test.spring.inmodule.resource.SpringLocatingSimpleResource;
-import org.jboss.resteasy.spi.HttpResponseCodes;
-import org.jboss.resteasy.utils.PortProviderUtil;
-import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
+import java.io.FilePermission;
+import java.lang.reflect.ReflectPermission;
+import java.util.PropertyPermission;
+import java.util.logging.LoggingPermission;
 
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit5.ArquillianExtension;
+import org.jboss.resteasy.spi.HttpResponseCodes;
+import org.jboss.resteasy.test.spring.inmodule.resource.SpringLocatingLocatingResource;
+import org.jboss.resteasy.test.spring.inmodule.resource.SpringLocatingSimpleResource;
+import org.jboss.resteasy.utils.PortProviderUtil;
+import org.jboss.shrinkwrap.api.Archive;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.StringAsset;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
-
-import java.io.FilePermission;
-import java.lang.reflect.ReflectPermission;
-import java.util.PropertyPermission;
-import java.util.logging.LoggingPermission;
 
 /**
  * @tpSubChapter Spring
@@ -44,7 +43,8 @@ public class SpringLocatingResourceTest {
     @Deployment
     private static Archive<?> deploy() {
         WebArchive archive = ShrinkWrap.create(WebArchive.class, SpringLocatingResourceTest.class.getSimpleName() + ".war")
-                .addAsWebInfResource(SpringLocatingResourceTest.class.getPackage(), "springLocatingResource/web.xml", "web.xml");
+                .addAsWebInfResource(SpringLocatingResourceTest.class.getPackage(), "springLocatingResource/web.xml",
+                        "web.xml");
         archive.addAsWebInfResource(SpringLocatingResourceTest.class.getPackage(),
                 "springLocatingResource/applicationContext.xml", "applicationContext.xml");
         archive.addAsManifestResource(new StringAsset("Dependencies: org.springframework.spring meta-inf\n"), "MANIFEST.MF");
@@ -59,8 +59,7 @@ public class SpringLocatingResourceTest {
                 new ReflectPermission("suppressAccessChecks"),
                 new RuntimePermission("accessDeclaredMembers"),
                 new FilePermission("<<ALL FILES>>", "read"),
-                new LoggingPermission("control", "")
-        ), "permissions.xml");
+                new LoggingPermission("control", "")), "permissions.xml");
 
         return archive;
     }
@@ -115,7 +114,7 @@ public class SpringLocatingResourceTest {
 
     /**
      * @tpTestDetails Test resource bean defined in xml spring settings, resource calls another resource also
-     * defined as resource bean
+     *                defined as resource bean
      * @tpSince RESTEasy 3.0.16
      */
     @Test
@@ -125,7 +124,7 @@ public class SpringLocatingResourceTest {
             WebTarget target = client.target(generateURL("/locating/basic"));
             Response response = target.request().get();
             Assertions.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
-            Assertions.assertEquals( "basic", response.readEntity(String.class), "Unexpected response from the server");
+            Assertions.assertEquals("basic", response.readEntity(String.class), "Unexpected response from the server");
         }
         {
             WebTarget target = client.target(generateURL("/locating/basic"));
@@ -136,7 +135,7 @@ public class SpringLocatingResourceTest {
             WebTarget target = client.target(generateURL("/locating/queryParam"));
             Response response = target.queryParam("param", "hello world").request().get();
             Assertions.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
-            Assertions.assertEquals( "hello world", response.readEntity(String.class), "Unexpected response from the server");
+            Assertions.assertEquals("hello world", response.readEntity(String.class), "Unexpected response from the server");
         }
         {
             WebTarget target = client.target(generateURL("/locating/uriParam/1234"));

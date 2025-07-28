@@ -1,11 +1,11 @@
 package org.jboss.resteasy.test.spring.inmodule.resource;
 
-import org.jboss.logging.Logger;
-
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+
+import org.jboss.logging.Logger;
 import org.junit.jupiter.api.Assertions;
 
 @Path("/prototyped")

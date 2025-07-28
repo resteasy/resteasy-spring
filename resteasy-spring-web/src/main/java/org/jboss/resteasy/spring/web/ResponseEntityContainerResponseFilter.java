@@ -1,13 +1,14 @@
 package org.jboss.resteasy.spring.web;
 
-import org.springframework.http.ResponseEntity;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerResponseContext;
 import jakarta.ws.rs.container.ContainerResponseFilter;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
 
 public class ResponseEntityContainerResponseFilter implements ContainerResponseFilter {
 

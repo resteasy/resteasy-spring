@@ -1,32 +1,33 @@
 package org.jboss.resteasy.test.spring.deployment;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.resteasy.test.spring.deployment.resource.SpringLocatingLocatingResource;
-import org.jboss.resteasy.test.spring.deployment.resource.SpringLocatingSimpleResource;
-import org.jboss.resteasy.spi.HttpResponseCodes;
-import org.jboss.resteasy.utils.PortProviderUtil;
-import org.jboss.resteasy.utils.TestUtilSpring;
-import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
+import java.io.FilePermission;
+import java.lang.reflect.ReflectPermission;
+import java.util.PropertyPermission;
+import java.util.logging.LoggingPermission;
+
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit5.ArquillianExtension;
+import org.jboss.resteasy.spi.HttpResponseCodes;
+import org.jboss.resteasy.test.spring.deployment.resource.SpringLocatingLocatingResource;
+import org.jboss.resteasy.test.spring.deployment.resource.SpringLocatingSimpleResource;
+import org.jboss.resteasy.utils.PortProviderUtil;
+import org.jboss.resteasy.utils.TestUtilSpring;
+import org.jboss.shrinkwrap.api.Archive;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
-
-import java.io.FilePermission;
-import java.lang.reflect.ReflectPermission;
-import java.util.PropertyPermission;
-import java.util.logging.LoggingPermission;
 
 /**
  * @tpSubChapter Spring
@@ -41,8 +42,10 @@ public class SpringLocatingResourceDependenciesInDeploymentTest {
 
     @Deployment
     private static Archive<?> deploy() {
-        WebArchive archive = ShrinkWrap.create(WebArchive.class, SpringLocatingResourceDependenciesInDeploymentTest.class.getSimpleName() + ".war")
-                .addAsWebInfResource(SpringLocatingResourceDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml");
+        WebArchive archive = ShrinkWrap
+                .create(WebArchive.class, SpringLocatingResourceDependenciesInDeploymentTest.class.getSimpleName() + ".war")
+                .addAsWebInfResource(SpringLocatingResourceDependenciesInDeploymentTest.class.getPackage(), "web.xml",
+                        "web.xml");
         archive.addAsWebInfResource(SpringLocatingResourceDependenciesInDeploymentTest.class.getPackage(),
                 "springLocatingResource/applicationContext.xml", "applicationContext.xml");
         archive.addClass(SpringLocatingLocatingResource.class);
@@ -56,8 +59,7 @@ public class SpringLocatingResourceDependenciesInDeploymentTest {
                 new ReflectPermission("suppressAccessChecks"),
                 new RuntimePermission("accessDeclaredMembers"),
                 new FilePermission("<<ALL FILES>>", "read"),
-                new LoggingPermission("control", "")
-        ), "permissions.xml");
+                new LoggingPermission("control", "")), "permissions.xml");
 
         TestUtilSpring.addSpringLibraries(archive);
         return archive;
@@ -113,7 +115,7 @@ public class SpringLocatingResourceDependenciesInDeploymentTest {
 
     /**
      * @tpTestDetails Test resource bean defined in xml spring settings, resource calls another resource also
-     * defined as resource bean
+     *                defined as resource bean
      * @tpSince RESTEasy 3.0.16
      */
     @Test

@@ -1,11 +1,12 @@
 package org.jboss.resteasy.spring.web;
 
-import org.jboss.resteasy.spi.HttpResponseCodes;
+import java.io.IOException;
 
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerResponseContext;
 import jakarta.ws.rs.container.ContainerResponseFilter;
-import java.io.IOException;
+
+import org.jboss.resteasy.spi.HttpResponseCodes;
 
 public class ResponseStatusContainerResponseFilter implements ContainerResponseFilter {
 

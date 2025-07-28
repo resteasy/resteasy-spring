@@ -1,31 +1,32 @@
 package org.jboss.resteasy.test.spring.deployment;
 
-import org.jboss.arquillian.junit5.ArquillianExtension;
-import org.jboss.logging.Logger;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.test.spring.deployment.resource.SpringWebappContextResource;
-import org.jboss.resteasy.spi.HttpResponseCodes;
-import org.jboss.resteasy.utils.TestUtilSpring;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.resteasy.utils.PortProviderUtil;
-import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.Response;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
-
 import java.io.FilePermission;
 import java.lang.reflect.ReflectPermission;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PropertyPermission;
 import java.util.logging.LoggingPermission;
+
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.Response;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.junit5.ArquillianExtension;
+import org.jboss.logging.Logger;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.spi.HttpResponseCodes;
+import org.jboss.resteasy.test.spring.deployment.resource.SpringWebappContextResource;
+import org.jboss.resteasy.utils.PortProviderUtil;
+import org.jboss.resteasy.utils.TestUtilSpring;
+import org.jboss.shrinkwrap.api.Archive;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
 /**
  * @tpSubChapter Spring
@@ -38,17 +39,20 @@ import java.util.logging.LoggingPermission;
 public class SpringWebappContextDependenciesInDeploymentTest {
 
     private static Logger logger = Logger.getLogger(SpringWebappContextDependenciesInDeploymentTest.class);
-    private static final String BASE_URL = PortProviderUtil.generateBaseUrl(SpringWebappContextDependenciesInDeploymentTest.class.getSimpleName());
+    private static final String BASE_URL = PortProviderUtil
+            .generateBaseUrl(SpringWebappContextDependenciesInDeploymentTest.class.getSimpleName());
     private static final String PATH = "/echo";
     private static final String EXPECTED_URI = BASE_URL + PATH + "/uri";
     private static final String EXPECTED_HEADERS = BASE_URL + PATH + "/headers" + ":text/plain";
 
     @Deployment
     private static Archive<?> deploy() {
-        WebArchive archive = ShrinkWrap.create(WebArchive.class, SpringWebappContextDependenciesInDeploymentTest.class.getSimpleName() + ".war")
+        WebArchive archive = ShrinkWrap
+                .create(WebArchive.class, SpringWebappContextDependenciesInDeploymentTest.class.getSimpleName() + ".war")
                 .addClass(SpringWebappContextResource.class)
                 .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml")
-                .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(), "springWebAppContext/applicationContext.xml", "applicationContext.xml");
+                .addAsWebInfResource(SpringWebappContextDependenciesInDeploymentTest.class.getPackage(),
+                        "springWebAppContext/applicationContext.xml", "applicationContext.xml");
 
         // Permission needed for "arquillian.debug" to run
         // "suppressAccessChecks" required for access to arquillian-core.jar
@@ -58,8 +62,7 @@ public class SpringWebappContextDependenciesInDeploymentTest {
                 new ReflectPermission("suppressAccessChecks"),
                 new RuntimePermission("accessDeclaredMembers"),
                 new FilePermission("<<ALL FILES>>", "read"),
-                new LoggingPermission("control", "")
-        ), "permissions.xml");
+                new LoggingPermission("control", "")), "permissions.xml");
 
         TestUtilSpring.addSpringLibraries(archive);
         return archive;
@@ -158,8 +161,9 @@ public class SpringWebappContextDependenciesInDeploymentTest {
 
         if (expectedResponsePattern != null) {
             String entity = response.readEntity(String.class);
-            Assertions.assertTrue(entity.indexOf(expectedResponsePattern) != -1, "Unexpected response: " + entity + ", no match for: "
-                    + expectedResponsePattern);
+            Assertions.assertTrue(entity.indexOf(expectedResponsePattern) != -1,
+                    "Unexpected response: " + entity + ", no match for: "
+                            + expectedResponsePattern);
         }
     }
 }

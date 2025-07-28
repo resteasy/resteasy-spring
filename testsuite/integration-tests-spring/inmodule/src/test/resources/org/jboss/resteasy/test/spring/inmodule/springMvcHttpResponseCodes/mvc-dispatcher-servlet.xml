@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <import resource="classpath:springmvc-resteasy.xml"/>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <import resource="classpath:springmvc-resteasy.xml" />
     <!--    relative issue and commit:
-            - https://github.com/mdeinum/spring-framework/commit/37e695e2cd77a6abffbe1bc2478275d91b25afc7
-            - https://github.com/spring-projects/spring-framework/issues/29491
-           -->
-    <mvc:annotation-driven/>
+        - https://github.com/mdeinum/spring-framework/commit/37e695e2cd77a6abffbe1bc2478275d91b25afc7
+        - https://github.com/spring-projects/spring-framework/issues/29491
+    -->
+    <mvc:annotation-driven />
     <bean id="springMvcHttpResponseCodesResource"
-          class="org.jboss.resteasy.test.spring.inmodule.resource.SpringMvcHttpResponseCodesResource"/>
-    <bean id="testResource" class="org.jboss.resteasy.test.spring.inmodule.resource.TestResource"/>
+        class="org.jboss.resteasy.test.spring.inmodule.resource.SpringMvcHttpResponseCodesResource" />
+    <bean id="testResource" class="org.jboss.resteasy.test.spring.inmodule.resource.TestResource" />
 </beans>

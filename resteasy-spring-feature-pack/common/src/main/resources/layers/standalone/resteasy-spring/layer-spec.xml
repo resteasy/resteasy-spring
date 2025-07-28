@@ -1,10 +1,11 @@
 <?xml version="1.0" ?>
 <layer-spec xmlns="urn:jboss:galleon:layer-spec:2.0" name="resteasy-spring">
     <props>
-        <prop name="org.wildfly.rule.xml-path" value="/WEB-INF/web.xml,/web-app/listener/listener-class,org.jboss.resteasy.plugins.spring.SpringContextLoaderListener"/>
+        <prop name="org.wildfly.rule.xml-path"
+            value="/WEB-INF/web.xml,/web-app/listener/listener-class,org.jboss.resteasy.plugins.spring.SpringContextLoaderListener" />
     </props>
     <packages>
-        <package name="org.jboss.resteasy.resteasy-spring"/>
+        <package name="org.jboss.resteasy.resteasy-spring" />
     </packages>
 </layer-spec>
 
