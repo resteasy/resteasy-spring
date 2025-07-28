@@ -24,8 +24,7 @@
     <properties>
         <version.download-plugin>1.6.6</version.download-plugin>
         <debug.port>8787</debug.port>
-        <!--        <debugJvmArgs>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=${debug.port}</debugJvmArgs>-->
-        <debugJvmArgs></debugJvmArgs>
+        <debugJvmArgs/>
         <jboss.home>${project.build.directory}/test-server/wildfly-${server.version}</jboss.home>
         <version.test.org.jboss.resteasy.spring>${project.version}</version.test.org.jboss.resteasy.spring>
 
@@ -85,41 +84,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <repositories>
-        <!-- Required for provisioning WildFly. Not all dependencies currently exist on Maven Central. This is also
-             useful for when we want to test with versions releases that have not yet been synchronized to Maven Central
-             from JBoss Nexus.
-         -->
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </snapshots>
-            <id>jboss-public-repository-group</id>
-            <name>JBoss Public Repository Group</name>
-            <url>https://repository.jboss.org/nexus/content/groups/public/</url>
-            <layout>default</layout>
-        </repository>
-        <!-- Required for PicketBox, once this is removed from WildFly this can be removed -->
-        <repository>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </snapshots>
-            <id>jboss-enterprise-maven-repository</id>
-            <name>JBoss Enterprise Maven Repository</name>
-            <url>https://maven.repository.redhat.com/ga/</url>
-            <layout>default</layout>
-        </repository>
-    </repositories>
 
     <build>
         <pluginManagement>

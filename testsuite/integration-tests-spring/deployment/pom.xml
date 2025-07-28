@@ -14,55 +14,6 @@
     <artifactId>resteasy-integration-tests-spring-deployment</artifactId>
     <name>RESTEasy Main testsuite: Spring integration tests - Deployment</name>
 
-    <profiles>
-        <!--
-        Name:  download
-        Descr: Download WildFly
-        -->
-        <profile>
-          <id>download</id>
-          <activation>
-            <property>
-              <name>!server.home</name>
-            </property>
-          </activation>
-          <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.wildfly.plugins</groupId>
-                    <artifactId>wildfly-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>server-provisioning</id>
-                            <phase>generate-test-resources</phase>
-                            <goals>
-                                <goal>provision</goal>
-                            </goals>
-                            <configuration>
-                                <layers>
-                                    <layer>jaxrs</layer>
-                                    <layer>resteasy-spring</layer>
-                                </layers>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <configuration>
-                        <systemProperties>
-                            <property>
-                                <name>java.util.logging.config.file</name>
-                                <value>src/test/resources/logging.properties</value>
-                            </property>
-                        </systemProperties>
-                    </configuration>
-                </plugin>
-            </plugins>
-          </build>
-        </profile>
-    </profiles>
-
     <build>
         <testResources>
             <testResource>
@@ -91,4 +42,50 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <!--
+        Name:  download
+        Descr: Download WildFly
+        -->
+        <profile>
+            <id>download</id>
+            <activation>
+                <property>
+                    <name>!server.home</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>server-provisioning</id>
+                                <phase>generate-test-resources</phase>
+                                <goals>
+                                    <goal>provision</goal>
+                                </goals>
+                                <configuration>
+                                    <layers>
+                                        <layer>jaxrs</layer>
+                                        <layer>resteasy-spring</layer>
+                                    </layers>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <java.util.logging.config.file>src/test/resources/logging.properties</java.util.logging.config.file>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
