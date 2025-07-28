@@ -63,7 +63,7 @@
                 <!-- Can be removed when RESTEASY-3273 is resolved -->
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
-                    <artifactId>jackson-databind</artifactId>
+                    <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
