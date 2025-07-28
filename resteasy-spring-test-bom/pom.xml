@@ -61,19 +61,10 @@
                 <version>${version.org.jboss.resteasy}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
-                <version>${version.log4j}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-core</artifactId>
-                <version>${version.log4j}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${version.org.springframework}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -84,13 +75,12 @@
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-json-p-provider</artifactId>
                 <version>${version.resteasy.testsuite}</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.jboss.resteasy</groupId>
                 <artifactId>resteasy-json-binding-provider</artifactId>
                 <version>${version.resteasy.testsuite}</version>
-                <scope>provided</scope>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -128,23 +118,25 @@
                 <groupId>org.wildfly.arquillian</groupId>
                 <artifactId>wildfly-arquillian-container-managed</artifactId>
                 <version>${version.org.wildfly.arquillian}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.wildfly.arquillian</groupId>
                 <artifactId>wildfly-testing-tools</artifactId>
                 <version>${version.org.wildfly.arquillian}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.wildfly.glow</groupId>
                 <artifactId>wildfly-glow-core</artifactId>
-                <scope>test</scope>
                 <version>${version.wildfly.glow}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.wildfly.glow</groupId>
                 <artifactId>wildfly-glow-maven-resolver</artifactId>
-                <scope>test</scope>
                 <version>${version.wildfly.glow}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

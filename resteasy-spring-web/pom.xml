@@ -13,7 +13,7 @@
     <artifactId>resteasy-spring-web</artifactId>
     <packaging>jar</packaging>
     <name>RESTEasy Spring SPI</name>
-    <description/>
+    <description>RESTEasy Spring SPI for spring-web</description>
 
     <dependencyManagement>
         <dependencies>
@@ -35,7 +35,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 
