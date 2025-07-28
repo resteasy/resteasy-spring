@@ -12,19 +12,17 @@ import java.lang.annotation.Target;
  *
  */
 
-@Target(
-{ ElementType.PARAMETER })
+@Target({ ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface RestfulData
-{
+public @interface RestfulData {
 
-   /**
-    * what content type does this support? This has the same allowed values as
-    * jakarta.ws.rs.Consumes
-    *
-    * @see jakarta.ws.rs.Consumes
-    * */
-   String[] value = null;
+    /**
+     * what content type does this support? This has the same allowed values as
+     * jakarta.ws.rs.Consumes
+     *
+     * @see jakarta.ws.rs.Consumes
+     */
+    String[] value = null;
 
 }

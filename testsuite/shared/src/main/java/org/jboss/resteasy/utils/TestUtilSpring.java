@@ -25,14 +25,13 @@ public class TestUtilSpring {
 
         try {
             final File[] springDeps = resolver.resolve(
-                            "org.springframework:spring-core",
-                            "org.springframework:spring-web",
-                            "org.springframework:spring-webmvc",
-                            "org.springframework:spring-context",
-                            "org.springframework:spring-expression",
-                            "org.springframework:spring-beans",
-                            "org.springframework:spring-aop"
-                    ).withTransitivity()
+                    "org.springframework:spring-core",
+                    "org.springframework:spring-web",
+                    "org.springframework:spring-webmvc",
+                    "org.springframework:spring-context",
+                    "org.springframework:spring-expression",
+                    "org.springframework:spring-beans",
+                    "org.springframework:spring-aop").withTransitivity()
                     .asFile();
             runtimeDependencies.addAll(Arrays.asList(springDeps));
             if (includeResteasySpring()) {

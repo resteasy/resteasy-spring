@@ -14,60 +14,48 @@ import org.springframework.beans.factory.FactoryBean;
  * @version $Revision: 1 $
  */
 
-public class OptionalValueBeanFactory implements FactoryBean<Object>, BeanFactoryAware
-{
+public class OptionalValueBeanFactory implements FactoryBean<Object>, BeanFactoryAware {
 
-   private String beanName;
-   private Class<?> clazz;
-   private BeanFactory beanFactory;
+    private String beanName;
+    private Class<?> clazz;
+    private BeanFactory beanFactory;
 
-   public String getBeanName()
-   {
-      return beanName;
-   }
+    public String getBeanName() {
+        return beanName;
+    }
 
-   public void setBeanName(String beanName)
-   {
-      this.beanName = beanName;
-   }
+    public void setBeanName(String beanName) {
+        this.beanName = beanName;
+    }
 
-   public Class<?> getClazz()
-   {
-      return clazz;
-   }
+    public Class<?> getClazz() {
+        return clazz;
+    }
 
-   public void setClazz(Class<?> clazz)
-   {
-      this.clazz = clazz;
-   }
+    public void setClazz(Class<?> clazz) {
+        this.clazz = clazz;
+    }
 
-   public Object getObject() throws Exception
-   {
-      try
-      {
-         if (beanFactory.containsBean(beanName))
-            return beanFactory.getBean(beanName, clazz);
-      }
-      catch (Exception e)
-      {
-         LogMessages.LOGGER.error(Messages.MESSAGES.couldNotRetrieveBean(beanName), e);
-      }
-      return null;
-   }
+    public Object getObject() throws Exception {
+        try {
+            if (beanFactory.containsBean(beanName))
+                return beanFactory.getBean(beanName, clazz);
+        } catch (Exception e) {
+            LogMessages.LOGGER.error(Messages.MESSAGES.couldNotRetrieveBean(beanName), e);
+        }
+        return null;
+    }
 
-   public Class<?> getObjectType()
-   {
-      return clazz;
-   }
+    public Class<?> getObjectType() {
+        return clazz;
+    }
 
-   public boolean isSingleton()
-   {
-      return true;
-   }
+    public boolean isSingleton() {
+        return true;
+    }
 
-   public void setBeanFactory(BeanFactory beanFactory) throws BeansException
-   {
-      this.beanFactory = beanFactory;
-   }
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
+    }
 
 }
