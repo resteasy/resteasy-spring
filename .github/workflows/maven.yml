@@ -25,7 +25,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest ]
         java: ['17', '21']
-        wildfly-version: ['29.0.1.Final', '30.0.0.Final']
 
     steps:
     - uses: actions/checkout@v4
@@ -35,15 +34,15 @@ jobs:
         java-version: ${{ matrix.java }}
         distribution: 'temurin'
         cache: 'maven'
-    - name: Build and test with ${{ matrix.java }} on WildFly ${{ matrix.wildfly-version }} - ${{ matrix.os }}
-      run: mvn -B clean install '-Dversion.org.wildfly=${{ matrix.wildfly-version }}'
+    - name: Build and test with ${{ matrix.java }} - ${{ matrix.os }}
+      run: mvn -B clean install
     - uses: actions/upload-artifact@v4
       if: failure()
       with:
-        name: surefire-reports-${{ matrix.os }}-${{ matrix.java }}-${{ matrix.wildfly-version }}
-        path: '**/surefire-reports/*.txt'
+        name: surefire-reports-${{ matrix.os }}-${{ matrix.java }}
+        path: '**/surefire-reports/'
     - uses: actions/upload-artifact@v4
       if: failure()
       with:
-        name: server-logs-${{ matrix.os }}-${{ matrix.java }}-${{ matrix.wildfly-version }}
+        name: server-logs-${{ matrix.os }}-${{ matrix.java }}
         path: '**/server.log'
