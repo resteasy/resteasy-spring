@@ -1,5 +1,8 @@
 package org.jboss.resteasy.test.spring.web.deployment.resource;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.ws.rs.core.MediaType;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.ws.rs.core.MediaType;
 
 @RestController
 @RequestMapping("/" + TestController.CONTROLLER_PATH)
@@ -95,7 +95,8 @@ public class TestController {
     }
 
     @PutMapping(path = "/json3")
-    public Greeting multipleInputAndJsonResponse(@RequestBody SomeClass someClass, @RequestParam(value = "suffix") String suffix) {
+    public Greeting multipleInputAndJsonResponse(@RequestBody SomeClass someClass,
+            @RequestParam(value = "suffix") String suffix) {
         return new Greeting(someClass.getMessage() + suffix);
     }
 

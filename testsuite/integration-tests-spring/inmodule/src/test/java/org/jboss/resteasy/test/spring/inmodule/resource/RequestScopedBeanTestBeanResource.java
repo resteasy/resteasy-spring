@@ -1,14 +1,14 @@
 package org.jboss.resteasy.test.spring.inmodule.resource;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+
 @Path("/")
 public class RequestScopedBeanTestBeanResource {
-   @GET
-   public String test(@Qualifier("testBean") RequestScopedBeanTestBean bean) {
-      return bean.configured;
-   }
+    @GET
+    public String test(@Qualifier("testBean") RequestScopedBeanTestBean bean) {
+        return bean.configured;
+    }
 }

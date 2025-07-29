@@ -1,19 +1,20 @@
 package org.jboss.resteasy.test.undertow;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
+import org.jboss.resteasy.plugins.server.undertow.UndertowJaxrsServer;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import io.undertow.Handlers;
 import io.undertow.Undertow;
 import io.undertow.server.handlers.PathHandler;
 import io.undertow.servlet.Servlets;
 import io.undertow.servlet.api.DeploymentInfo;
 import io.undertow.servlet.api.DeploymentManager;
-import org.jboss.resteasy.plugins.server.undertow.UndertowJaxrsServer;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 public class BasicTest {
     private static UndertowJaxrsServer server;

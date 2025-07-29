@@ -10,13 +10,13 @@ import java.util.PropertyPermission;
 import java.util.logging.LoggingPermission;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.HttpException;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
@@ -48,169 +48,184 @@ import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 @RunAsClient
 public class AddSpringResteasyAsResourceRootTest {
 
-   private CloseableHttpClient client;
+    private CloseableHttpClient client;
 
-   private String deploymentName;
-   private static String deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded = "deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded";
-   private static String deploymentWithSpringContextLoaderListenerSpringIncluded = "deploymentWithSpringContextLoaderListenerSpringIncluded";
-   private static String deploymentWithSpringMvcDispatcherSpringIncluded = "deploymentWithSpringMvcDispatcherSpringIncluded";
+    private String deploymentName;
+    private static String deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded = "deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded";
+    private static String deploymentWithSpringContextLoaderListenerSpringIncluded = "deploymentWithSpringContextLoaderListenerSpringIncluded";
+    private static String deploymentWithSpringMvcDispatcherSpringIncluded = "deploymentWithSpringMvcDispatcherSpringIncluded";
 
-   @Before
-   public void before() throws Exception {
-      client = HttpClients.createDefault();
-   }
+    @Before
+    public void before() throws Exception {
+        client = HttpClients.createDefault();
+    }
 
-   /**
-    * @tpTestDetails Add spring libraries into the deployment. Deployment is configured with SpringMVC Dispatcher Servlet.
-    * @tpPassCrit The application is successfully deployed, resource is available, and Spring classes are on the path.
-    * @tpSince RESTEasy 3.0.16
-    */
-   @Test
-   @OperateOnDeployment("dep3")
-   public void testDeploymentWithSpringMvcDispatcherAddsResourceRoot() throws Exception {
-      deploymentName = deploymentWithSpringMvcDispatcherSpringIncluded;
+    /**
+     * @tpTestDetails Add spring libraries into the deployment. Deployment is configured with SpringMVC Dispatcher Servlet.
+     * @tpPassCrit The application is successfully deployed, resource is available, and Spring classes are on the path.
+     * @tpSince RESTEasy 3.0.16
+     */
+    @Test
+    @OperateOnDeployment("dep3")
+    public void testDeploymentWithSpringMvcDispatcherAddsResourceRoot() throws Exception {
+        deploymentName = deploymentWithSpringMvcDispatcherSpringIncluded;
 
-      assertResponse(deploymentName);
-      Assert.assertTrue("Spring classes are not available in deployment", springClassesAreAvailableToDeployment(deploymentName));
-      Assert.assertTrue("Resteasy Spring classes are not available in deployment", resteasySpringClassesAreAvailableToDeployment(deploymentName));
-   }
+        assertResponse(deploymentName);
+        Assert.assertTrue("Spring classes are not available in deployment",
+                springClassesAreAvailableToDeployment(deploymentName));
+        Assert.assertTrue("Resteasy Spring classes are not available in deployment",
+                resteasySpringClassesAreAvailableToDeployment(deploymentName));
+    }
 
-   @Deployment(name = "dep3")
-   private static WebArchive createDeploymentWithSpringMvcDispatcher() {
+    @Deployment(name = "dep3")
+    private static WebArchive createDeploymentWithSpringMvcDispatcher() {
 
-      WebArchive archive = ShrinkWrap.create(WebArchive.class, deploymentWithSpringMvcDispatcherSpringIncluded + ".war")
-            .addClass(TestResource.class)
-            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "mvc-dispatcher-servlet/web.xml", "web.xml")
-            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "mvc-dispatcher-servlet/mvc-dispatcher-servlet.xml", "mvc-dispatcher-servlet.xml")
-            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "mvc-dispatcher-servlet/applicationContext.xml", "applicationContext.xml");
+        WebArchive archive = ShrinkWrap.create(WebArchive.class, deploymentWithSpringMvcDispatcherSpringIncluded + ".war")
+                .addClass(TestResource.class)
+                .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "mvc-dispatcher-servlet/web.xml",
+                        "web.xml")
+                .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(),
+                        "mvc-dispatcher-servlet/mvc-dispatcher-servlet.xml", "mvc-dispatcher-servlet.xml")
+                .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(),
+                        "mvc-dispatcher-servlet/applicationContext.xml", "applicationContext.xml");
 
-      // PropertyPermission needed for "arquillian.debug" to run
-      // remaining permissions needed to run springframework
-      archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
-              new PropertyPermission("org.graalvm.nativeimage.imagecode", "read"),
-              new SecurityPermission("insertProvider"),
-              new RuntimePermission("getClassLoader"),
-              new RuntimePermission("getenv.RESTEASY_SERVER_TRACING_THRESHOLD"),
-              new RuntimePermission("getenv.resteasy_server_tracing_threshold"),
-              new RuntimePermission("getenv.resteasy.server.tracing.threshold"),
-              new RuntimePermission("getenv.RESTEASY_SERVER_TRACING_TYPE"),
-              new RuntimePermission("getenv.resteasy_server_tracing_type"),
-              new RuntimePermission("getenv.resteasy.server.tracing.type"),
-         new ReflectPermission("suppressAccessChecks"),
-         new RuntimePermission("accessDeclaredMembers"),
-         new FilePermission("<<ALL FILES>>", "read"),
-         new LoggingPermission("control", "")
-      ), "permissions.xml");
+        // PropertyPermission needed for "arquillian.debug" to run
+        // remaining permissions needed to run springframework
+        archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
+                new PropertyPermission("org.graalvm.nativeimage.imagecode", "read"),
+                new SecurityPermission("insertProvider"),
+                new RuntimePermission("getClassLoader"),
+                new RuntimePermission("getenv.RESTEASY_SERVER_TRACING_THRESHOLD"),
+                new RuntimePermission("getenv.resteasy_server_tracing_threshold"),
+                new RuntimePermission("getenv.resteasy.server.tracing.threshold"),
+                new RuntimePermission("getenv.RESTEASY_SERVER_TRACING_TYPE"),
+                new RuntimePermission("getenv.resteasy_server_tracing_type"),
+                new RuntimePermission("getenv.resteasy.server.tracing.type"),
+                new ReflectPermission("suppressAccessChecks"),
+                new RuntimePermission("accessDeclaredMembers"),
+                new FilePermission("<<ALL FILES>>", "read"),
+                new LoggingPermission("control", "")), "permissions.xml");
 
-      TestUtilSpring.addSpringLibraries(archive);
-      archive.as(ZipExporter.class).exportTo(new File("target", deploymentWithSpringMvcDispatcherSpringIncluded + ".war"), true);
-      return archive;
-   }
+        TestUtilSpring.addSpringLibraries(archive);
+        archive.as(ZipExporter.class).exportTo(new File("target", deploymentWithSpringMvcDispatcherSpringIncluded + ".war"),
+                true);
+        return archive;
+    }
 
-   /**
-    * @tpTestDetails Add spring libraries into the deployment. Deployment is configured with Spring context loader listener.
-    * @tpPassCrit The application is successfully deployed, resource is available, and Spring classes are on the path.
-    * @tpSince RESTEasy 3.0.16
-    */
-   @Test
-   @OperateOnDeployment("dep2")
-   public void testDeploymentWithSpringContextLoaderListenerAddsResourceRoot() throws Exception {
-      deploymentName = deploymentWithSpringContextLoaderListenerSpringIncluded;
+    /**
+     * @tpTestDetails Add spring libraries into the deployment. Deployment is configured with Spring context loader listener.
+     * @tpPassCrit The application is successfully deployed, resource is available, and Spring classes are on the path.
+     * @tpSince RESTEasy 3.0.16
+     */
+    @Test
+    @OperateOnDeployment("dep2")
+    public void testDeploymentWithSpringContextLoaderListenerAddsResourceRoot() throws Exception {
+        deploymentName = deploymentWithSpringContextLoaderListenerSpringIncluded;
 
-      assertResponse(deploymentName);
-      Assert.assertTrue("Spring classes are not available in deployment", springClassesAreAvailableToDeployment(deploymentName));
-      Assert.assertTrue("Resteasy Spring classes are not available in deployment", resteasySpringClassesAreAvailableToDeployment(deploymentName));
-   }
+        assertResponse(deploymentName);
+        Assert.assertTrue("Spring classes are not available in deployment",
+                springClassesAreAvailableToDeployment(deploymentName));
+        Assert.assertTrue("Resteasy Spring classes are not available in deployment",
+                resteasySpringClassesAreAvailableToDeployment(deploymentName));
+    }
 
-   @Deployment(name = "dep2")
-   private static Archive<?> createDeploymentWithSpringContextLoaderListener() {
-      WebArchive archive = ShrinkWrap.create(WebArchive.class, deploymentWithSpringContextLoaderListenerSpringIncluded + ".war")
-            .addClass(TestResource.class)
-            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "web.xml", "web.xml")
-            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "applicationContext.xml", "applicationContext.xml");
+    @Deployment(name = "dep2")
+    private static Archive<?> createDeploymentWithSpringContextLoaderListener() {
+        WebArchive archive = ShrinkWrap
+                .create(WebArchive.class, deploymentWithSpringContextLoaderListenerSpringIncluded + ".war")
+                .addClass(TestResource.class)
+                .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "web.xml", "web.xml")
+                .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "applicationContext.xml",
+                        "applicationContext.xml");
 
-      // remaining permissions needed to run springframework
-      archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
-         new RuntimePermission("accessDeclaredMembers"),
-         new FilePermission("<<ALL FILES>>", "read"),
-         new LoggingPermission("control", "")
-      ), "permissions.xml");
+        // remaining permissions needed to run springframework
+        archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
+                new RuntimePermission("accessDeclaredMembers"),
+                new FilePermission("<<ALL FILES>>", "read"),
+                new LoggingPermission("control", "")), "permissions.xml");
 
-      TestUtilSpring.addSpringLibraries(archive);
-      archive.as(ZipExporter.class).exportTo(new File("target", deploymentWithSpringContextLoaderListenerSpringIncluded + ".war"), true);
-      return archive;
-   }
+        TestUtilSpring.addSpringLibraries(archive);
+        archive.as(ZipExporter.class)
+                .exportTo(new File("target", deploymentWithSpringContextLoaderListenerSpringIncluded + ".war"), true);
+        return archive;
+    }
 
-   /**
-    * @tpTestDetails Add spring libraries into the deployment. Deployment is configured without Spring context loader listener or
-    * MVC dispatcher.
-    * @tpPassCrit The application is successfully deployed, resource is available, and Spring classes are on the path.
-    * @tpSince RESTEasy 3.0.16
-    */
-   @Test
-   @OperateOnDeployment("dep1")
-   public void testDeploymentWithoutSpringMvcDispatcherOrListenerDoesNotAddResourceRoot() throws Exception {
-      deploymentName = deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded;
+    /**
+     * @tpTestDetails Add spring libraries into the deployment. Deployment is configured without Spring context loader listener
+     *                or
+     *                MVC dispatcher.
+     * @tpPassCrit The application is successfully deployed, resource is available, and Spring classes are on the path.
+     * @tpSince RESTEasy 3.0.16
+     */
+    @Test
+    @OperateOnDeployment("dep1")
+    public void testDeploymentWithoutSpringMvcDispatcherOrListenerDoesNotAddResourceRoot() throws Exception {
+        deploymentName = deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded;
 
-      assertResponse(deploymentName);
-      Assert.assertTrue("Spring classes are not available in deployment", springClassesAreAvailableToDeployment(deploymentName));
-      // Do not execute this test if the dependencies were explicitly added to the deployment
-      Assert.assertFalse("Resteasy Spring classes are available in deployment, which is not expected",
-              !TestUtilSpring.includeResteasySpring() && resteasySpringClassesAreAvailableToDeployment(deploymentName));
-   }
+        assertResponse(deploymentName);
+        Assert.assertTrue("Spring classes are not available in deployment",
+                springClassesAreAvailableToDeployment(deploymentName));
+        // Do not execute this test if the dependencies were explicitly added to the deployment
+        Assert.assertFalse("Resteasy Spring classes are available in deployment, which is not expected",
+                !TestUtilSpring.includeResteasySpring() && resteasySpringClassesAreAvailableToDeployment(deploymentName));
+    }
 
-   @Deployment(name = "dep1")
-   private static Archive<?> createDeploymentWithoutSpringMvcDispatcherOrListener() {
-      WebArchive archive = TestUtil.prepareArchive(deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded);
-      archive.addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "web-no-mvc-no-listener.xml", "web.xml")
-            .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "applicationContext.xml", "applicationContext.xml");
+    @Deployment(name = "dep1")
+    private static Archive<?> createDeploymentWithoutSpringMvcDispatcherOrListener() {
+        WebArchive archive = TestUtil.prepareArchive(deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded);
+        archive.addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "web-no-mvc-no-listener.xml",
+                "web.xml")
+                .addAsWebInfResource(AddSpringResteasyAsResourceRootTest.class.getPackage(), "applicationContext.xml",
+                        "applicationContext.xml");
 
-      TestUtilSpring.addSpringLibraries(archive);
-      archive.as(ZipExporter.class).exportTo(new File("target", deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded + ".war"), true);
-      return TestUtil.finishContainerPrepare(archive, null, TestResource.class);
-   }
+        TestUtilSpring.addSpringLibraries(archive);
+        archive.as(ZipExporter.class)
+                .exportTo(new File("target", deploymentWithoutSpringMvcDispatcherOrListenerSpringIncluded + ".war"), true);
+        return TestUtil.finishContainerPrepare(archive, null, TestResource.class);
+    }
 
-   private boolean resteasySpringClassesAreAvailableToDeployment(String deploymentName) throws IOException, HttpException {
+    private boolean resteasySpringClassesAreAvailableToDeployment(String deploymentName) throws IOException, HttpException {
 
-      return isClassAvailableToDeployment(deploymentName, SpringContextLoaderListener.class);
-   }
+        return isClassAvailableToDeployment(deploymentName, SpringContextLoaderListener.class);
+    }
 
-   private boolean isClassAvailableToDeployment(String deploymentName, Class<?> clazz) throws IOException,
-         HttpException {
-      String className = clazz.getName();
-      String CONTEXT_URL = PortProviderUtil.generateURL("/", deploymentName);
-      HttpGet httpget = new HttpGet(CONTEXT_URL + TestResource.LOAD_CLASS_PATH + "?" + TestResource.CLASSNAME_PARAM + "=" + className);
-      try {
-         String responseString = new String();
-         HttpClientContext context = HttpClientContext.create();
-         CloseableHttpResponse response = client.execute(httpget, context);
-         HttpEntity entity = response.getEntity();
-         if (entity != null) {
-            responseString = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-         }
-         return (HttpStatus.SC_OK == response.getStatusLine().getStatusCode())
-               && (className.equals(responseString));
-      } finally {
-         httpget.releaseConnection();
-      }
-   }
+    private boolean isClassAvailableToDeployment(String deploymentName, Class<?> clazz) throws IOException,
+            HttpException {
+        String className = clazz.getName();
+        String CONTEXT_URL = PortProviderUtil.generateURL("/", deploymentName);
+        HttpGet httpget = new HttpGet(
+                CONTEXT_URL + TestResource.LOAD_CLASS_PATH + "?" + TestResource.CLASSNAME_PARAM + "=" + className);
+        try {
+            String responseString = new String();
+            HttpClientContext context = HttpClientContext.create();
+            CloseableHttpResponse response = client.execute(httpget, context);
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                responseString = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+            }
+            return (HttpStatus.SC_OK == response.getStatusLine().getStatusCode())
+                    && (className.equals(responseString));
+        } finally {
+            httpget.releaseConnection();
+        }
+    }
 
-   private boolean springClassesAreAvailableToDeployment(String deploymentName) throws IOException, HttpException {
-      return isClassAvailableToDeployment(deploymentName, ApplicationContext.class);
-   }
+    private boolean springClassesAreAvailableToDeployment(String deploymentName) throws IOException, HttpException {
+        return isClassAvailableToDeployment(deploymentName, ApplicationContext.class);
+    }
 
-   private void assertResponse(String deploymentName) throws IOException, HttpException {
+    private void assertResponse(String deploymentName) throws IOException, HttpException {
 
-      String CONTEXT_URL = PortProviderUtil.generateURL("/", deploymentName);
+        String CONTEXT_URL = PortProviderUtil.generateURL("/", deploymentName);
 
-      HttpGet httpget = new HttpGet(CONTEXT_URL + TestResource.TEST_PATH);
+        HttpGet httpget = new HttpGet(CONTEXT_URL + TestResource.TEST_PATH);
 
-      HttpClientContext context = HttpClientContext.create();
-      CloseableHttpResponse response = client.execute(httpget, context);
-      Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
-      HttpEntity entity = response.getEntity();
-      String responseString = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-      Assert.assertEquals("The server resource didn't send correct response", TestResource.TEST_RESPONSE, responseString);
-      httpget.releaseConnection();
-   }
+        HttpClientContext context = HttpClientContext.create();
+        CloseableHttpResponse response = client.execute(httpget, context);
+        Assert.assertEquals(HttpStatus.SC_OK, response.getStatusLine().getStatusCode());
+        HttpEntity entity = response.getEntity();
+        String responseString = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+        Assert.assertEquals("The server resource didn't send correct response", TestResource.TEST_RESPONSE, responseString);
+        httpget.releaseConnection();
+    }
 }

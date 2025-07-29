@@ -1,5 +1,14 @@
 package org.jboss.resteasy.test.spring.web.deployment;
 
+import java.io.File;
+
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
@@ -22,14 +31,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Entity;
-import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import java.io.File;
 
 @RunWith(Arquillian.class)
 @RunAsClient
@@ -95,7 +96,8 @@ public class SpringWebTest {
 
     @Test
     public void verifyPathWithMultipleWildcards() {
-        WebTarget target = client.target(getBaseURL() + TestController.CONTROLLER_PATH + "/wildcard2/something/folks/somethingelse");
+        WebTarget target = client
+                .target(getBaseURL() + TestController.CONTROLLER_PATH + "/wildcard2/something/folks/somethingelse");
         Response response = target.request().get();
         Assert.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
         String str = response.readEntity(String.class);
@@ -113,7 +115,7 @@ public class SpringWebTest {
 
     @Test
     public void verifyPathWithCharacterWildCard() {
-        for (char c : new char[]{'t', 'r'}) {
+        for (char c : new char[] { 't', 'r' }) {
             WebTarget target = client.target(getBaseURL() + TestController.CONTROLLER_PATH + String.format("/ca%cs", c));
             Response response = target.request().get();
             Assert.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
@@ -124,7 +126,7 @@ public class SpringWebTest {
 
     @Test
     public void verifyPathWithMultipleCharacterWildCards() {
-        for (String path : new String[]{"/cars/shop/info", "/cart/show/info"}) {
+        for (String path : new String[] { "/cars/shop/info", "/cart/show/info" }) {
             WebTarget target = client.target(getBaseURL() + TestController.CONTROLLER_PATH + path);
             Response response = target.request().get();
             Assert.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
@@ -141,7 +143,6 @@ public class SpringWebTest {
         String str = response.readEntity(String.class);
         Assert.assertEquals("Unexpected response content from the server", "10", str);
     }
-
 
     @Test
     public void verifyJsonGetWithPathParamAndGettingMapping() {
@@ -194,7 +195,8 @@ public class SpringWebTest {
         Response response = target.request().get();
         Assert.assertEquals(HttpResponseCodes.SC_OK, response.getStatus());
         String str = response.readEntity(String.class);
-        Assert.assertTrue("Unexpected response content from the server", str.contains("localhost") || str.contains("127.0.0.1"));
+        Assert.assertTrue("Unexpected response content from the server",
+                str.contains("localhost") || str.contains("127.0.0.1"));
     }
 
     @Test
@@ -257,7 +259,6 @@ public class SpringWebTest {
         Assert.assertEquals("Unexpected response content from the server", "hello world", str);
     }
 
-
     private String getBaseURL() {
         return PortProviderUtil.generateURL("/", DEPLOYMENT_NAME);
     }
@@ -267,11 +268,12 @@ public class SpringWebTest {
         WebArchive archive = ShrinkWrap.create(WebArchive.class, DEPLOYMENT_NAME + ".war");
         archive.addAsWebInfResource(SpringWebTest.class.getPackage(), "web.xml", "web.xml");
 
-
-        TestUtilSpring.addSpringLibraries(archive, "org.jboss.resteasy.spring:resteasy-spring-web:" + TestUtilSpring.getResteasySpringVersion());
+        TestUtilSpring.addSpringLibraries(archive,
+                "org.jboss.resteasy.spring:resteasy-spring-web:" + TestUtilSpring.getResteasySpringVersion());
         archive.as(ZipExporter.class).exportTo(new File("target", DEPLOYMENT_NAME + ".war"), true);
         return TestUtil.finishContainerPrepare(archive, null,
-                SomeClass.class, Greeting.class, TestController.class, ResponseEntityController.class, ResponseStatusController.class, GreetingControllerWithNoRequestMapping.class);
+                SomeClass.class, Greeting.class, TestController.class, ResponseEntityController.class,
+                ResponseStatusController.class, GreetingControllerWithNoRequestMapping.class);
     }
 
 }
