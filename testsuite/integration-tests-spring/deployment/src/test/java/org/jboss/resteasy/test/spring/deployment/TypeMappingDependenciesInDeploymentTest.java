@@ -1,5 +1,15 @@
 package org.jboss.resteasy.test.spring.deployment;
 
+import java.io.FilePermission;
+import java.lang.reflect.ReflectPermission;
+import java.util.PropertyPermission;
+import java.util.logging.LoggingPermission;
+
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.Invocation;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.Response;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit5.ArquillianExtension;
@@ -11,38 +21,29 @@ import org.jboss.resteasy.utils.TestUtilSpring;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.Invocation;
-import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
 
-import java.io.FilePermission;
-import java.lang.reflect.ReflectPermission;
-import java.util.PropertyPermission;
-import java.util.logging.LoggingPermission;
-
-
 /**
  * @tpSubChapter Spring
  * @tpChapter Integration tests - dependencies included in deployment
  * @tpTestCaseDetails Test extension mapping by ResteasyDeployment property mediaTypeMappings.
- * Logic of this test is in spring-typemapping-test-server.xml.
+ *                    Logic of this test is in spring-typemapping-test-server.xml.
  * @tpSince RESTEasy 3.0.16
  */
 @ExtendWith(ArquillianExtension.class)
 @RunAsClient
 public class TypeMappingDependenciesInDeploymentTest {
 
-
     @Deployment
     private static Archive<?> deploy() {
-        WebArchive archive = ShrinkWrap.create(WebArchive.class, TypeMappingDependenciesInDeploymentTest.class.getSimpleName() + ".war")
+        WebArchive archive = ShrinkWrap
+                .create(WebArchive.class, TypeMappingDependenciesInDeploymentTest.class.getSimpleName() + ".war")
                 .addAsWebInfResource(TypeMappingDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml");
-        archive.addAsWebInfResource(TypeMappingDependenciesInDeploymentTest.class.getPackage(), "typeMapping/spring-typemapping-test-server.xml", "applicationContext.xml");
+        archive.addAsWebInfResource(TypeMappingDependenciesInDeploymentTest.class.getPackage(),
+                "typeMapping/spring-typemapping-test-server.xml", "applicationContext.xml");
         archive.addClass(TypeMappingResource.class);
 
         archive.addAsManifestResource(DeploymentDescriptors.createPermissionsXmlAsset(
@@ -58,8 +59,7 @@ public class TypeMappingDependenciesInDeploymentTest {
                 new RuntimePermission("getClassLoader"),
                 new RuntimePermission("getenv.resteasy.server.tracing.type"),
                 new FilePermission("<<ALL FILES>>", "read"),
-                new LoggingPermission("control", "")
-        ), "permissions.xml");
+                new LoggingPermission("control", "")), "permissions.xml");
 
         TestUtilSpring.addSpringLibraries(archive);
         return archive;
@@ -87,7 +87,8 @@ public class TypeMappingDependenciesInDeploymentTest {
         int status = response.getStatus();
         String contentType = response.getHeaderString("Content-type");
         Assertions.assertEquals(HttpResponseCodes.SC_OK, status, "Request for " + url + " returned a non-200 status");
-        Assertions.assertEquals(expectedContentType, contentType, "Request for " + url + " returned an unexpected content type");
+        Assertions.assertEquals(expectedContentType, contentType,
+                "Request for " + url + " returned an unexpected content type");
 
         // close
         response.close();

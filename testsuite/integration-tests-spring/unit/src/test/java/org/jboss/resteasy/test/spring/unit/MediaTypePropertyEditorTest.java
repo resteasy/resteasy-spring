@@ -1,13 +1,14 @@
 package org.jboss.resteasy.test.spring.unit;
 
+import java.beans.PropertyEditor;
+import java.nio.charset.StandardCharsets;
+
 import jakarta.ws.rs.core.MediaType;
+
 import org.jboss.resteasy.propertyeditor.mediatype.editor.MediaTypeEditor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.beans.PropertyEditor;
-import java.nio.charset.StandardCharsets;
 
 /**
  * @tpSubChapter Spring

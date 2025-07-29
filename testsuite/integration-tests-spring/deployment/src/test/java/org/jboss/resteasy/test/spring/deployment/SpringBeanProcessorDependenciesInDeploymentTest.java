@@ -47,7 +47,7 @@ import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
  * @tpSubChapter Spring
  * @tpChapter Integration tests - dependencies included in deployment
  * @tpTestCaseDetails This class tests a gamut of Spring related functionality including @Configuration beans, @Autowired,
- * scanned beans, interceptors and overall integration between RESTEasy and the Spring ApplicationContext.
+ *                    scanned beans, interceptors and overall integration between RESTEasy and the Spring ApplicationContext.
  * @tpSince RESTEasy 3.0.16
  */
 @ExtendWith(ArquillianExtension.class)
@@ -73,7 +73,8 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
 
     @Deployment
     private static Archive<?> deploy() {
-        WebArchive archive = ShrinkWrap.create(WebArchive.class, SpringBeanProcessorDependenciesInDeploymentTest.class.getSimpleName() + ".war")
+        WebArchive archive = ShrinkWrap
+                .create(WebArchive.class, SpringBeanProcessorDependenciesInDeploymentTest.class.getSimpleName() + ".war")
                 .addAsWebInfResource(SpringBeanProcessorDependenciesInDeploymentTest.class.getPackage(), "web.xml", "web.xml");
         archive.addAsWebInfResource(SpringBeanProcessorDependenciesInDeploymentTest.class.getPackage(),
                 "springBeanProcessor/spring-bean-processor-test.xml", "applicationContext.xml");
@@ -108,8 +109,7 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
                 new ReflectPermission("suppressAccessChecks"),
                 new RuntimePermission("accessDeclaredMembers"),
                 new FilePermission("<<ALL FILES>>", "read"),
-                new LoggingPermission("control", "")
-        ), "permissions.xml");
+                new LoggingPermission("control", "")), "permissions.xml");
 
         TestUtilSpring.addSpringLibraries(archive, "aopalliance:aopalliance");
         return archive;
@@ -141,7 +141,7 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
 
     /**
      * @tpTestDetails Tests that resource bean defined in xml spring application context with scope prototype
-     * is registred by resourceBeanProcessor
+     *                is registred by resourceBeanProcessor
      * @tpSince RESTEasy 3.0.16
      */
     @Test
@@ -158,7 +158,7 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
 
     /**
      * @tpTestDetails Tests that resource is automatically registered without defining it in spring application context
-     * configuration file, but defined programatically with @Configuration annotation
+     *                configuration file, but defined programatically with @Configuration annotation
      * @tpSince RESTEasy 3.0.16
      */
     @Test
@@ -171,7 +171,7 @@ public class SpringBeanProcessorDependenciesInDeploymentTest {
 
     /**
      * @tpTestDetails Tests that resource is automatically registered without defining it in spring application context
-     * configuration file
+     *                configuration file
      * @tpSince RESTEasy 3.0.16
      */
     @Test

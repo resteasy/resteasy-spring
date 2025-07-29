@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <layer-spec xmlns="urn:jboss:galleon:layer-spec:2.0" name="resteasy-spring-web">
     <props>
-        <prop name="org.wildfly.rule.annotations" value="org.springframework.web.bind.annotation"/>
+        <prop name="org.wildfly.rule.annotations" value="org.springframework.web.bind.annotation" />
     </props>
     <dependencies>
-        <layer name="spring"/>
+        <layer name="spring" />
     </dependencies>
     <packages>
-        <package name="org.jboss.resteasy.resteasy-spring-web"/>
+        <package name="org.jboss.resteasy.resteasy-spring-web" />
     </packages>
 </layer-spec>
 

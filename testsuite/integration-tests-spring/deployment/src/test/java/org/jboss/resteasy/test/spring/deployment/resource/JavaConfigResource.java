@@ -1,12 +1,12 @@
 package org.jboss.resteasy.test.spring.deployment.resource;
 
-import org.jboss.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+
+import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * This class provides a web-based facade for an injected service.
@@ -14,24 +14,23 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/")
 public class JavaConfigResource {
 
-   private static Logger logger = Logger.getLogger(JavaConfigResource.class);
-   JavaConfigService service;
+    private static Logger logger = Logger.getLogger(JavaConfigResource.class);
+    JavaConfigService service;
 
-   @Autowired
-   public void setService(JavaConfigService service) {
-      logger.info("*** service injected=" + service);
-      this.service = service;
-   }
+    @Autowired
+    public void setService(JavaConfigService service) {
+        logger.info("*** service injected=" + service);
+        this.service = service;
+    }
 
-   public JavaConfigResource() {
-      logger.info("*** resource created:" + super.toString());
-   }
+    public JavaConfigResource() {
+        logger.info("*** resource created:" + super.toString());
+    }
 
-
-   @GET
-   @Path("invoke")
-   @Produces(MediaType.TEXT_PLAIN)
-   public String invoke() {
-      return service.invoke();
-   }
+    @GET
+    @Path("invoke")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String invoke() {
+        return service.invoke();
+    }
 }

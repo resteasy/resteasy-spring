@@ -42,19 +42,18 @@ public class SpringApplicationArchiveProcessor implements ApplicationArchiveProc
             "            <subsystem name=\"weld\"/>\n" +
                     "            <subsystem name=\"jsf\"/>\n";
 
-    private static final String FULL =
-            "<?xml version=\"1.0\"?>\n" +
-                    "<jboss-deployment-structure xmlns=\"urn:jboss:deployment-structure:1.2\"\n" +
-                    "                            xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-                    "    <deployment>\n" +
-                    "        <exclude-subsystems>\n" +
-                    SUBSYSTEMS +
-                    "        </exclude-subsystems>\n" +
-                    "        <exclusions>\n" +
-                    EXCLUDED_MODULES +
-                    "        </exclusions>\n" +
-                    "    </deployment>\n" +
-                    "</jboss-deployment-structure>";
+    private static final String FULL = "<?xml version=\"1.0\"?>\n" +
+            "<jboss-deployment-structure xmlns=\"urn:jboss:deployment-structure:1.2\"\n" +
+            "                            xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+            "    <deployment>\n" +
+            "        <exclude-subsystems>\n" +
+            SUBSYSTEMS +
+            "        </exclude-subsystems>\n" +
+            "        <exclusions>\n" +
+            EXCLUDED_MODULES +
+            "        </exclusions>\n" +
+            "    </deployment>\n" +
+            "</jboss-deployment-structure>";
 
     @Override
     public void process(final Archive<?> applicationArchive, final TestClass testClass) {

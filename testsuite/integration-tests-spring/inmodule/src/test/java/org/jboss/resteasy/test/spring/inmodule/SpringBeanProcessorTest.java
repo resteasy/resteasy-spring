@@ -1,26 +1,36 @@
 package org.jboss.resteasy.test.spring.inmodule;
 
+import java.io.FilePermission;
+import java.lang.reflect.ReflectPermission;
+import java.util.PropertyPermission;
+import java.util.logging.LoggingPermission;
+
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.Response;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit5.ArquillianExtension;
+import org.jboss.resteasy.spi.HttpResponseCodes;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorCounter;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorCustomer;
+import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorCustomerParamConverter;
+import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorCustomerParamConverterProvider;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorCustomerService;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorMyBean;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorMyBeanFactoryBean;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorMyInnerBean;
-import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorSpringBeanProcessorMyInnerBeanImpl;
-import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorMyInterceptor;
-import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorMyInterceptedResource;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorMyIntercepted;
+import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorMyInterceptedResource;
+import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorMyInterceptor;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorMyPrototypedResource;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorMyResource;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorMyWriter;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorResourceConfiguration;
-import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorCustomerParamConverter;
-import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorCustomerParamConverterProvider;
 import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorScannedResource;
-import org.jboss.resteasy.spi.HttpResponseCodes;
+import org.jboss.resteasy.test.spring.inmodule.resource.SpringBeanProcessorSpringBeanProcessorMyInnerBeanImpl;
 import org.jboss.resteasy.utils.PortProviderUtil;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -31,23 +41,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.Response;
 import org.wildfly.testing.tools.deployments.DeploymentDescriptors;
-
-import java.io.FilePermission;
-import java.lang.reflect.ReflectPermission;
-import java.util.PropertyPermission;
-import java.util.logging.LoggingPermission;
 
 /**
  * @tpSubChapter Spring
  * @tpChapter Integration tests
  * @tpTestCaseDetails This class tests a gamut of Spring related functionality including @Configuration beans, @Autowired,
- * scanned beans, interceptors and overall integration between RESTEasy and the Spring ApplicationContext.
+ *                    scanned beans, interceptors and overall integration between RESTEasy and the Spring ApplicationContext.
  * @tpSince RESTEasy 3.0.16
  */
 @ExtendWith(ArquillianExtension.class)
@@ -104,8 +104,7 @@ public class SpringBeanProcessorTest {
                 new ReflectPermission("suppressAccessChecks"),
                 new RuntimePermission("accessDeclaredMembers"),
                 new FilePermission("<<ALL FILES>>", "read"),
-                new LoggingPermission("control", "")
-        ), "permissions.xml");
+                new LoggingPermission("control", "")), "permissions.xml");
 
         return archive;
     }
@@ -136,7 +135,7 @@ public class SpringBeanProcessorTest {
 
     /**
      * @tpTestDetails Tests that resource bean defined in xml spring application context with scope prototype
-     * is registred by resourceBeanProcessor
+     *                is registred by resourceBeanProcessor
      * @tpSince RESTEasy 3.0.16
      */
     @Test
@@ -153,7 +152,7 @@ public class SpringBeanProcessorTest {
 
     /**
      * @tpTestDetails Tests that resource is automatically registered without defining it in spring application context
-     * configuration file, but defined programatically with @Configuration annotation
+     *                configuration file, but defined programatically with @Configuration annotation
      * @tpSince RESTEasy 3.0.16
      */
     @Test
@@ -166,7 +165,7 @@ public class SpringBeanProcessorTest {
 
     /**
      * @tpTestDetails Tests that resource is automatically registered without defining it in spring application context
-     * configuration file
+     *                configuration file
      * @tpSince RESTEasy 3.0.16
      */
     @Test

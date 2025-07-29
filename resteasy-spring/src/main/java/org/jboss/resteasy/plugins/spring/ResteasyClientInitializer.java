@@ -8,11 +8,9 @@ import org.jboss.resteasy.spi.ResteasyProviderFactory;
  * @version $Revision: 1 $
  */
 
-public class ResteasyClientInitializer
-{
-   public ResteasyClientInitializer()
-   {
-      // this initialization only needs to be done once per VM
-      RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
-   }
+public class ResteasyClientInitializer {
+    public ResteasyClientInitializer() {
+        // this initialization only needs to be done once per VM
+        RegisterBuiltin.register(ResteasyProviderFactory.getInstance());
+    }
 }

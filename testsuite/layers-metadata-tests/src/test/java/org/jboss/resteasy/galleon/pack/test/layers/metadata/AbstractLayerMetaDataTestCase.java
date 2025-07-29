@@ -1,15 +1,5 @@
 package org.jboss.resteasy.galleon.pack.test.layers.metadata;
 
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.wildfly.glow.Arguments;
-import org.wildfly.glow.GlowMessageWriter;
-import org.wildfly.glow.GlowSession;
-import org.wildfly.glow.ScanResults;
-import org.wildfly.glow.maven.MavenResolver;
-
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.FileVisitResult;
@@ -21,6 +11,16 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.wildfly.glow.Arguments;
+import org.wildfly.glow.GlowMessageWriter;
+import org.wildfly.glow.GlowSession;
+import org.wildfly.glow.ScanResults;
+import org.wildfly.glow.maven.MavenResolver;
 
 public class AbstractLayerMetaDataTestCase {
 
@@ -48,7 +48,6 @@ public class AbstractLayerMetaDataTestCase {
         }
         Files.createDirectories(ARCHIVES_PATH);
     }
-
 
     protected static WebArchive createWebArchive(String xmlName, URL xmlContent) {
         WebArchive war = ShrinkWrap.create(WebArchive.class);

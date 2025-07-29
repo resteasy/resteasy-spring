@@ -10,43 +10,37 @@ import org.jboss.resteasy.plugins.server.servlet.ServletSecurityContext;
 import org.jboss.resteasy.spi.HttpResponse;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 
-public abstract class ResteasyWebHandlerTemplate<T>
-{
-   protected ResteasyProviderFactory factory;
+public abstract class ResteasyWebHandlerTemplate<T> {
+    protected ResteasyProviderFactory factory;
 
-   public ResteasyWebHandlerTemplate(final ResteasyProviderFactory factory)
-   {
-      this.factory = factory;
-   }
+    public ResteasyWebHandlerTemplate(final ResteasyProviderFactory factory) {
+        this.factory = factory;
+    }
 
-   public T handle(ResteasyRequestWrapper requestWrapper,
-                   HttpServletResponse httpServletResponse) throws Exception
-   {
+    public T handle(ResteasyRequestWrapper requestWrapper,
+            HttpServletResponse httpServletResponse) throws Exception {
 
-      T result = null;
-      HttpResponse response = new HttpServletResponseWrapper(httpServletResponse, requestWrapper.getHttpServletRequest(),
-              factory);
+        T result = null;
+        HttpResponse response = new HttpServletResponseWrapper(httpServletResponse, requestWrapper.getHttpServletRequest(),
+                factory);
 
-      HttpServletRequest servletRequest = requestWrapper.getHttpServletRequest();
-      try
-      {
-         ResteasyContext.pushContext(HttpServletRequest.class,
-                 servletRequest);
-         ResteasyContext.pushContext(HttpServletResponse.class,
-                 httpServletResponse);
-         ResteasyContext.pushContext(SecurityContext.class,
-                 new ServletSecurityContext(servletRequest));
+        HttpServletRequest servletRequest = requestWrapper.getHttpServletRequest();
+        try {
+            ResteasyContext.pushContext(HttpServletRequest.class,
+                    servletRequest);
+            ResteasyContext.pushContext(HttpServletResponse.class,
+                    httpServletResponse);
+            ResteasyContext.pushContext(SecurityContext.class,
+                    new ServletSecurityContext(servletRequest));
 
-         result = handle(requestWrapper, response);
+            result = handle(requestWrapper, response);
 
-      }
-      finally
-      {
-         ResteasyContext.clearContextData();
-      }
-      return result;
-   }
+        } finally {
+            ResteasyContext.clearContextData();
+        }
+        return result;
+    }
 
-   protected abstract T handle(ResteasyRequestWrapper requestWrapper, HttpResponse response) throws Exception;
+    protected abstract T handle(ResteasyRequestWrapper requestWrapper, HttpResponse response) throws Exception;
 
 }

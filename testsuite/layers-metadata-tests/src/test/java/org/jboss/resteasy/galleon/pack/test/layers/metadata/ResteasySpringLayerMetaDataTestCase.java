@@ -1,11 +1,11 @@
 package org.jboss.resteasy.galleon.pack.test.layers.metadata;
 
+import java.nio.file.Path;
+
 import org.jboss.resteasy.utils.TestUtilSpring;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
-
-import java.nio.file.Path;
 
 public class ResteasySpringLayerMetaDataTestCase extends AbstractLayerMetaDataTestCase {
     private static Path web;
