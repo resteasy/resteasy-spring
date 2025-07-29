@@ -9,7 +9,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    rebase-strategy: disabled
+    open-pull-requests-limit: 10
   - package-ecosystem: "github-actions"
     # Workflow files stored in the
     # default location of `.github/workflows`
@@ -22,7 +22,7 @@ updates:
     target-branch: "3.0"
     schedule:
       interval: "daily"
-    rebase-strategy: disabled
+    open-pull-requests-limit: 10
     groups:
       spring-dependencies:
         patterns:
