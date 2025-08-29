@@ -73,7 +73,7 @@
         <version.org.wildfly.arquillian>5.1.0.Beta11</version.org.wildfly.arquillian>
         <version.org.testng>7.6.1</version.org.testng>
         <version.resteasy.testsuite>6.2.12.Final</version.resteasy.testsuite>
-        <version.wildfly.glow>1.4.1.Final</version.wildfly.glow>
+        <version.wildfly.glow>1.5.0.Final</version.wildfly.glow>
 
         <!-- Plugin Versions, please keep in alphabetical order -->
         <version.formatter.maven.plugin>2.27.0</version.formatter.maven.plugin>
