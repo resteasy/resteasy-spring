@@ -69,7 +69,7 @@
         <!-- Test only dependencies -->
         <server.version>${version.org.wildfly}</server.version>
         <version.aopalliance>1.0</version.aopalliance>
-        <version.org.aspectj>1.9.24</version.org.aspectj>
+        <version.org.aspectj>1.9.25</version.org.aspectj>
         <version.org.jboss.arquillian>1.7.2.Final</version.org.jboss.arquillian>
         <version.org.wildfly.arquillian>5.1.0.Beta11</version.org.wildfly.arquillian>
         <version.org.testng>7.6.1</version.org.testng>
