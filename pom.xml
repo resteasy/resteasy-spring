@@ -80,7 +80,7 @@
         <version.impsort.maven.plugin>1.11.0</version.impsort.maven.plugin>
         <version.org.jboss.galleon>6.0.6.Final</version.org.jboss.galleon>
         <version.org.jboss.resteasy.checkstyle>1.0.0.Final</version.org.jboss.resteasy.checkstyle>
-        <version.org.wildfly.galleon-plugins>7.0.0.Final</version.org.wildfly.galleon-plugins>
+        <version.org.wildfly.galleon-plugins>8.1.0.Final</version.org.wildfly.galleon-plugins>
 
         <!-- print logs to file by default -->
         <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
